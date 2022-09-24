@@ -19,6 +19,28 @@ $ yarn generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+## Linter
+
+You can check your code file's lint by running
+```bash
+$ yarn prettier -c <file>
+```
+
+or, if you wanna check all project files, you can run
+
+```bash
+yarn prettier -c .
+```
+
+To fix linter issues, just add the flag -w to write Prettier changes to files
+```bash
+# fix linter issues from a given file
+yarn prettier -w <file>
+
+# fix all project linter issues
+yarn prettier -w .
+```
+
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
