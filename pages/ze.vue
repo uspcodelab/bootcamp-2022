@@ -3,14 +3,7 @@
     <NuxtLogo />
     <v-bottom-sheet inset>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="red"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Open Player
-        </v-btn>
+        <v-btn color="red" dark v-bind="attrs" v-on="on"> Open Player </v-btn>
       </template>
       <v-card tile>
         <v-progress-linear
@@ -23,7 +16,10 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>{{ musica.nome }}</v-list-item-title>
-              <v-list-item-subtitle>{{ musica.artista[0] }} e {{ musica.artista[1] }}</v-list-item-subtitle>
+              <v-list-item-subtitle
+                >{{ musica.artista[0] }} e
+                {{ musica.artista[1] }}</v-list-item-subtitle
+              >
             </v-list-item-content>
 
             <v-spacer></v-spacer>
@@ -56,15 +52,14 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      musica: {
-        nome: "Star Walking'",
-        artista: ["Lil Nas X",
-                  "League of Legends"],
-      },
-    }),
-  }
+export default {
+  data: () => ({
+    musica: {
+      nome: "Star Walking'",
+      artista: ["Lil Nas X", "League of Legends"],
+    },
+  }),
+};
 </script>
 
 <style scoped>
