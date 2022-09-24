@@ -81,6 +81,11 @@ export default {
           title: "Inspire",
           to: "/inspire",
         },
+        {
+          icon: "mdi-knife-military",
+          title: "Ze's page",
+          to: "/ze",
+        },
       ],
       miniVariant: false,
       right: true,
