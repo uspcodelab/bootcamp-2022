@@ -1,74 +1,77 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
+    <v-col cols="40" sm="8" md="6">
       <v-card class="logo py-4 d-flex justify-center">
         <NuxtLogo />
-        <VuetifyLogo />
       </v-card>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          Mal vindo ao site DO MAU ༽◺_◿༼
         </v-card-title>
         <v-card-text>
           <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
+ヽ(ｏ`皿′ｏ)ﾉ୧༼ ಠ益ಠ ༽୨(ꈍ︹ꈍ๑✿)(ꈍ︹ꈍ๑✿)(ꈍ︹ꈍ๑✿)
           </p>
           <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
           </p>
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
           <p>
-            If you have questions, please join the official
+            <paralax />
+
+            <s>If you have questions, please join the official </s>
+            Nao responderei perguntas da plebe
             <a
-              href="https://chat.vuetifyjs.com/"
+              href="https://discord.gg/mFyRE95z"
               target="_blank"
               rel="noopener noreferrer"
               title="chat"
             >
               discord </a
             >.
+            <----- link proibido
           </p>
+
+
           <p>
-            Find a bug? Report it on the github
+Nao existem bugs nesse site
             <a
               href="https://github.com/vuetifyjs/vuetify/issues"
               target="_blank"
               rel="noopener noreferrer"
               title="contribute"
             >
-              issue board </a
+              <s> issue board  </s></a
             >.
           </p>
           <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
+            <s> Thank you for developing with Vuetify and I look forward to bringing
+            more exciting features in the future. </s>
           </p>
+        <Vender />
+            <br> <br>
+            <novo />
           <div class="text-xs-right">
             <em><small>&mdash; John Leider</small></em>
           </div>
           <hr class="my-3" />
           <a
-            href="https://nuxtjs.org/"
+                href="https://www.youtube.com/watch?v=tKEL_jXey74"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Nuxt Documentation
+            Link Especial
           </a>
           <br />
           <a
-            href="https://github.com/nuxt/nuxt.js"
+            href="https://www.youtube.com/watch?v=OaeVieQRHRs"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Nuxt GitHub
+            Link especial 2
           </a>
         </v-card-text>
         <v-card-actions>
