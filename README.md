@@ -41,6 +41,39 @@ yarn prettier -w <file>
 yarn prettier -w .
 ```
 
+## Contributing
+
+In order to contribute to this repository, you must create a new branch with your code, setup a pull-request with your changes and have your code reviewed by pairs. First, pull the
+main changes into your local repository, by running
+```bash
+$ git pull
+```
+
+Then, to create a new branch, run
+```bash
+$ git checkout -b <branch-name>
+```
+
+As you make changes to the app, do some commits that expressively describe what you have changed, by running
+```bash
+$ git commit -s -m "<your-message>"
+```
+
+The -s flag signs out your message (if you don't have a signature, setup your [username](https://docs.github.com/en/get-started/getting-started-with-git/setting-your-username-in-git)
+and your [mail](https://docs.github.com/en/github-ae@latest/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address))
+and the -m flag set a message to your commit, e.g. "Update header component with app logo". It is strongly recommended that your messages have imperative verbal mode. If you need to
+push your changes into a upstream branch, you must run
+```bash
+$ git push --set-upstream origin <branch-name>
+```
+
+or, if you already set the branch to upstream, just run
+```bash
+$ git push
+```
+
+After finishing the changes, create a pull-request in the main repository GitHub page or in your branch page and request a pair review of your code to merge it.
+
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
