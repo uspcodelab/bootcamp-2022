@@ -1,5 +1,5 @@
 <template>
-  <v-row cols="12" style="background-color: #DAE3F0">
+  <v-row cols="12" style="background-color: #dae3f0">
     <v-container>
       <h1>Header</h1>
       <p>Change me</p>
@@ -7,8 +7,6 @@
   </v-row>
 </template>
 
-<script>
-</script>
+<script></script>
 
-<style scoped>
-</style>
+<style scoped></style>

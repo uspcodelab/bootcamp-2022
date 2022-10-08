@@ -1,7 +1,7 @@
 <template>
   <v-col>
     <v-row cols="12" sm="8" md="6">
-      <Header /> 
+      <Header />
     </v-row>
     <v-row cols="12" sm="8" md="6">
       <FAQ />
