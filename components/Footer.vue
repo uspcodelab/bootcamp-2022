@@ -2,8 +2,6 @@
   <p>&copy; 2022 - Rede Linux</p>
 </template>
 
-<script>
-</script>
+<script></script>
 
-<style scoped>
-</style>
+<style scoped></style>
