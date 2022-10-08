@@ -73,12 +73,12 @@ export default {
       items: [
         {
           icon: "mdi-apps",
-          title: "୧༼ ಠ益ಠ ༽୨",
+          title: "Welcome",
           to: "/",
         },
         {
           icon: "mdi-chart-bubble",
-          title: "Analise",
+          title: "Inspire",
           to: "/inspire",
         },
       ],
@@ -88,6 +88,5 @@ export default {
       title: "Vuetify.js",
     };
   },
- 
 };
 </script>

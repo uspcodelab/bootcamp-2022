@@ -1,22 +1,17 @@
 <template>
   <v-row>
     <v-col class="text-center">
-      <img src="/ednaldo.jpg" alt="Vuetify.js" class="mb-5" />
-        <ednaldo />
-        <outro />
+      <img src="/v.png" alt="Vuetify.js" class="mb-5" />
       <blockquote class="blockquote">
-        &#8220; Não existe site feio; só existe site que nao conhece os produtos vue &#8221;
+        &#8220;First, solve the problem. Then, write the code.&#8221;
         <footer>
           <small>
-            <em>&mdash; Minha Cabeça </em>
+            <em>&mdash;John Johnson</em>
           </small>
         </footer>
       </blockquote>
     </v-col>
-
-    <NuxtLink to="/fun"> teste </NuxtLink>
   </v-row>
-
 </template>
 
 <script>
