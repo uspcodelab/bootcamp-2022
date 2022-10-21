@@ -2,7 +2,11 @@
   <v-container>
     <h1>FAQ</h1>
     <v-expansion-panels accordion flat>
-      <v-expansion-panel v-for="(item, index) in faqContent" class="py-1 rounded-lg black--text question" active-class="active">
+      <v-expansion-panel
+        v-for="(item, index) in faqContent"
+        class="py-1 rounded-lg black--text question"
+        active-class="active"
+      >
         <v-expansion-panel-header v-slot="{ open }" expand-icon="">
           <v-layout justify-space-between align-center>
             {{ item.question }}
