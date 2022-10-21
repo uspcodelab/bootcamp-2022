@@ -2,23 +2,15 @@
   <v-container>
     <h1>FAQ</h1>
     <v-expansion-panels accordion flat>
-      <v-expansion-panel v-for="(item, index) in faqContent" class="rounded-xl">
-        <v-expansion-panel-header
-          @click="togglePanels(index)"
-          class="rounded-lg"
-          :color="
-            itemStatus[index]
-              ? 'grey darken-4 white--text'
-              : 'blue-grey lighten-4 black--text'
-          "
-        >
-          {{ item.question }}
-          <template v-slot:actions>
-            <v-icon v-if="itemStatus[index]" color="white"> $expand </v-icon>
-            <v-icon v-else color="black"> $expand </v-icon>
-          </template>
+      <v-expansion-panel v-for="(item, index) in faqContent" class="py-1 rounded-lg black--text question" active-class="active">
+        <v-expansion-panel-header v-slot="{ open }" expand-icon="">
+          <v-layout justify-space-between align-center>
+            {{ item.question }}
+            <v-icon v-if="!open" color="black">mdi-chevron-down</v-icon>
+            <v-icon v-else color="white">mdi-chevron-up</v-icon>
+          </v-layout>
         </v-expansion-panel-header>
-        <v-expansion-panel-content class="rounded-lg">
+        <v-expansion-panel-content class="rounded-lg rounded-t-0">
           {{ item.answer }}
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -95,20 +87,9 @@ export default {
             Para se inscrever, saír ou mudar sua senha da lista. Por favor, entre em nos seguintes links: Lista de users, lista de users-bcc.",
       },
     ];
-    var activeItens = [];
-    for (let i = 0; i < allQA.length; i++) activeItens.push(false);
     return {
       faqContent: allQA,
-      itemStatus: activeItens,
     };
-  },
-  methods: {
-    togglePanels(index) {
-      for (let i = 0; i < this.itemStatus.length; i++) {
-        if (i != index) this.itemStatus.splice(i, 1, false);
-        else this.itemStatus.splice(i, 1, !this.itemStatus[i]);
-      }
-    },
   },
 };
 </script>
@@ -122,8 +103,12 @@ export default {
   margin: 8px;
   padding: 0;
 }
-.v-expansion-panel-header {
-  margin-bottom: -10px;
-  z-index: 1;
+.question {
+  background-color: #dae3f0 !important;
+  color: black !important;
+}
+.active {
+  background-color: #212121 !important;
+  color: white !important;
 }
 </style>
