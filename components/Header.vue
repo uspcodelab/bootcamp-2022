@@ -3,27 +3,41 @@
     <v-container>
       <v-row>
         <v-col cols="8" align-self="center" align="left">
-        <v-carousel
-          cycle
-          height="400"
-          hide-delimiter-background
-          :show-arrows="false"
-        >
-          <v-carousel-item v-for="slide in slides" :key="slide">
-            <v-container class="texto">
-              <h3 class="sub">{{ slide.smallIntro }}</h3>
-              <h1 class="big">{{ slide.mainText }}</h1>
-              <template v-for="button in slide.buttons">
-                <v-btn v-if="!button.external" :to="button.link" :color="button.color" class="infolink" flat outlined>
-                  {{ button.text }}
-                </v-btn>
-                <v-btn v-else :href="button.link" :color="button.color" class="infolink" flat outlined>
-                  {{ button.text }} 
-                </v-btn>
-              </template>
-            </v-container>
-          </v-carousel-item>
-        </v-carousel>
+          <v-carousel
+            cycle
+            height="400"
+            hide-delimiter-background
+            :show-arrows="false"
+          >
+            <v-carousel-item v-for="slide in slides" :key="slide">
+              <v-container class="texto">
+                <h3 class="sub">{{ slide.smallIntro }}</h3>
+                <h1 class="big">{{ slide.mainText }}</h1>
+                <template v-for="button in slide.buttons">
+                  <v-btn
+                    v-if="!button.external"
+                    :to="button.link"
+                    :color="button.color"
+                    class="infolink"
+                    flat
+                    outlined
+                  >
+                    {{ button.text }}
+                  </v-btn>
+                  <v-btn
+                    v-else
+                    :href="button.link"
+                    :color="button.color"
+                    class="infolink"
+                    flat
+                    outlined
+                  >
+                    {{ button.text }}
+                  </v-btn>
+                </template>
+              </v-container>
+            </v-carousel-item>
+          </v-carousel>
         </v-col>
         <v-col cols="4" align-self="center" align="right"><Tux /></v-col>
       </v-row>
@@ -44,15 +58,15 @@ export default {
               text: "Mais informações",
               external: false,
               link: "/inspire",
-              color: "rgba(5, 22, 30, 1)"
+              color: "rgba(5, 22, 30, 1)",
             },
             {
               text: "Logue-se",
               external: false,
               link: "/login",
-              color: "rgba(0, 0, 0, 1)"
-            }
-          ]
+              color: "rgba(0, 0, 0, 1)",
+            },
+          ],
         },
         {
           smallIntro: "Conta",
@@ -62,14 +76,14 @@ export default {
               text: "Clique aqui",
               external: true,
               link: "https://linux.ime.usp.br",
-              color: "rgba(5, 22, 30, 1)"
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
+              color: "rgba(5, 22, 30, 1)",
+            },
+          ],
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style scoped>
