@@ -16,11 +16,13 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
+    <v-footer cols="12" color="#05161E">
       <Footer />
     </v-footer>
   </v-app>
 </template>
+
+<style scoped></style>
 
 <script>
 export default {
