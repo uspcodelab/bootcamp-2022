@@ -1,24 +1,22 @@
 <template>
   <div>
     <h1>Avisos</h1>
-    <v-container>
-      <v-row v-for="(itemRow, indexRow) in 2">
-        <v-col v-for="(itemCol, indexCol) in 2" style="height: 250px">
-          <v-card height="220px" , :color="avisos[2 * indexRow + indexCol].cor">
+      <v-row class="my-1">
+        <v-col v-for="aviso in avisos.slice(0, 4)" :key="aviso.titulo" cols="6">
+          <v-card min-height="220px" :color="aviso.cor">
             <v-card-title>
-              {{ avisos[2 * indexRow + indexCol].titulo }}
+              {{ aviso.titulo }}
               <v-spacer></v-spacer>
               <v-icon>
-                {{ avisos[2 * indexRow + indexCol].icone }}
+                {{ aviso.icone }}
               </v-icon>
             </v-card-title>
             <v-card-text>
-              {{ avisos[2 * indexRow + indexCol].conteudo }}
+              {{ aviso.conteudo }}
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
-    </v-container>
   </div>
 </template>
 
@@ -39,6 +37,13 @@ export default {
         cor: "blue",
         icone: "mdi-robot-excited",
       },
+      {
+        titulo: "Teste",
+        conteudo:
+          "Testando aqui",
+        cor: "red",
+        icone: "mdi-linkedin",
+      }, 
       {
         titulo: "",
         conteudo: "",
