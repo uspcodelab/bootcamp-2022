@@ -11,9 +11,7 @@
 
       <v-col cols="12" md="4">
         <div class="d-flex flex-column align-center">
-          <span>
-            Endereço: Rua do Matão, 1010, Bloco A, Sala 125
-          </span>
+          <span> Endereço: Rua do Matão, 1010, Bloco A, Sala 125 </span>
           <span>Cidade Universitária - USP, São Paulo/SP</span>
         </div>
       </v-col>
@@ -21,20 +19,22 @@
         <div class="d-flex flex-row align-center DivFooter-1">
           <div class="d-flex flex-column align-center">
             <div class="d-flex flex-row align-center">
-              <v-icon class="mx-2" id="Telefone" color="white">mdi-phone</v-icon>
-              <span>
-                Telefone: {{ telefone }}
-              </span>
+              <v-icon class="mx-2" id="Telefone" color="white"
+                >mdi-phone</v-icon
+              >
+              <span> Telefone: {{ telefone }} </span>
             </div>
             <div class="d-flex flex-row align-center">
-              <v-icon class="mx-2" id="Envelope" color="white">mdi-email</v-icon>
+              <v-icon class="mx-2" id="Envelope" color="white"
+                >mdi-email</v-icon
+              >
               <span>Email: {{ email }}</span>
             </div>
           </div>
           <ImeLogo />
         </div>
       </v-col>
-      </v-row>
+    </v-row>
   </v-container>
 </template>
 
