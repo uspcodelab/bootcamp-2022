@@ -1,5 +1,5 @@
 <template>
-  <img class="ime-logo" alt="Ime Logo" src="/ime-logo.svg" />
+  <img class="ime-logo" alt="Ime Logo" src="@/assets/imgs/ime-logo.svg" />
 </template>
 
 <style scoped>
