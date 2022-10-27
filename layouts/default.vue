@@ -16,24 +16,13 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-footer cols="12" id="Footer" color="#05161E">
-      <div id="FooterDiv">
-        <Footer />
-      </div>
+    <v-footer cols="12" color="#05161E">
+      <Footer />
     </v-footer>
   </v-app>
 </template>
 
 <style scoped>
-#Footer {
-  display: flex;
-  padding: 0;
-  min-height: 13%;
-}
-#FooterDiv {
-  display: flex;
-  width: 100%;
-}
 </style>
 
 <script>
@@ -60,28 +49,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: "Vuetify.js",
-
-      heightFooter() {
-        switch (this.$vuetify.breakpoint.name) {
-          case "xs":
-            return 50;
-          case "sm":
-            return 100;
-          case "md":
-            return 3000;
-          case "lg":
-            return 600;
-          case "xl":
-            return 600;
-        }
-      },
-    };
-  },
-
-  methods: {
-    printar_tamanho() {
-      console.log(this.$vuetify.breakpoint.name);
-    },
-  },
+    }
+  }
 };
 </script>
