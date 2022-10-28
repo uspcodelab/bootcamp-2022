@@ -1,39 +1,25 @@
 <template>
   <v-container>
-    <v-row align="center">
+    <v-row align-center>
       <v-col cols="12" md="4">
-        <div class="d-flex flex-column align-center">
-          <p><i>In memorian:</i></p>
-          <span><b>Rogério Theodoro Brito</b></span>
-          <span>Sem o qual esta rede não estaria aqui.</span>
-        </div>
+        <FooterTexto
+          linha1="<p><i>In memorian:</i></p>"
+          linha2="<h4><b> Rogério Theodoro Brito </b></h4>"
+          linha3="Sem o qual esta rede nao estaria aqui."
+        />
       </v-col>
 
       <v-col cols="12" md="4">
-        <div class="d-flex flex-column align-center">
-          <span> Endereço: Rua do Matão, 1010, Bloco A, Sala 125 </span>
-          <span>Cidade Universitária - USP, São Paulo/SP</span>
-        </div>
+        <FooterTexto
+          linha1="Cidade Universitária - USP, São Paulo/SP"
+          linha2="Rua do Matão, 1010, Bloco A, Sala 125."
+        />
       </v-col>
+
       <v-col cols="12" md="4">
-        <div class="d-flex flex-row align-center DivFooter-1">
-          <div class="d-flex flex-column align-center">
-            <div class="d-flex flex-row align-center">
-              <v-icon class="mx-2" id="Telefone" color="white"
-                >mdi-phone</v-icon
-              >
-              <span> Telefone: {{ telefone }} </span>
-            </div>
-            <div class="d-flex flex-row align-center">
-              <v-icon class="mx-2" id="Envelope" color="white"
-                >mdi-email</v-icon
-              >
-              <span>Email: {{ email }}</span>
-            </div>
-          </div>
-          <ImeLogo />
-        </div>
+        <FooterTextoImagem :telefone="telefone" :email="email" />
       </v-col>
+
     </v-row>
   </v-container>
 </template>
@@ -50,15 +36,10 @@ export default {
 </script>
 
 <style scoped>
-.DivFooter-1 {
-  justify-content: space-evenly;
-}
 
-#Telefone {
-  text-shadow: 2px 2px 6px black;
-}
-
-#Envelope {
-  text-shadow: 2px 2px 6px black;
+@media screen and (max-width: 960px) {
+  #FooterContainer > * {
+    padding: min(15px, 4%) 0;
+  }
 }
 </style>
