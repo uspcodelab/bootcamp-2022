@@ -1,9 +1,9 @@
 <template>
-    <div class="FooterDiv">
-      <span v-if="linha1 != ''" v-html="linha1"> </span>
-      <span v-if="linha2 != ''" v-html="linha2" id="nome"> </span>
-      <span v-if="linha3 != ''" v-html="linha3"> </span>
-    </div>
+  <div class="FooterDiv">
+    <span v-if="linha1 != ''" v-html="linha1"> </span>
+    <span v-if="linha2 != ''" v-html="linha2" id="nome"> </span>
+    <span v-if="linha3 != ''" v-html="linha3"> </span>
+  </div>
 </template>
 <script>
 export default {
@@ -25,9 +25,8 @@ export default {
 </script>
 
 <style scoped>
-
 .FooterDiv {
-  height:100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,5 +37,4 @@ export default {
 #nome > * {
   margin: 100px;
 }
-
 </style>

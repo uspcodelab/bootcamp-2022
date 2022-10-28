@@ -19,7 +19,6 @@
       <v-col cols="12" md="4">
         <FooterTextoImagem :telefone="telefone" :email="email" />
       </v-col>
-
     </v-row>
   </v-container>
 </template>
@@ -36,7 +35,6 @@ export default {
 </script>
 
 <style scoped>
-
 @media screen and (max-width: 960px) {
   #FooterContainer > * {
     padding: min(15px, 4%) 0;
