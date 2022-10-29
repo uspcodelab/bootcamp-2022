@@ -2,14 +2,19 @@
   <v-row style="background-color: #dae3f0">
     <v-container>
       <v-row>
-        <v-col cols="8" align-self="center" align="left">
+        <v-col cols="12" md="8" align-self="center" align="left">
           <v-carousel
             cycle
+            interval="10000"
             height="400"
             hide-delimiter-background
             :show-arrows="false"
           >
-            <v-carousel-item v-for="slide in slides" :key="slide">
+            <v-carousel-item
+              class="d-block mx-auto"
+              v-for="slide in slides"
+              :key="slide"
+            >
               <v-container class="texto">
                 <h3 class="sub">{{ slide.smallIntro }}</h3>
                 <h1 class="big">{{ slide.mainText }}</h1>
@@ -39,7 +44,10 @@
             </v-carousel-item>
           </v-carousel>
         </v-col>
-        <v-col cols="4" align-self="center" align="right"><Tux /></v-col>
+
+        <v-col cols="4" align="center">
+          <Tux />
+        </v-col>
       </v-row>
     </v-container>
   </v-row>
