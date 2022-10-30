@@ -2,7 +2,12 @@
   <div>
     <h1>Avisos</h1>
     <v-row class="my-1 flex-column flex-md-row">
-      <v-col v-for="aviso in avisos.slice(0, 4)" :key="aviso.titulo" cols="12" md="6">
+      <v-col
+        v-for="aviso in avisos.slice(0, 4)"
+        :key="aviso.titulo"
+        cols="12"
+        md="6"
+      >
         <v-card :min-height="minimunHeight" :color="aviso.cor">
           <v-card-title :class="fontSizeTitulo">
             {{ aviso.titulo }}
@@ -95,11 +100,9 @@ export default {
       }
     },
     isBigEnough() {
-      if(this.$vuetify.breakpoint.name == "xs") 
-        return false;
-      else
-        return true;
-    }
+      if (this.$vuetify.breakpoint.name == "xs") return false;
+      else return true;
+    },
   },
 };
 </script>
