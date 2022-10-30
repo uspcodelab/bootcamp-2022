@@ -43,6 +43,12 @@ export default {
         icone: "mdi-robot-excited",
       },
       {
+        titulo: "Teste",
+        conteudo: "Testando aqui",
+        cor: "red",
+        icone: "mdi-linkedin",
+      },
+      {
         titulo: "",
         conteudo: "",
         cor: "green",
