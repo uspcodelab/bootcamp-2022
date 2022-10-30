@@ -17,7 +17,7 @@
             >
               <v-container class="texto">
                 <h3 class="sub">{{ slide.smallIntro }}</h3>
-                <h1 class=" text-h3 text-h1-md ">{{ slide.mainText }}</h1>
+                <h1 class="big text-h3 text-h1-md ">{{ slide.mainText }}</h1>
                 <template v-for="button in slide.buttons">
                   <v-btn
                     v-if="!button.external"
@@ -97,7 +97,7 @@ export default {
 <style scoped>
 .texto {
   color: rgba(5, 22, 30, 1);
-  font-family: "Ubuntu";
+  font-family: Ubuntu !important;
   font-weight: bolder;
   padding: 30px 0px;
 }
@@ -112,7 +112,7 @@ h1 {
 }
 .big {
   line-height: 0.9;
-  font-family:"Ubuntu"
+  font-family:Ubuntu !important;
 }
 .infolink {
   font-size: 1rem;
