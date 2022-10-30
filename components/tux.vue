@@ -1,6 +1,6 @@
 <template>
   <img
-    class="tux"
+    class="tux d-flex "
     alt="Tux"
     src="@/assets/imgs/Tux.svg"
     :aspect-ratio="16 / 9"

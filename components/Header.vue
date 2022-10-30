@@ -2,7 +2,7 @@
   <v-row style="background-color: #dae3f0">
     <v-container>
       <v-row>
-        <v-col cols="12" md="8" align-self="center" align="left">
+        <v-col cols="12" md="8" align-self="center" >
           <v-carousel
             cycle
             interval="10000"
@@ -17,7 +17,7 @@
             >
               <v-container class="texto">
                 <h3 class="sub">{{ slide.smallIntro }}</h3>
-                <h1 class="big">{{ slide.mainText }}</h1>
+                <h1 class=" text-h3 text-h1-md ">{{ slide.mainText }}</h1>
                 <template v-for="button in slide.buttons">
                   <v-btn
                     v-if="!button.external"
@@ -45,7 +45,7 @@
           </v-carousel>
         </v-col>
 
-        <v-col cols="4" align="center">
+        <v-col cols="4" align="center" >
           <Tux />
         </v-col>
       </v-row>
@@ -112,10 +112,13 @@ h1 {
 }
 .big {
   line-height: 0.9;
+  font-family:"Ubuntu"
 }
 .infolink {
   font-size: 1rem;
   margin-right: 10px;
   margin-top: 10px;
 }
+
+
 </style>
