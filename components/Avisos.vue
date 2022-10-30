@@ -1,28 +1,22 @@
 <template>
   <div>
     <h1>Avisos</h1>
-    <v-container>
-      <v-row v-for="(itemRow, indexRow) in 2">
-        <v-col v-for="(itemCol, indexCol) in 2">
-          <v-card
-            :min-height="minimunHeight"
-            :min-width="minimunWidth"
-            :color="avisos[2 * indexRow + indexCol].color"
-          >
-            <v-card-title :class="fontSizeTitle">
-              {{ avisos[2 * indexRow + indexCol].title }}
-              <v-spacer></v-spacer>
-              <v-icon v-if="isBigEnough">
-                {{ avisos[2 * indexRow + indexCol].icon }}
-              </v-icon>
-            </v-card-title>
-            <v-card-text :class="fontSizeContent">
-              {{ avisos[2 * indexRow + indexCol].content }}
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-row class="my-1 flex-column flex-md-row">
+      <v-col v-for="aviso in avisos.slice(0, 4)" :key="aviso.titulo" cols="12" md="6">
+        <v-card :min-height="minimunHeight" :color="aviso.cor">
+          <v-card-title :class="fontSizeTitulo">
+            {{ aviso.titulo }}
+            <v-spacer></v-spacer>
+            <v-icon v-if="isBigEnough">
+              {{ aviso.icone }}
+            </v-icon>
+          </v-card-title>
+          <v-card-text :class="fontSizeConteudo">
+            {{ aviso.conteudo }}
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -31,29 +25,29 @@ export default {
   data: () => ({
     avisos: [
       {
-        title: "Impressora",
-        content: "Impressora não está funcionando no momento.",
-        color: "orange",
-        icon: "mdi-alien",
+        titulo: "Impressora",
+        conteudo: "Impressora não está funcionando no momento.",
+        cor: "orange",
+        icone: "mdi-alien",
       },
       {
-        title: "Feriado",
-        content:
+        titulo: "Feriado",
+        conteudo:
           "Rede ficará indisponível durante o feriado para a realização de manutenção.",
-        color: "blue",
-        icon: "mdi-robot-excited",
+        cor: "blue",
+        icone: "mdi-robot-excited",
       },
       {
-        title: "",
-        content: "",
-        color: "green",
-        icon: "",
+        titulo: "",
+        conteudo: "",
+        cor: "green",
+        icone: "",
       },
       {
-        title: "",
-        content: "",
-        color: "yellow",
-        icon: "mdi-nintendo-wii",
+        titulo: "",
+        conteudo: "",
+        cor: "yellow",
+        icone: "mdi-nintendo-wii",
       },
     ],
   }),
@@ -63,7 +57,7 @@ export default {
         case "xs":
           return 100;
         case "sm":
-          return 150;
+          return 160;
         case "md":
           return 200;
         case "lg":
@@ -72,39 +66,21 @@ export default {
           return 400;
       }
     },
-    minimunWidth() {
+    fontSizeTitulo() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          return 100;
+          return "text-subtitulo-2";
         case "sm":
-          return 150;
+          return "text-subtitulo-1";
         case "md":
-          return 200;
+          return "text-subtitulo-1";
         case "lg":
-          return 250;
-        case "xl":
-          return 400;
-      }
-    },
-    isBigEnough() {
-      if (this.$vuetify.breakpoint.name == "xs") return false;
-      else return true;
-    },
-    fontSizeTitle() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "text-subtitle-2";
-        case "sm":
-          return "text-subtitle-1";
-        case "md":
-          return "text-subtitle-1";
-        case "lg":
-          return "text-h4";
-        case "xl":
           return "text-h6";
+        case "xl":
+          return "text-h4";
       }
     },
-    fontSizeContent() {
+    fontSizeConteudo() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
           return "text-caption";
@@ -113,11 +89,17 @@ export default {
         case "md":
           return "text-body-1";
         case "lg":
-          return "text-h6";
+          return "text-body-1";
         case "xl":
           return "text-h4";
       }
     },
+    isBigEnough() {
+      if(this.$vuetify.breakpoint.name == "xs") 
+        return false;
+      else
+        return true;
+    }
   },
 };
 </script>
