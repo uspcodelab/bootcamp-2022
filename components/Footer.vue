@@ -14,8 +14,8 @@
       <v-col cols="12" md="4">
         <FooterTexto>
           <template v-slot:left>
-            Cidade Universitária - USP, São Paulo/SP
-            Rua do Matão, 1010, Bloco A, Sala 125.
+            Cidade Universitária - USP, São Paulo/SP Rua do Matão, 1010, Bloco
+            A, Sala 125.
           </template>
         </FooterTexto>
       </v-col>
