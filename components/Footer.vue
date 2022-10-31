@@ -1,23 +1,41 @@
 <template>
   <v-container>
-    <v-row align-center>
+    <v-row align="center">
       <v-col cols="12" md="4">
-        <FooterTexto
-          linha1="<p><i>In memorian:</i></p>"
-          linha2="<h4><b> Rogério Theodoro Brito </b></h4>"
-          linha3="Sem o qual esta rede nao estaria aqui."
-        />
+        <FooterTexto>
+          <template v-slot:left>
+            <p><i>In memorian:</i></p>
+            <h4><b> Rogério Theodoro Brito</b></h4>
+            Sem o qual esta rede nao estaria aqui.
+          </template>
+        </FooterTexto>
       </v-col>
 
       <v-col cols="12" md="4">
-        <FooterTexto
-          linha1="Cidade Universitária - USP, São Paulo/SP"
-          linha2="Rua do Matão, 1010, Bloco A, Sala 125."
-        />
+        <FooterTexto>
+          <template v-slot:left>
+            Cidade Universitária - USP, São Paulo/SP
+            Rua do Matão, 1010, Bloco A, Sala 125.
+          </template>
+        </FooterTexto>
       </v-col>
 
       <v-col cols="12" md="4">
-        <FooterTextoImagem :telefone="telefone" :email="email" />
+        <FooterTexto>
+          <template v-slot:left>
+            <div>
+              <v-icon class="px-3">mdi-phone</v-icon>
+              <span>Telefone: {{ telefone }}</span>
+            </div>
+            <div>
+              <v-icon class="px-3">mdi-email-outline</v-icon>
+              <span>Email: {{ email }}</span>
+            </div>
+          </template>
+          <template v-slot:right>
+            <ImeLogo />
+          </template>
+        </FooterTexto>
       </v-col>
     </v-row>
   </v-container>
@@ -33,11 +51,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-@media screen and (max-width: 960px) {
-  #FooterContainer > * {
-    padding: min(15px, 4%) 0;
-  }
-}
-</style>
