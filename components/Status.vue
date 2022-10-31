@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="StatusHeader" style="margin: 5% 0 2.8% 0">
-      <h2 style="display: inline-block">Status</h2>
-      <!-- Os icones do status invisiveis pq
-        o fundo normal esta da mesma cor que eles -->
+    <div class="d-flex align-center">
+      <h1>Status</h1>
       <v-icon size="2.5em" class="icon">mdi-format-list-bulleted-square</v-icon>
       <v-icon size="1.9em" class="icon"> mdi-server</v-icon>
     </div>
@@ -43,21 +41,11 @@ export default {
 </script>
 
 <style scoped>
-.StatusHeader {
-  display: flex;
-  align-items: center;
-}
-.StatusHeader > * {
-  margin-right: 2%;
-}
 .MaqStats {
   background-color: rgba(0, 0, 0, 0);
   padding: 0;
 }
 .MaqStats > * {
-  display: flex;
-  justify-content: space-between;
-
   width: 100%;
   padding: 1.2% 4%;
   border-radius: 0.4rem;
