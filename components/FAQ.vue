@@ -25,8 +25,8 @@
 <script>
 export default {
   props: {
-    QuestionsAndAnswers: Array
-  }
+    QuestionsAndAnswers: Array,
+  },
 };
 </script>
 <style scoped>
