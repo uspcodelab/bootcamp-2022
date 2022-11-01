@@ -74,7 +74,7 @@ export default {
       }
     },
     isBigEnough() {
-      return (this.$vuetify.breakpoint.name != "xs");
+      return this.$vuetify.breakpoint.name != "xs";
     },
   },
 };
