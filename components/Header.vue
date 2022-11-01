@@ -25,7 +25,7 @@
                     {{ button.text }}
                   </v-btn>
                   <v-btn
-                    :key="button"
+                    :key="button.text"
                     v-else
                     :href="button.link"
                     :color="button.color"
