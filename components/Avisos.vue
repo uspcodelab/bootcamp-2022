@@ -8,15 +8,15 @@
         cols="12"
         md="6"
       >
-        <v-card :min-height="minimunHeight" :color="aviso.cor">
-          <v-card-title :class="fontSizeTitulo">
+        <v-card :min-height="minimumHeight" :color="aviso.cor">
+          <v-card-title class="text-subtitle-1 text-sm-subtitle-2 text-md-h6">
             {{ aviso.titulo }}
             <v-spacer></v-spacer>
             <v-icon v-if="isBigEnough">
               {{ aviso.icone }}
             </v-icon>
           </v-card-title>
-          <v-card-text :class="fontSizeConteudo">
+          <v-card-text class="text-caption text-sm-body-2 text-md-body-1">
             {{ aviso.conteudo }}
           </v-card-text>
         </v-card>
@@ -63,54 +63,19 @@ export default {
     ],
   }),
   computed: {
-    minimunHeight() {
+    minimumHeight() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
           return 100;
         case "sm":
           return 160;
-        case "md":
+        default:
           return 200;
-        case "lg":
-          return 250;
-        case "xl":
-          return 400;
-      }
-    },
-    fontSizeTitulo() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "text-subtitulo-2";
-        case "sm":
-          return "text-subtitulo-1";
-        case "md":
-          return "text-subtitulo-1";
-        case "lg":
-          return "text-h6";
-        case "xl":
-          return "text-h4";
-      }
-    },
-    fontSizeConteudo() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return "text-caption";
-        case "sm":
-          return "text-body-2";
-        case "md":
-          return "text-body-1";
-        case "lg":
-          return "text-body-1";
-        case "xl":
-          return "text-h4";
       }
     },
     isBigEnough() {
-      if (this.$vuetify.breakpoint.name == "xs") return false;
-      else return true;
+      return (this.$vuetify.breakpoint.name != "xs");
     },
   },
 };
 </script>
-
-<style scoped></style>
