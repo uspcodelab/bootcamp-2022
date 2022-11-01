@@ -15,21 +15,21 @@
                 <h1 class="big">{{ slide.mainText }}</h1>
                 <template v-for="button in slide.buttons">
                   <v-btn
+                    :key="button"
                     v-if="!button.external"
                     :to="button.link"
                     :color="button.color"
                     class="infolink"
-                    flat
                     outlined
                   >
                     {{ button.text }}
                   </v-btn>
                   <v-btn
+                    :key="button"
                     v-else
                     :href="button.link"
                     :color="button.color"
                     class="infolink"
-                    flat
                     outlined
                   >
                     {{ button.text }}

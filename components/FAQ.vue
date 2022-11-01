@@ -3,7 +3,8 @@
     <h1>FAQ</h1>
     <v-expansion-panels accordion flat>
       <v-expansion-panel
-        v-for="(item, index) in faqContent"
+        v-for="item in faqContent"
+        :key="item"
         class="py-1 rounded-lg black--text question"
         active-class="active"
       >
