@@ -2,7 +2,7 @@
   <div>
     <h1>Blog</h1>
     <v-row class="py-3">
-      <v-col v-for="blog in blogs.slice(0, 3)" :key="blog" cols="4">
+      <v-col v-for="blog in blogs.slice(0, 3)" :key="blog.title" cols="4">
         <v-card color="#dae3f0" class="black--text">
           <v-card-title class="text-h6">{{ blog.title }}</v-card-title>
           <v-card-subtitle
