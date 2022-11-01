@@ -47,8 +47,7 @@
 
 <script>
 export default {
-  data() {
-    return {
+  data:() => ({
       slides: [
         {
           smallIntro: "Bem vindo(a) à",
@@ -81,8 +80,7 @@ export default {
           ],
         },
       ],
-    };
-  },
+    }),
 };
 </script>
 

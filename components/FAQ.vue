@@ -24,8 +24,8 @@
 
 <script>
 export default {
-  data() {
-    var allQA = [
+  data: () => ({
+    allQA: [
       {
         question: "Posso ter uma conta na Rede Linux?",
         answer:
@@ -90,11 +90,8 @@ export default {
             users-bcc@linux.ime.usp.br ─ Lista do Bacharelado em Ciência da Computação\n\n\
             Para se inscrever, saír ou mudar sua senha da lista. Por favor, entre em nos seguintes links: Lista de users, lista de users-bcc.",
       },
-    ];
-    return {
-      faqContent: allQA,
-    };
-  },
+    ],
+  }),
 };
 </script>
 <style scoped>

@@ -23,8 +23,8 @@
 
 <script>
 export default {
-  data() {
-    var blogs = [
+  data: () => ({
+    blogs: [
       {
         title: "Lorem ipsum dolor sit amet",
         subtitle: "Lorem ipsum dolor sit amet",
@@ -42,10 +42,7 @@ export default {
         subtitle: "Lorem ipsum dolor sit amet",
         link: "/blog3",
       },
-    ];
-    return {
-      blogs: blogs,
-    };
-  },
+    ],
+  }),
 };
 </script>

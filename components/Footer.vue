@@ -5,7 +5,7 @@
         <FooterTexto>
           <template v-slot:left>
             <p><i>In memorian:</i></p>
-            <h4><b> Rogério Theodoro Brito</b></h4>
+            <b> Rogério Theodoro Brito</b>
             Sem o qual esta rede nao estaria aqui.
           </template>
         </FooterTexto>
@@ -43,11 +43,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      telefone: "(11) 3091-6482",
-      email: "admin@linux.ime.usp.br",
-    };
-  },
+  data: () => ({
+    telefone: "(11) 3091-6482",
+    email: "admin@linux.ime.usp.br",
+  }),
 };
 </script>
