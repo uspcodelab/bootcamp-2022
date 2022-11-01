@@ -13,9 +13,9 @@
               <v-container class="texto">
                 <h3 class="sub">{{ slide.smallIntro }}</h3>
                 <h1 class="big">{{ slide.mainText }}</h1>
-                <template v-for="button in slide.buttons" :key="button.text">
+                <template v-for="button in slide.buttons">
                   <v-btn
-                    :key="button"
+                    :key="button.text"
                     v-if="!button.external"
                     :to="button.link"
                     :color="button.color"
