@@ -5,7 +5,7 @@
         <FooterTexto>
           <template v-slot:left>
             <p><i>In memorian:</i></p>
-            <h4><b> Rogério Theodoro Brito</b></h4>
+            <b> Rogério Theodoro Brito</b>
             Sem o qual esta rede nao estaria aqui.
           </template>
         </FooterTexto>
