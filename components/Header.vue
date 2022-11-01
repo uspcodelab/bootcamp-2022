@@ -9,7 +9,7 @@
             hide-delimiter-background
             :show-arrows="false"
           >
-            <v-carousel-item v-for="slide in slides" :key="slide">
+            <v-carousel-item v-for="slide in slides" :key="slide.mainText">
               <v-container class="texto">
                 <h3 class="sub">{{ slide.smallIntro }}</h3>
                 <h1 class="big">{{ slide.mainText }}</h1>

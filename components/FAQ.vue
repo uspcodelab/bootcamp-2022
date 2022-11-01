@@ -4,7 +4,7 @@
     <v-expansion-panels accordion flat>
       <v-expansion-panel
         v-for="item in QuestionsAndAnswers"
-        :key="item"
+        :key="item.question"
         class="py-1 rounded-lg black--text question"
         active-class="active"
       >
