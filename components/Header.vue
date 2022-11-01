@@ -13,7 +13,7 @@
               <v-container class="texto">
                 <h3 class="sub">{{ slide.smallIntro }}</h3>
                 <h1 class="big">{{ slide.mainText }}</h1>
-                <template v-for="button in slide.buttons">
+                <template v-for="button in slide.buttons" :key="button.text">
                   <v-btn
                     :key="button"
                     v-if="!button.external"
