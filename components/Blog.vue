@@ -11,9 +11,7 @@
             }}</span></v-card-subtitle
           >
           <v-card-actions class="mt-5">
-            <v-btn :to="blog.link" color="black" outlined>
-              Ver mais
-            </v-btn>
+            <v-btn :to="blog.link" color="black" outlined> Ver mais </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
