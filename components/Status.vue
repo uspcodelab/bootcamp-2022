@@ -26,17 +26,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      Maquinas: [
-        { name: "LOL", status: false },
-        { name: "Dota", status: true },
-        { name: "Máquina 3", status: false },
-        { name: "Máquina 4", status: true },
-        { name: "Máquina 5", status: true },
-      ],
-    };
-  },
+  data: () => ({
+    Maquinas: [
+      { name: "LOL", status: false },
+      { name: "Dota", status: true },
+      { name: "Máquina 3", status: false },
+      { name: "Máquina 4", status: true },
+      { name: "Máquina 5", status: true },
+    ],
+  }),
 };
 </script>
 

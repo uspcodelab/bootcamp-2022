@@ -43,11 +43,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      telefone: "(11) 3091-6482",
-      email: "admin@linux.ime.usp.br",
-    };
-  },
+  data: () => ({
+    telefone: "(11) 3091-6482",
+    email: "admin@linux.ime.usp.br",
+  }),
 };
 </script>

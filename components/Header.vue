@@ -47,42 +47,40 @@
 
 <script>
 export default {
-  data() {
-    return {
-      slides: [
-        {
-          smallIntro: "Bem vindo(a) à",
-          mainText: "Rede GNU-Linux IME-USP",
-          buttons: [
-            {
-              text: "Mais informações",
-              external: false,
-              link: "/inspire",
-              color: "rgba(5, 22, 30, 1)",
-            },
-            {
-              text: "Logue-se",
-              external: false,
-              link: "/login",
-              color: "rgba(0, 0, 0, 1)",
-            },
-          ],
-        },
-        {
-          smallIntro: "Conta",
-          mainText: "Crie a sua conta",
-          buttons: [
-            {
-              text: "Clique aqui",
-              external: true,
-              link: "https://linux.ime.usp.br",
-              color: "rgba(5, 22, 30, 1)",
-            },
-          ],
-        },
-      ],
-    };
-  },
+  data: () => ({
+    slides: [
+      {
+        smallIntro: "Bem vindo(a) à",
+        mainText: "Rede GNU-Linux IME-USP",
+        buttons: [
+          {
+            text: "Mais informações",
+            external: false,
+            link: "/inspire",
+            color: "rgba(5, 22, 30, 1)",
+          },
+          {
+            text: "Logue-se",
+            external: false,
+            link: "/login",
+            color: "rgba(0, 0, 0, 1)",
+          },
+        ],
+      },
+      {
+        smallIntro: "Conta",
+        mainText: "Crie a sua conta",
+        buttons: [
+          {
+            text: "Clique aqui",
+            external: true,
+            link: "https://linux.ime.usp.br",
+            color: "rgba(5, 22, 30, 1)",
+          },
+        ],
+      },
+    ],
+  }),
 };
 </script>
 
