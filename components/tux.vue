@@ -1,15 +1,14 @@
 <template>
-    <v-col  >
-      <v-img
-    class="tux d-flex"
-    alt="Tux"
-    :src="require('@/assets/imgs/Tux.svg')"
-    min-width="100"
-    contain
-    > 
-  </v-img>
-    </v-col>
-
+  <v-col>
+    <v-img
+      class="tux d-flex"
+      alt="Tux"
+      :src="require('@/assets/imgs/Tux.svg')"
+      min-width="100"
+      contain
+    >
+    </v-img>
+  </v-col>
 </template>
 
 <style>
