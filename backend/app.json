@@ -1,0 +1,6 @@
+{
+  "name": "Rede Linux",
+  "description": "API do site da Rede Linux",
+  "repository": "",
+  "keywords": ["node", "express", "postgresql"]
+}
