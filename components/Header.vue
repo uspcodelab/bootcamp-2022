@@ -2,13 +2,14 @@
   <v-row style="background-color: #dae3f0">
     <v-container>
       <v-row>
-        <v-col cols="10" md="8" align-self="center" >
+        <v-col cols="8" align-self="center" >
           <v-carousel
             cycle
             interval="6000"
             height="400"
             hide-delimiter-background
             :show-arrows="false"
+            class="pl-2"
           >
             <v-carousel-item
               class="d-block "
@@ -47,7 +48,6 @@
           </v-carousel>
          
         </v-col>
-
         <v-col cols="4"  >
           <Tux />
         </v-col>
