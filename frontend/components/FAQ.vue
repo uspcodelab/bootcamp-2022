@@ -4,12 +4,12 @@
     <v-template v-for="item in faqContent" :key="item.question">
       <FAQCard :question="item.question" :answer="item.answer" />
     </v-template>
-</v-container>
+  </v-container>
 </template>
 
 <script>
 export default {
-   data: () => ({
+  data: () => ({
     faqContent: [
       {
         question: "Posso ter uma conta na Rede Linux?",
