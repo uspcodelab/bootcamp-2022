@@ -29,7 +29,11 @@ jobs:
         cache: 'npm'
         
     - name: Install packages
-      run: yarn install
+      run: |
+        yarn install
+      working-directory: ./frontend
       
     - name: Run linter check
-      run: yarn prettier -c .
+      run: |
+        yarn prettier -c .
+      working-directory: ./frontend
