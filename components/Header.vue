@@ -101,7 +101,6 @@ export default {
 .texto {
   color: rgba(5, 22, 30, 1);
   font-family: "Ubuntu" !important;
-  font-weight: bolder;
   padding: 30px 0px;
 }
 h1 {
