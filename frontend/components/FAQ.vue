@@ -1,31 +1,16 @@
 <template>
   <v-container>
     <h1>FAQ</h1>
-    <v-expansion-panels accordion flat>
-      <v-expansion-panel
-        v-for="(item, index) in faqContent"
-        class="py-1 rounded-lg black--text question"
-        active-class="active"
-      >
-        <v-expansion-panel-header v-slot="{ open }" expand-icon="">
-          <v-layout justify-space-between align-center>
-            {{ item.question }}
-            <v-icon v-if="!open" color="black">mdi-chevron-down</v-icon>
-            <v-icon v-else color="white">mdi-chevron-up</v-icon>
-          </v-layout>
-        </v-expansion-panel-header>
-        <v-expansion-panel-content class="rounded-lg rounded-t-0">
-          {{ item.answer }}
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+    <v-template v-for="item in faqContent" :key="item.question">
+      <FAQCard :question="item.question" :answer="item.answer" />
+    </v-template>
   </v-container>
 </template>
 
 <script>
 export default {
-  data() {
-    var allQA = [
+  data: () => ({
+    faqContent: [
       {
         question: "Posso ter uma conta na Rede Linux?",
         answer:
@@ -90,29 +75,7 @@ export default {
             users-bcc@linux.ime.usp.br ─ Lista do Bacharelado em Ciência da Computação\n\n\
             Para se inscrever, saír ou mudar sua senha da lista. Por favor, entre em nos seguintes links: Lista de users, lista de users-bcc.",
       },
-    ];
-    return {
-      faqContent: allQA,
-    };
-  },
+    ],
+  }),
 };
 </script>
-<style scoped>
-.v-expansion-panel-content {
-  white-space: pre-line;
-  color: #797979;
-  background-color: #f2f2f2;
-}
-.v-expansion-panel {
-  margin: 8px;
-  padding: 0;
-}
-.question {
-  background-color: #dae3f0 !important;
-  color: black !important;
-}
-.active {
-  background-color: #212121 !important;
-  color: white !important;
-}
-</style>
