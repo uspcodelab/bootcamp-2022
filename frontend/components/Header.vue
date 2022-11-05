@@ -15,7 +15,7 @@
                 <h1 class="big">{{ slide.mainText }}</h1>
                 <template v-for="button in slide.buttons">
                   <v-btn
-                    :key="button"
+                    :key="button.text"
                     v-if="!button.external"
                     :to="button.link"
                     :color="button.color"
@@ -25,7 +25,7 @@
                     {{ button.text }}
                   </v-btn>
                   <v-btn
-                    :key="button"
+                    :key="button.text"
                     v-else
                     :href="button.link"
                     :color="button.color"
