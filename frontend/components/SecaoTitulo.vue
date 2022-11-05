@@ -16,7 +16,7 @@ export default {
   props: {
     icon: String,
     title: String,
-  }
+  },
 };
 </script>
 
@@ -25,7 +25,7 @@ h1 {
   font-family: "Ubuntu";
 }
 .container-blue {
-  background-color: #DAE3F0;
-  color: #05161E;
+  background-color: #dae3f0;
+  color: #05161e;
 }
 </style>
