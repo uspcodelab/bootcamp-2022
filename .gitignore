@@ -1,3 +1,6 @@
+# Environment variables files
+.env
+
 # Nuxt dev/build outputs
 .output
 .nuxt
