@@ -1,7 +1,23 @@
 <template>
   <v-app dark>
-    <v-app-bar color="#05161E" fixed app>
-      <TabsMenu />
+    <v-app-bar color="#05161E" flat app absolute>
+      <v-container>
+        <v-row align="center">
+          <v-col cols="8">
+            <v-app-bar color="#05161E" flat>
+              <TabsMenu />
+            </v-app-bar>
+          </v-col>
+          <v-col cols="4">
+            <div class="d-flex flex-row align-center justify-end">
+              <span class="mx-4">Criar conta</span>|<span class="mx-4"
+                >Entrar</span
+              >
+              <v-icon size="28">mdi-account-circle</v-icon>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-app-bar>
     <v-main>
       <Nuxt />

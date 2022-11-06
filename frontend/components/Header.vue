@@ -1,5 +1,5 @@
 <template>
-  <v-row style="background-color: #dae3f0">
+  <v-row no-gutters style="background-color: #dae3f0">
     <v-container>
       <v-row>
         <v-col cols="8" align-self="center" align="left">
