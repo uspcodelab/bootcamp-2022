@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="d-flex align-center">
-      <v-icon size="30" class="icon mr-4" color="#05161E"> mdi-comment-text-multiple</v-icon>
+      <v-icon size="30" class="icon mr-4" color="#05161E">
+        mdi-comment-text-multiple</v-icon
+      >
       <h1>Blog</h1>
     </div>
     <v-row class="py-3">
