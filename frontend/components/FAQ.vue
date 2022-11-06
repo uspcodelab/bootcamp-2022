@@ -1,10 +1,10 @@
 <template>
-  <v-container>
+  <div>
     <h1>FAQ</h1>
     <v-template v-for="item in faqContent" :key="item.question">
       <FAQCard :question="item.question" :answer="item.answer" />
     </v-template>
-  </v-container>
+  </div>
 </template>
 
 <script>

@@ -17,12 +17,12 @@
           <Blog />
         </v-col>
       </v-row>
+      <v-row class="mt-8">
+        <v-col cols="12">
+          <FAQ />
+        </v-col>
+      </v-row>
     </v-container>
-    <v-row class="mt-8">
-      <v-col cols="12">
-        <FAQ />
-      </v-col>
-    </v-row>
   </v-col>
 </template>
 
