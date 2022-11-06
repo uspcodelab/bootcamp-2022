@@ -62,6 +62,6 @@ export default {
 
   // Development Configuration
   server: {
-    port: 8000
-  }
+    port: 8000,
+  },
 };
