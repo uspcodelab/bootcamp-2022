@@ -1,25 +1,27 @@
 <template>
   <v-col>
-    <v-row cols="12" sm="8" md="6">
+    <v-row cols="12">
       <Header />
     </v-row>
     <v-container>
-      <v-row>
-        <v-col cols="6">
+      <v-row class="mt-8">
+        <v-col cols="12" md="6">
           <Avisos />
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" md="6">
           <Status />
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="mt-8">
         <v-col cols="12">
           <Blog />
         </v-col>
       </v-row>
     </v-container>
-    <v-row cols="12" sm="8" md="6">
-      <FAQ />
+    <v-row class="mt-8">
+      <v-col cols="12">
+        <FAQ />
+      </v-col>
     </v-row>
   </v-col>
 </template>
