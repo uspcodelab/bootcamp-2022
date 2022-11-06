@@ -5,6 +5,7 @@
       <v-icon size="2.5em" class="icon">mdi-format-list-bulleted-square</v-icon>
       <v-icon size="1.9em" class="icon"> mdi-server</v-icon>
     </div>
+    <div class="mt-4">
     <v-list class="MaqStats" v-for="maquina in Maquinas" :key="maquina.name">
       <v-list-item
         :class="{ verde: maquina.status, vermelho: !maquina.status }"
@@ -21,6 +22,7 @@
         </v-list-item-icon>
       </v-list-item>
     </v-list>
+    </div>
   </div>
 </template>
 
