@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Avisos</h1>
+    <div class="d-flex align-center">
+      <v-icon size="30" class="mr-4" color="#05161E"> mdi-comment-alert</v-icon>
+      <h1>Avisos</h1>
+    </div>
     <v-row class="my-1 flex-column flex-md-row">
       <v-col
         v-for="aviso in avisos.slice(0, 4)"
