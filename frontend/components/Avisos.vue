@@ -9,14 +9,18 @@
         md="6"
       >
         <v-card :min-height="minimumHeight" :color="aviso.cor">
-          <v-card-title class="text-subtitle-1 text-sm-subtitle-2 text-md-h6 text-ubuntu">
+          <v-card-title
+            class="text-subtitle-1 text-sm-subtitle-2 text-md-h6 text-ubuntu"
+          >
             {{ aviso.titulo }}
             <v-spacer></v-spacer>
             <v-icon v-if="isBigEnough">
               {{ aviso.icone }}
             </v-icon>
           </v-card-title>
-          <v-card-text class="text-caption text-sm-body-2 text-md-body-1 text-ubuntu">
+          <v-card-text
+            class="text-caption text-sm-body-2 text-md-body-1 text-ubuntu"
+          >
             {{ aviso.conteudo }}
           </v-card-text>
         </v-card>
@@ -82,6 +86,6 @@ export default {
 
 <style scoped>
 .text-ubuntu {
-  font-family: 'Ubuntu' !important;
+  font-family: "Ubuntu" !important;
 }
 </style>

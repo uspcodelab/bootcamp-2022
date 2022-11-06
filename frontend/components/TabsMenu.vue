@@ -1,6 +1,12 @@
 <template>
   <v-tabs color="white" optional>
-    <v-tab class="white--text px-6" v-for="page in pages" :key="page.name" :to="page.link">{{ page.name }}</v-tab>
+    <v-tab
+      class="white--text px-6"
+      v-for="page in pages"
+      :key="page.name"
+      :to="page.link"
+      >{{ page.name }}</v-tab
+    >
   </v-tabs>
 </template>
 
@@ -10,16 +16,15 @@ export default {
     pages: [
       {
         name: "Home",
-        link: "/"
+        link: "/",
       },
       {
         name: "Inspire",
-        link: "/inspire"
+        link: "/inspire",
       },
-    ]
+    ],
   }),
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

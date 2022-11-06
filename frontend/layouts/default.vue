@@ -10,7 +10,9 @@
           </v-col>
           <v-col cols="4">
             <div class="d-flex flex-row align-center justify-end">
-              <span class="mx-4">Criar conta</span>|<span class="mx-4">Entrar</span>
+              <span class="mx-4">Criar conta</span>|<span class="mx-4"
+                >Entrar</span
+              >
               <v-icon size="28">mdi-account-circle</v-icon>
             </div>
           </v-col>
