@@ -1,26 +1,27 @@
 <template>
   <div>
     <div class="d-flex align-center">
+      <v-icon size="30" class="icon mr-4">mdi-server-network</v-icon>
       <h1>Status</h1>
-      <v-icon size="2.5em" class="icon">mdi-format-list-bulleted-square</v-icon>
-      <v-icon size="1.9em" class="icon"> mdi-server</v-icon>
     </div>
-    <v-list class="MaqStats" v-for="maquina in Maquinas" :key="maquina.name">
-      <v-list-item
-        :class="{ verde: maquina.status, vermelho: !maquina.status }"
-      >
-        <v-list-item-title>
-          {{ maquina.name }}
-        </v-list-item-title>
+    <div class="mt-4">
+      <v-list class="MaqStats" v-for="maquina in Maquinas" :key="maquina.name">
+        <v-list-item
+          :class="{ verde: maquina.status, vermelho: !maquina.status }"
+        >
+          <v-list-item-title>
+            {{ maquina.name }}
+          </v-list-item-title>
 
-        <v-list-item-icon>
-          <v-icon class="icon" v-if="maquina.status"> mdi-check-bold </v-icon>
-          <v-icon class="icon" v-else="!maquina.status">
-            mdi-close-thick
-          </v-icon>
-        </v-list-item-icon>
-      </v-list-item>
-    </v-list>
+          <v-list-item-icon>
+            <v-icon class="icon" v-if="maquina.status"> mdi-check-bold </v-icon>
+            <v-icon class="icon" v-else="!maquina.status">
+              mdi-close-thick
+            </v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list>
+    </div>
   </div>
 </template>
 

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Avisos</h1>
+    <div class="d-flex align-center">
+      <v-icon size="30" class="mr-4" color="#05161E"> mdi-comment-alert</v-icon>
+      <h1>Avisos</h1>
+    </div>
     <v-row class="my-1 flex-column flex-md-row">
       <v-col
         v-for="aviso in avisos.slice(0, 4)"
@@ -9,14 +12,18 @@
         md="6"
       >
         <v-card :min-height="minimumHeight" :color="aviso.cor">
-          <v-card-title class="text-subtitle-1 text-sm-subtitle-2 text-md-h6">
+          <v-card-title
+            class="text-subtitle-1 text-sm-subtitle-2 text-md-h6 text-ubuntu"
+          >
             {{ aviso.titulo }}
             <v-spacer></v-spacer>
             <v-icon v-if="isBigEnough">
               {{ aviso.icone }}
             </v-icon>
           </v-card-title>
-          <v-card-text class="text-caption text-sm-body-2 text-md-body-1">
+          <v-card-text
+            class="text-caption text-sm-body-2 text-md-body-1 text-ubuntu"
+          >
             {{ aviso.conteudo }}
           </v-card-text>
         </v-card>
@@ -79,3 +86,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.text-ubuntu {
+  font-family: "Ubuntu" !important;
+}
+</style>

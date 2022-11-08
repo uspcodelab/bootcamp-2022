@@ -1,10 +1,15 @@
 <template>
-  <v-container>
-    <h1>FAQ</h1>
+  <div>
+    <div class="d-flex align-center">
+      <v-icon size="30" class="icon mr-4" color="#05161E">
+        mdi-frequently-asked-questions</v-icon
+      >
+      <h1>FAQ</h1>
+    </div>
     <v-template v-for="item in faqContent" :key="item.question">
       <FAQCard :question="item.question" :answer="item.answer" />
     </v-template>
-  </v-container>
+  </div>
 </template>
 
 <script>
