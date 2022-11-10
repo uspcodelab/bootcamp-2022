@@ -2,7 +2,12 @@
   <v-row no-gutters style="background-color: #dae3f0">
     <v-container>
       <v-row align="center">
-        <v-col cols="12" md="8" align-self="center" class="order-last order-md-first">
+        <v-col
+          cols="12"
+          md="8"
+          align-self="center"
+          class="order-last order-md-first"
+        >
           <v-carousel
             cycle
             interval="6000"
