@@ -1,15 +1,15 @@
 <template>
   <v-row no-gutters style="background-color: #dae3f0">
     <v-container>
-      <v-row>
-        <v-col cols="8" align-self="center">
+      <v-row align="center">
+        <v-col cols="12" md="8" align-self="center" class="order-last order-md-first">
           <v-carousel
             cycle
             interval="6000"
             height="400"
             hide-delimiter-background
             :show-arrows="false"
-            class="pl-2"
+            class="pl-2 text-center text-md-left"
           >
             <v-carousel-item
               class="d-block"
@@ -45,7 +45,7 @@
             </v-carousel-item>
           </v-carousel>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <Tux />
         </v-col>
       </v-row>
