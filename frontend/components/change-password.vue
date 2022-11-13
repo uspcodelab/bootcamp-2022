@@ -1,82 +1,68 @@
 <template>
-    <v-expansion-panels flat>
-      <v-expansion-panel>
-        <v-expansion-panel-header 
-          expand-icon=""
-          style="max-width: 250px"
-        >
-          <v-btn
-           depressed
-           color="#DAE3F0"
-           light 
-           @click="open=!open"
-          >
-         Alterar a senha 
-      </v-btn>
-        </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-text-field
-              :append-icon="hide ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.min]"
-              :type="hide ? 'text' : 'password'"
-              name="input-10-2"
-              label="Senha antiga"
-              color="red"
-              hint="Senha deve possuir ao menos 8 caracteres"
-              value=""
-              class="input-group--focused mt-2"
-              style="width: 300px"
-              @click:append="hide = !hide"
-            />
-            <v-text-field
-              :append-icon="hide ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.min]"
-              :type="hide ? 'text' : 'password'"
-              name="input-10-2"
-              label="Senha nova"
-              color="red"
-              hint="Senha deve possuir ao menos 8 caracteres"
-              value=""
-              class="input-group--focused mt-2"
-              style="width: 300px"
-              @click:append="hide = !hide"
-            />
-            <v-text-field
-              :append-icon="hide ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.min]"
-              :type="hide ? 'text' : 'password'"
-              name="input-10-2"
-              label="Senha nova"
-              color="red"
-              hint="Senha deve possuir ao menos 8 caracteres"
-              value=""
-              class="input-group--focused mt-2"
-              style="width: 300px"
-              @click:append="hide = !hide"
-            />
-            <v-btn
-             depressed
-             color="green"
-             dark 
-             @click="open=!open"
-            >
-              Confirma
-            </v-btn>
-          </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+  <open-card title="Alterar senha" icon="mdi-cog">
+    <span> Por favor, insira a senha atual: </span>
+    <v-text-field
+      :append-icon="hide[0] ? 'mdi-eye' : 'mdi-eye-off'"
+      :rules="[rules.min]"
+      :type="hide[0] ? 'text' : 'password'"
+      v-model="passwords.old"
+      hint="A senha deve possuir ao menos 8 caracteres"
+      value=""
+      class="input-group--focused mt-2"
+      style="width: 300px"
+      @click:append="hide[0] = !hide[0]"
+      required
+    />
+
+    <span> Insira a nova senha: </span>
+    <v-text-field
+      :append-icon="hide[1] ? 'mdi-eye' : 'mdi-eye-off'"
+      :rules="[rules.min]"
+      :type="hide[1] ? 'text' : 'password'"
+      v-model="passwords.new1"
+      hint="Senha deve possuir ao menos 8 caracteres"
+      value=""
+      class="input-group--focused mt-2"
+      style="width: 300px"
+      @click:append="hide[1] = !hide[1]"
+      required
+    />
+    <span> Confirme a senha: </span>
+    <v-text-field
+      :append-icon="hide[2] ? 'mdi-eye' : 'mdi-eye-off'"
+      :rules="[rules.min, rules.semelhantes]"
+      :type="hide[2] ? 'text' : 'password'"
+      v-model="passwords.new2"
+      hint="Senha deve possuir ao menos 8 caracteres"
+      value=""
+      class="input-group--focused mt-2"
+      style="width: 300px"
+      @click:append="hide[2] = !hide[2]"
+      required
+    />
+  </open-card>
 </template>
+
 <script>
 export default {
-  data () {
+  data() {
     return {
-      open: false,
-      hide: false,
-      rules: {
-        min: v => v.length >= 8 || 'No mínimo 8 caracteres',
+      passwords: {
+        old: "",
+        new1: "",
+        new2: "",
       },
-    }
-  }
-
-}
+      hide: {
+        0: true,
+        1: true,
+        2: true,
+      },
+      rules: {
+        min: (v) => v.length >= 8 || "No mínimo 8 caracteres",
+        semelhantes: (v) =>
+          v == this.passwords.new1 || "As senhas não são semelhantes!",
+      },
+    };
+  },
+};
 </script>

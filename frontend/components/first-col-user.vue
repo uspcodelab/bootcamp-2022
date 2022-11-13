@@ -1,57 +1,61 @@
 <template>
-  <v-card class="d-flex flex-column" align-center flat color="gray" light>
-    <v-card 
-      class="d-flex flex-column justify-space-between" 
-      min-height="130px"
-      flat
-     >
-      <h2> Suas Informações </h2>
-      <div>
-        <v-icon color="black"> mdi-home-city </v-icon>
-        <span> Instituto de matemática e Estatística </span>
-      </div>
-      <div>
-        <v-icon color="black"> mdi-link-variant </v-icon>
-        <span> Aluno de graduação </span>
-      </div>
-    </v-card>
-    <v-card 
-      class="d-flex flex-column justify-space-between mt-16" 
-      min-height="220px"
-      flat
-    >
-      <h2> Serviços </h2>
-      <div>
-        <span> <b> Acesso Remoto: </b> </span>
-        <v-checkbox 
-          label="Habilitar acesso via SSH"
-          class="mt-0"
-        />
-      </div>
-      <div>
-        <span> <b> Alterar senha: </b> </span>
-        <change-password style="margin-left:-20px"/>
-      </div>
-    </v-card>
+  <v-card
+    class="d-flex flex-column justify-space-between"
+    align-center
+    flat
+    color="gray"
+    light
+    min-height="500"
+  >
+    <h2>Sua conta de usuário</h2>
+    <p style="font-size: 20px; margin: -15px 0 -15px 0; padding: 0">
+      Detalhes da conta
+    </p>
+    <div>
+      <v-icon> mdi-account-box </v-icon>
+      <span class="title"> Login </span> <br />
+      <span> {{ username }}</span>
+    </div>
+    <div>
+      <v-icon> mdi-lock-outline </v-icon>
+      <span class="title"> <b> Senha </b> </span>
+      <change-password />
+    </div>
+    <div>
+      <v-icon> mdi-at </v-icon>
+      <span class="title"> <b> E-mails de contato </b> </span> <br />
+      <span v-for="email of emails"> {{ email }} </span>
+      <br />
+      <add-email />
+    </div>
+    <div>
+      <v-icon> mdi-code-tags </v-icon>
+      <span class="title"> <b> Shell </b> </span> <br />
+      <span> /bin/bash </span>
+    </div>
+    <div>
+      <v-icon> mdi-account-group </v-icon>
+      <span class="title"> <b> Grupo </b> </span> <br />
+      <span> {{ group }} </span>
+    </div>
+    <div>
+      <v-icon> mdi-earth </v-icon>
+      <span class="title"> <b> Website </b> </span> <br />
+      <span> https://linux.ime.usp.br/{{ username }} </span>
+    </div>
   </v-card>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        hide: false,
-        rules: {
-          min: v => v.length >= 8 || 'No mínimo 8 caracteres',
-        }
-      }
-    }
-  }
+export default {
+  props: {
+    username: String,
+    emails: Array,
+    group: String,
+  },
+};
 </script>
 <style scoped>
-  .password {
-    background-color: red;
-    padding-top: -20px;
-  }
+h3 {
+  margin-bottom: 6px;
+}
 </style>
-
-

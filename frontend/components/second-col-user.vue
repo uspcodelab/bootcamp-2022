@@ -1,48 +1,50 @@
 <template>
-  <v-card 
-    class="d-flex flex-column justify-space-between" 
-    align-center 
-    flat 
-    color="gray" 
-    light
-    min-height="500"
-  >
-      <h2> Sua conta de usuário </h2>
-      <p style="font-size: 20px; margin: -15px 0 -15px 0; padding: 0"> Detalhes da conta </p>
+  <v-card class="d-flex flex-column" align-center flat color="gray" light>
+    <v-card
+      class="d-flex flex-column justify-space-between"
+      min-height="130px"
+      flat
+    >
+      <h2>Suas Informações</h2>
       <div>
-        <h3> Login </h3>
-        <span> {{ username }}</span>
-      </div> 
-      <div class="d-flex flex-column"> 
-        <h3> E-mails de contato </h3>
-        <span v-for="email of emails"> {{ email }} </span>
-      </div>
-      <div>      
-        <h3> Shell </h3>
-        <span> /bin/bash </span>
+        <v-icon color="black"> mdi-home-city </v-icon>
+        <span> Instituto de matemática e Estatística </span>
+        <change-institute />
       </div>
       <div>
-        <h3> Grupo </h3>
-        <span> {{ group }} </span>
+        <v-icon color="black"> mdi-link-variant </v-icon>
+        <span> Aluno de graduação </span>
+        <change-status />
       </div>
+    </v-card>
+    <v-card
+      class="d-flex flex-column justify-space-between mt-16"
+      min-height="140px"
+      flat
+    >
+      <h2>Serviços</h2>
       <div>
-        <h3> Website </h3>
-        <span> https://linux.ime.usp.br/{{username}} </span>
+        <span> <b> Acesso Remoto: </b> </span>
+        <v-checkbox label="Habilitar acesso via SSH" class="mt-0" />
       </div>
-
+    </v-card>
   </v-card>
 </template>
 <script>
-  export default {
-    props: {
-      username: String,
-      emails: Array,
-      group: String,
-    }
-  }
+export default {
+  data() {
+    return {
+      hide: false,
+      rules: {
+        min: (v) => v.length >= 8 || "No mínimo 8 caracteres",
+      },
+    };
+  },
+};
 </script>
 <style scoped>
-  h3 {
-    margin-bottom: 6px;
-  }
+.password {
+  background-color: red;
+  padding-top: -20px;
+}
 </style>
