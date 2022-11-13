@@ -8,7 +8,11 @@
           <first-col-user />
         </v-col>
         <v-col>
-          <second-col-user />
+          <second-col-user 
+            :username="username"
+            :emails="emails"
+            :group="group"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -19,6 +23,11 @@ export default {
   data () {
     return {
       username: "Pedrinho",
+      emails: [
+        "pedrinho_gameplays@gmail.com",
+        "pedro_bem_profissional@usp.br"
+      ],
+      group: "bcc (20)",
     }
   }
 }

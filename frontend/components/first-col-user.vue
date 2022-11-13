@@ -30,21 +30,7 @@
       </div>
       <div>
         <span> <b> Alterar senha: </b> </span>
-        <v-form ref="form">
-            <v-text-field
-              :append-icon="hide ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.min]"
-              :type="hide ? 'text' : 'password'"
-              name="input-10-2"
-              label="senha"
-              color="red"
-              hint="Senha deve possuir ao menos 8 caracteres"
-              value=""
-              class="input-group--focused mt-2"
-              style="width: 300px"
-              @click:append="hide = !hide"
-            />
-        </v-form>
+        <change-password style="margin-left:-20px"/>
       </div>
     </v-card>
   </v-card>
