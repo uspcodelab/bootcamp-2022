@@ -1,5 +1,5 @@
 <template>
-  <open-card title="Mudar graduação" icon="mdi-cog">
+  <open-card title="Mudar graduação" icon="mdi-pencil">
     <span> Selecione seu grau: </span>
     <v-select
       label="Grau"

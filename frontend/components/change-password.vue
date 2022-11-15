@@ -1,5 +1,5 @@
 <template>
-  <open-card title="Alterar senha" icon="mdi-cog">
+  <open-card title="Alterar senha" icon="mdi-pencil">
     <span> Por favor, insira a senha atual: </span>
     <v-text-field
       :append-icon="hide[0] ? 'mdi-eye' : 'mdi-eye-off'"

@@ -1,5 +1,5 @@
 <template>
-  <open-card title="Mudar Instituto" icon="mdi-cog">
+  <open-card title="Mudar Instituto" icon="mdi-pencil">
     <span> Selecione o seu instituto: </span>
     <v-select
       label="Instituto"
