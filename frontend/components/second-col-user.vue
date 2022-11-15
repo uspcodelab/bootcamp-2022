@@ -15,7 +15,7 @@
       </div>
       <div>
         
-        <p> <v-icon color="black"> mdi-link-variant </v-icon> Aluno de graduação <change-status /> </p>
+        <p> <v-icon color="black"> mdi-link-variant </v-icon> {{ degree }} <change-status /> </p>
         
       </div>
     </v-card>
@@ -25,7 +25,13 @@
       flat
     >
       <h2>Serviços</h2>
-      <div >
+      <div>
+        <span> <b> Acesso Remoto: </b> </span>
+        <v-checkbox 
+          label="Habilitar acesso via SSH" 
+          v-model="SSH"
+          class="mt-0"
+        />
         <p style="margin-bottom:0; margin-top:0;"> <b> Acesso Remoto: </b> </p>
         <v-checkbox label="Habilitar acesso via SSH" class="mt-0" style="font-weight: bold;" />
       </div>
@@ -41,6 +47,11 @@ export default {
         min: (v) => v.length >= 8 || "No mínimo 8 caracteres",
       },
     };
+  },
+  props: {
+    institute: String,
+    degree: String,
+    SSH: Boolean,
   },
 };
 </script>
