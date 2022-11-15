@@ -31,9 +31,9 @@
           label="Habilitar acesso via SSH" 
           v-model="SSH"
           class="mt-0"
+          style="font-weight: bold;"
         />
-        <p style="margin-bottom:0; margin-top:0;"> <b> Acesso Remoto: </b> </p>
-        <v-checkbox label="Habilitar acesso via SSH" class="mt-0" style="font-weight: bold;" />
+        
       </div>
     </v-card>
   </v-card>
