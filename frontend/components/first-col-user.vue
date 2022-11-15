@@ -8,40 +8,45 @@
     min-height="500"
   >
     <h2>Sua conta de usuário</h2>
-    <p style="font-size: 20px; margin: -15px 0 -15px 0; padding: 0">
+    <h3 style="font-size: 20px; margin: -15px 0 -15px 0; padding: 10px 0; font-weight: normal;">
       Detalhes da conta
-    </p>
+    </h3>
     <div>
       <v-icon> mdi-account-box </v-icon>
-      <span class="title"> Login </span> <br />
-      <span> {{ username }}</span>
+      <span class="title"> Login </span> 
+      <p> {{ username }}</p>
     </div>
     <div>
-      <v-icon> mdi-lock-outline </v-icon>
-      <span class="title"> <b> Senha </b> </span>
+      
+      <span class="title"> <b> <v-icon> mdi-lock-outline </v-icon> Senha </b> </span>
       <change-password />
     </div>
     <div>
-      <v-icon> mdi-at </v-icon>
-      <span class="title"> <b> E-mails de contato </b> </span> <br />
-      <span v-for="email of emails"> {{ email }} </span>
-      <br />
-      <add-email />
+      
+      <span class="title">  <b> <v-icon> mdi-at </v-icon> E-mails de contato </b> </span> 
+      <span> 
+        <p v-for="email of emails">{{ email }}</p> 
+        <add-email  /> 
+      </span>
+      
+      
     </div>
     <div>
-      <v-icon> mdi-code-tags </v-icon>
-      <span class="title"> <b> Shell </b> </span> <br />
-      <span> /bin/bash </span>
+      
+      <span class="title"> <b> <v-icon> mdi-code-tags </v-icon> Shell </b> </span> 
+      <p> /bin/bash </p>
     </div>
     <div>
-      <v-icon> mdi-account-group </v-icon>
-      <span class="title"> <b> Grupo </b> </span> <br />
-      <span> {{ group }} </span>
+      
+      <span class="title"> <b> <v-icon> mdi-account-group </v-icon> Grupo </b> </span> 
+      <p> {{ group }} </p>
     </div>
     <div>
-      <v-icon> mdi-earth </v-icon>
-      <span class="title"> <b> Website </b> </span> <br />
-      <span> https://linux.ime.usp.br/{{ username }} </span>
+     
+      <span>  <b class="title">  <v-icon > mdi-earth </v-icon> Website </b>
+        <p> https://linux.ime.usp.br/{{ username }} </p> 
+      </span> 
+      
     </div>
   </v-card>
 </template>
@@ -55,7 +60,8 @@ export default {
 };
 </script>
 <style scoped>
-h3 {
+b {
   margin-bottom: 6px;
 }
+
 </style>
