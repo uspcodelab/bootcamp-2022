@@ -1,5 +1,5 @@
 <template>
-  <open-card title="Adicionar e-mail" icon="mdi-plus" >
+  <open-card title="Adicionar e-mail" icon="mdi-plus">
     <span> Insira o novo e-mail: </span>
     <v-text-field
       :rules="emailRules"

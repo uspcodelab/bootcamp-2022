@@ -1,67 +1,34 @@
 <template>
-  <v-dialog 
-    v-model="dialog" 
-    width="500"
-    persistent
-    no-click-animation	
-  >
+  <v-dialog v-model="dialog" width="500" persistent no-click-animation>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn 
-        icon 
-        @click="dialog = true"
-        small
-      >
-        <v-icon 
-          :size="iconSize"
-          color="#05161E"
-        > 
-          {{ icon }} 
+      <v-btn icon @click="dialog = true" small>
+        <v-icon :size="iconSize" color="#05161E">
+          {{ icon }}
         </v-icon>
       </v-btn>
     </template>
 
-    <v-card color="#DAE3F0" 
-      light
-      class="d-flex flex-column align-center"
-    >
+    <v-card color="#DAE3F0" light class="d-flex flex-column align-center">
       <!-- card que envolve tudo -->
 
-        <v-btn
-          icon
-          absolute
-          right
-          small
-          @click="close()"
-          style="margin-top: 6px"
-        >
-          <v-icon> mdi-close </v-icon>
-        </v-btn>
+      <v-btn icon absolute right small @click="close()" style="margin-top: 6px">
+        <v-icon> mdi-close </v-icon>
+      </v-btn>
 
       <v-card-title class="text-h5 lighten-2">
         <b> {{ title }} </b>
       </v-card-title>
 
-        <v-form
-          ref="form"
-          v-model="valid"
-        >
+      <v-form ref="form" v-model="valid">
+        <slot> </slot>
 
-          <slot> </slot>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-           <v-btn
-              depressed
-              color="#30167C"
-              dark
-              @click="validate()"
-            >
-              Confirma
-            </v-btn>
-          </v-card-actions>
-
-        </v-form>
-
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn depressed color="#30167C" dark @click="validate()">
+            Confirma
+          </v-btn>
+        </v-card-actions>
+      </v-form>
     </v-card>
   </v-dialog>
 </template>
@@ -84,17 +51,17 @@ export default {
     },
   },
   methods: {
-    validate () {
-      if(this.$refs.form.validate()) {
+    validate() {
+      if (this.$refs.form.validate()) {
         // mandar o post
         this.dialog = false;
         this.$refs.form.reset();
       }
     },
-    close () {
+    close() {
       this.dialog = false;
       this.$refs.form.reset();
-    }
+    },
   },
 };
 </script>

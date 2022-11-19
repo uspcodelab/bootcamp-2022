@@ -4,7 +4,7 @@
     <v-text-field
       :append-icon="hide[0] ? 'mdi-eye' : 'mdi-eye-off'"
       :rules="[rules.min]"
-      :type="hide[0] ? 'text' : 'password'"
+      :type="hide[0] ? 'password' : 'text'"
       v-model="passwords.old"
       hint="A senha deve possuir ao menos 8 caracteres"
       value=""
@@ -19,7 +19,7 @@
     <v-text-field
       :append-icon="hide[1] ? 'mdi-eye' : 'mdi-eye-off'"
       :rules="[rules.min]"
-      :type="hide[1] ? 'text' : 'password'"
+      :type="hide[1] ? 'password' : 'text'"
       v-model="passwords.new1"
       hint="Senha deve possuir ao menos 8 caracteres"
       value=""
@@ -33,7 +33,7 @@
     <v-text-field
       :append-icon="hide[2] ? 'mdi-eye' : 'mdi-eye-off'"
       :rules="[rules.min, rules.equal]"
-      :type="hide[2] ? 'text' : 'password'"
+      :type="hide[2] ? 'password' : 'text'"
       v-model="passwords.new2"
       hint="Senha deve possuir ao menos 8 caracteres"
       value=""
@@ -61,8 +61,9 @@ export default {
         2: true,
       },
       rules: {
-        min: (v) => v && v.length >= 8 || "No mínimo 8 caracteres",
-        equal: (v) => v && v == this.passwords.new1 || "As senhas não são semelhantes!",
+        min: (v) => (v && v.length >= 8) || "No mínimo 8 caracteres",
+        equal: (v) =>
+          (v && v == this.passwords.new1) || "As senhas não são semelhantes!",
       },
     };
   },

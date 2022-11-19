@@ -1,6 +1,6 @@
 <template>
   <v-main class="pt-0">
-    <SecaoTitulo :title="title" icon="mdi-account-circle"/>
+    <SecaoTitulo :title="title" icon="mdi-account-circle" />
     <v-container>
       <v-row class="mt-4">
         <v-col class="order-2 order-sm-1">
@@ -11,11 +11,7 @@
           />
         </v-col>
         <v-col class="order-1 order-sm-2">
-          <second-col-user 
-            :institute="institute"
-            :degree="degree"
-            :SSH="SSH"
-          />
+          <second-col-user :institute="institute" :degree="degree" :SSH="SSH" />
         </v-col>
       </v-row>
     </v-container>
@@ -34,9 +30,9 @@ export default {
     };
   },
   computed: {
-    title () {
+    title() {
       return "Página de usuário de " + this.username;
-    } 
-  }
+    },
+  },
 };
 </script>
