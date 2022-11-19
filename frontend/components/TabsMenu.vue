@@ -25,7 +25,7 @@ export default {
       {
         name: "Atendimento2",
         link: "/atendimento2",
-      }
+      },
     ],
   }),
 };
