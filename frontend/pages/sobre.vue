@@ -170,7 +170,6 @@
             </p>
 	    <h2>Administrações</h2>
 
-        <div class="admContainer">
             <h3>Fundadores</h3>
             <time>1997</time>
             <ul>
@@ -186,7 +185,6 @@
                 
                 <li> Sérgio Lopes de Oliveira  ─ saída em 1999. </li>
             </ul>
-        </div>
             <h3>2ª Geração</h3>
             <time>1998</time>
             <ul>
@@ -418,11 +416,6 @@ p{
 }
 h3{
     margin: 10px 0 10px 0;
-}
-.admContainer{
-    display: flex;
-    flex-direction: column;
-
 }
 
 </style>
