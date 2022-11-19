@@ -22,6 +22,10 @@ export default {
         name: "Inspire",
         link: "/inspire",
       },
+      {
+        name: "Sobre",
+        link: "/sobre",
+      },
     ],
   }),
 };
