@@ -3,7 +3,7 @@
     <span> Por favor, insira a senha atual: </span>
     <v-text-field
       :append-icon="hide[0] ? 'mdi-eye' : 'mdi-eye-off'"
-      :rules="[rules.min]"
+      :rules="[rules.min, rules.exists]"
       :type="hide[0] ? 'text' : 'password'"
       v-model="passwords.old"
       hint="A senha deve possuir ao menos 8 caracteres"
@@ -17,7 +17,7 @@
     <span> Insira a nova senha: </span>
     <v-text-field
       :append-icon="hide[1] ? 'mdi-eye' : 'mdi-eye-off'"
-      :rules="[rules.min]"
+      :rules="[rules.min, rules.exists]"
       :type="hide[1] ? 'text' : 'password'"
       v-model="passwords.new1"
       hint="Senha deve possuir ao menos 8 caracteres"
@@ -30,7 +30,7 @@
     <span> Confirme a senha: </span>
     <v-text-field
       :append-icon="hide[2] ? 'mdi-eye' : 'mdi-eye-off'"
-      :rules="[rules.min, rules.semelhantes]"
+      :rules="[rules.min, rules.semelhantes, rules.exists]"
       :type="hide[2] ? 'text' : 'password'"
       v-model="passwords.new2"
       hint="Senha deve possuir ao menos 8 caracteres"
@@ -58,9 +58,8 @@ export default {
         2: true,
       },
       rules: {
-        min: (v) => v.length >= 8 || "No mínimo 8 caracteres",
-        semelhantes: (v) =>
-          v == this.passwords.new1 || "As senhas não são semelhantes!",
+        min: (v) => v && v.length >= 8 || "No mínimo 8 caracteres",
+        semelhantes: (v) => v && v == this.passwords.new1 || "As senhas não são semelhantes!",
       },
     };
   },

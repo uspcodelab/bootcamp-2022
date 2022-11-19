@@ -1,63 +1,77 @@
 <template>
-  <v-card class="d-flex flex-column" align-center flat color="gray" light>
-    <v-card
-      class="d-flex flex-column justify-space-between"
-      min-height="130px"
-      flat
-    >
-      <h2>
-        <v-icon color="black">mdi-information-outline</v-icon>
-         Suas Informações</h2>
-      <div>
-       
-        <p style="margin-bottom:0;">  <v-icon color="black"> mdi-home-city </v-icon> Instituto de matemática e Estatística <change-institute /> </p>
-        
+  <v-card light flat>
+    <div class="d-flex flex-column justify-space-between">
+      <div class="title"> 
+        <v-icon> mdi-information-outline </v-icon>
+        <span> <b> Suas Informações </b> </span> 
       </div>
-      <div>
-        
-        <p> <v-icon color="black"> mdi-link-variant </v-icon> {{ degree }} <change-status /> </p>
-        
+
+      <div class="content">
+        <v-icon> mdi-home-city </v-icon>
+        <span class="text"> Instituto de matemática e Estatística </span>
+        <change-institute /> 
       </div>
-    </v-card>
-    <v-card
-      class="d-flex flex-column justify-space-between mt-16"
-      min-height="110px"
-      flat
-    >
-      <h2>Serviços</h2>
-      <div>
-        <span> <b> Acesso Remoto: </b> </span>
+
+      <div class="content">
+        <v-icon> mdi-link-variant </v-icon> 
+        <span class="text"> {{ degree }} </span> 
+        <change-status /> 
+      </div>
+
+    </div>
+
+    <div class="d-flex flex-column justify-space-between mt-16">
+
+      <div class="title"> 
+        <v-icon color="black">mdi-cogs</v-icon>
+        <span> <b> Serviços </b> </span>
+      </div>
+
+      <div class="content">
+        <b> Acesso Remoto: </b> 
         <v-checkbox 
-          label="Habilitar acesso via SSH" 
           v-model="SSH"
+          label="Habilitar acesso via SSH" 
           class="mt-0"
-          style="font-weight: bold;"
+          style="color: #05161E !important"
         />
-        
       </div>
-    </v-card>
+
+    </div>
   </v-card>
 </template>
+
 <script>
-export default {
-  data() {
-    return {
-      hide: false,
-      rules: {
-        min: (v) => v.length >= 8 || "No mínimo 8 caracteres",
+
+  export default {
+    data() {
+      return {
+        hide: false,
+        rules: {
+          min: (v) => v.length >= 8 || "No mínimo 8 caracteres",
+        },
+      };
+    },
+    props: {
+      institute: { 
+        type: String,
+        default: "Undefined",
       },
-    };
-  },
-  props: {
-    institute: String,
-    degree: String,
-    SSH: Boolean,
-  },
-};
+      degree: {
+        type: String,
+        default: "Undefined",
+      },
+      SSH: { 
+        type: Boolean,
+        default: false,
+      }
+    },
+  };
+
 </script>
+
 <style scoped>
-.password {
-  background-color: red;
-  padding-top: -20px;
-}
+
+@import '@/assets/css/user.css';
+
 </style>

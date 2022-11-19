@@ -1,67 +1,93 @@
 <template>
   <v-card
     class="d-flex flex-column justify-space-between"
-    align-center
     flat
     color="gray"
     light
-    min-height="500"
+    min-height=500
   >
-    <h2>Sua conta de usuário</h2>
-    <h3 style="font-size: 20px; margin: -15px 0 -15px 0; padding: 10px 0; font-weight: normal;">
-      Detalhes da conta
-    </h3>
-    <div>
-      <v-icon> mdi-account-box </v-icon>
-      <span class="title"> Login </span> 
-      <p> {{ username }}</p>
-    </div>
-    <div>
-      
-      <span class="title"> <b> <v-icon> mdi-lock-outline </v-icon> Senha </b> </span>
-      <change-password />
-    </div>
-    <div>
-      
-      <span class="title">  <b> <v-icon> mdi-at </v-icon> E-mails de contato </b> </span> 
-      <span> 
-        <p v-for="email of emails">{{ email }}</p> 
-        <add-email  /> 
-      </span>
-      
-      
-    </div>
-    <div>
-      
-      <span class="title"> <b> <v-icon> mdi-code-tags </v-icon> Shell </b> </span> 
-      <p> /bin/bash </p>
-    </div>
-    <div>
-      
-      <span class="title"> <b> <v-icon> mdi-account-group </v-icon> Grupo </b> </span> 
-      <p> {{ group }} </p>
-    </div>
-    <div>
-     
-      <span>  <b class="title">  <v-icon > mdi-earth </v-icon> Website </b>
-        <p> https://linux.ime.usp.br/{{ username }} </p> 
-      </span> 
-      
-    </div>
+
+      <div class="title">
+        <span> <b> Detalhes e configurações </b> </span>
+      </div>
+
+      <div class="content">
+        <v-icon> mdi-account-box </v-icon>
+        <span class="topic"> <b> Login </b> </span> <br/>
+        <span> {{ username }}</span>
+      </div> 
+
+
+      <div class="content">
+        <v-icon> mdi-lock-outline </v-icon>
+        <span class="topic"> <b>  Senha </b> </span>
+        <change-password />
+      </div>
+
+      <div class="content" >
+        <v-icon> mdi-at </v-icon> 
+        <span class="topic"> <b> E-mails de contato </b> </span> 
+        <span v-for="(email, index) of emails"> <br/> 
+          {{ email }} <!-- fazer componente para remover e-mail -->
+        </span> 
+        <br/>
+        <add-email style="padding: 10px !important;"/> 
+      </div>
+
+      <div class="content">
+        <v-icon> mdi-code-tags </v-icon>
+        <span class="topic"> <b> Shell </b> </span> 
+        <br/>
+        <span class="code "style=""> <i> /bin/bash </i> </span>
+      </div>
+
+      <div class="content">
+        <v-icon> mdi-account-group </v-icon>
+        <span class="topic"> <b> Grupo </b> </span> 
+        <br/>
+        <span> {{ group }} </span>
+      </div>
+
+      <div class="content">
+        <v-icon > mdi-earth </v-icon>
+        <span class="topic">  
+          <b> Website </b>
+        </span> 
+        <br/>
+        <span> https://linux.ime.usp.br/{{ username }} </span> 
+      </div>
+
   </v-card>
 </template>
+
 <script>
+
 export default {
   props: {
-    username: String,
-    emails: Array,
-    group: String,
+    username: {
+      type: String,
+      default: "Undefined",
+    },
+    emails: {
+      type: Array,
+      default: "Undefined"
+    },
+    group: {
+      type: String,
+      default: "Undefinded"
+    },
   },
 };
 </script>
+
 <style scoped>
-b {
-  margin-bottom: 6px;
+
+@import '@/assets/css/user.css';
+.code { 
+  background-color: rgba(0,0,0,0.1); 
+  padding: 4px 7px; 
+  border-radius: 3px;
+  
 }
 
 </style>

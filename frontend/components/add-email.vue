@@ -20,7 +20,7 @@ export default {
       email: "",
       emailRules: [
         (e) => !!e || "Insira um e-mail",
-        (e) => /.+@.+\..+/.test(e) || "O e-mail deve ser válido",
+        (e) => /.+@.+\..+/.test(e) || "E-mail inválido",
       ],
     };
   },
