@@ -1,14 +1,18 @@
-name: Prettier Verifier
+name: Prettier Frontend Verifier
 
 on:
   push:
     branches:
       - main
       - master
+    paths-ignore:
+      - 'backend/**'
   pull_request:
     branches:
       - main
       - master
+    paths-ignore:
+      - 'backend/**'
 
 jobs:
   build:
