@@ -9,7 +9,7 @@
       <v-btn 
         icon 
         @click="dialog = true"
-        max-width="20px" 
+        small
       >
         <v-icon 
           :size="iconSize"
@@ -30,7 +30,9 @@
           icon
           absolute
           right
+          small
           @click="close()"
+          style="margin-top: 6px"
         >
           <v-icon> mdi-close </v-icon>
         </v-btn>
@@ -60,7 +62,6 @@
 
         </v-form>
 
-
     </v-card>
   </v-dialog>
 </template>
@@ -79,7 +80,7 @@ export default {
     icon: String,
     iconSize: {
       type: String,
-      default: "20px",
+      default: "17px",
     },
   },
   methods: {

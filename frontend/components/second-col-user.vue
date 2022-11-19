@@ -1,6 +1,11 @@
 <template>
-  <v-card light flat>
-    <div class="d-flex flex-column justify-space-between">
+  <v-card 
+    light 
+    flat 
+    class="d-flex flex-column"
+  >
+    <div class="mb-10">
+
       <div class="title"> 
         <v-icon> mdi-information-outline </v-icon>
         <span> <b> Suas Informações </b> </span> 
@@ -8,19 +13,19 @@
 
       <div class="content">
         <v-icon> mdi-home-city </v-icon>
-        <span class="text"> Instituto de matemática e Estatística </span>
+        <span class="ml-2"> Instituto de matemática e Estatística </span>
         <change-institute /> 
       </div>
 
-      <div class="content">
+      <div class="content mt-3">
         <v-icon> mdi-link-variant </v-icon> 
-        <span class="text"> {{ degree }} </span> 
+        <span class="ml-2"> {{ degree }} </span> 
         <change-status /> 
       </div>
 
     </div>
 
-    <div class="d-flex flex-column justify-space-between mt-16">
+    <div>
 
       <div class="title"> 
         <v-icon color="black">mdi-cogs</v-icon>
@@ -72,6 +77,6 @@
 
 <style scoped>
 
-@import '@/assets/css/user.css';
+@import '@/assets/css/user.scss';
 
 </style>

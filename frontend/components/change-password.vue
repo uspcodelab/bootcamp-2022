@@ -3,11 +3,12 @@
     <span> Por favor, insira a senha atual: </span>
     <v-text-field
       :append-icon="hide[0] ? 'mdi-eye' : 'mdi-eye-off'"
-      :rules="[rules.min, rules.exists]"
+      :rules="[rules.min]"
       :type="hide[0] ? 'text' : 'password'"
       v-model="passwords.old"
       hint="A senha deve possuir ao menos 8 caracteres"
       value=""
+      placeholder="********"
       class="input-group--focused mt-2"
       style="width: 300px"
       @click:append="hide[0] = !hide[0]"
@@ -17,11 +18,12 @@
     <span> Insira a nova senha: </span>
     <v-text-field
       :append-icon="hide[1] ? 'mdi-eye' : 'mdi-eye-off'"
-      :rules="[rules.min, rules.exists]"
+      :rules="[rules.min]"
       :type="hide[1] ? 'text' : 'password'"
       v-model="passwords.new1"
       hint="Senha deve possuir ao menos 8 caracteres"
       value=""
+      placeholder="********"
       class="input-group--focused mt-2"
       style="width: 300px"
       @click:append="hide[1] = !hide[1]"
@@ -30,11 +32,12 @@
     <span> Confirme a senha: </span>
     <v-text-field
       :append-icon="hide[2] ? 'mdi-eye' : 'mdi-eye-off'"
-      :rules="[rules.min, rules.semelhantes, rules.exists]"
+      :rules="[rules.min, rules.equal]"
       :type="hide[2] ? 'text' : 'password'"
       v-model="passwords.new2"
       hint="Senha deve possuir ao menos 8 caracteres"
       value=""
+      placeholder="********"
       class="input-group--focused mt-2"
       style="width: 300px"
       @click:append="hide[2] = !hide[2]"
@@ -59,7 +62,7 @@ export default {
       },
       rules: {
         min: (v) => v && v.length >= 8 || "No mínimo 8 caracteres",
-        semelhantes: (v) => v && v == this.passwords.new1 || "As senhas não são semelhantes!",
+        equal: (v) => v && v == this.passwords.new1 || "As senhas não são semelhantes!",
       },
     };
   },

@@ -3,9 +3,10 @@
     <span> Insira o novo e-mail: </span>
     <v-text-field
       :rules="emailRules"
-      :type="'text'"
+      type="email"
       v-model="email"
       value=""
+      placeholder="Insira seu e-mail"
       class="input-group--focused mt-2"
       style="width: 300px"
       required
