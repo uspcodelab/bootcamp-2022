@@ -32,10 +32,6 @@
                 end: '2019-01-07 10:00',
               },
               {
-                name: `Thomas' Birthday`,
-                start: '2019-01-10',
-              },
-              {
                 name: 'Mash Potatoes',
                 start: '2019-01-09 12:30',
                 end: '2019-01-09 15:30',
@@ -81,10 +77,22 @@
       font-size: 25px !important;
     }
     .v-btn{
-      display: none !important;
+      visibility: hidden !important;
+    }
+    .v-application .blue{
+      visibility: hidden !important;
     }
     .v-application .blue--text{
       color: black !important;
+    }
+    .v-btn__content{
+      visibility: visible !important;
+      font-size: 30px !important;
+    }
+    .v-calendar-daily_head-day{
+      display: flex !important;
+      flex-direction: column-reverse !important;
+      padding-bottom: 25px !important;
     }
 
 </style>
