@@ -404,11 +404,7 @@
     </div>
 
 </template>
-<!-- 
-    <p>
-        &emsp;&emsp;
-    </p> 
--->
+
 <style scoped>
 p{
     max-width: 900px;
