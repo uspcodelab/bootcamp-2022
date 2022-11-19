@@ -1,0 +1,85 @@
+\documentclass[border=20pt, varwidth=21cm]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[table,xcdraw]{xcolor}
+
+\begin{document}
+
+\begin{tabular}{|c|cccccccccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{USUARIOS}} & & & & & & & & &              \\ \hline
+	\texttt{\underline{id}} & \multicolumn{1}{c|}{\texttt{username}} & \multicolumn{1}{c|}{\texttt{senha}} & \multicolumn{1}{c|}{\texttt{email}} & \multicolumn{1}{c|}{\texttt{shell}} & \multicolumn{1}{c|}{\texttt{grupo}} & \multicolumn{1}{c|}{\texttt{acesso\_ssh}} & \multicolumn{1}{c|}{\texttt{vinculo}} & \multicolumn{1}{c|}{\texttt{instituto}} & \multicolumn{1}{c|}{\texttt{chave\_auth}} & \multicolumn{1}{c|}{\texttt{ultimo\_login}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|ccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{AVISOS}} &                                      &                                         &                                                                                                \\ \hline
+	\texttt{\underline{id}}                          & \multicolumn{1}{c|}{\texttt{titulo}} & \multicolumn{1}{c|}{\texttt{descricao}} & \multicolumn{1}{c|}{\cellcolor[HTML]{6665CD}{\color{white}\texttt{\underline{id\_categoria}}}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|c}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{AVISOS\_CATEGORIA}} &                                      \\ \hline
+	\texttt{\underline{id}}                                     & \multicolumn{1}{c|}{\texttt{titulo}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|ccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{SLIDES}} &                                         &                                    &                                      \\ \hline
+	\texttt{\underline{id}}                          & \multicolumn{1}{c|}{\texttt{descricao}} & \multicolumn{1}{c|}{\texttt{tipo}} & \multicolumn{1}{c|}{\texttt{classe}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|ccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{SLIDES\_BOTOES}} &                                      &                                    &                                                                                            \\ \hline
+	\texttt{\underline{id}}                                  & \multicolumn{1}{c|}{\texttt{titulo}} & \multicolumn{1}{c|}{\texttt{link}} & \multicolumn{1}{c|}{\cellcolor[HTML]{6665CD}{\color{white}\texttt{\underline{id\_slide}}}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|cc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{STATUS}} &                                       &                                      \\ \hline
+	\texttt{\underline{id}}                          & \multicolumn{1}{c|}{\texttt{maquina}} & \multicolumn{1}{c|}{\texttt{status}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|cccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{NOTICIAS}} &                                                                                            &                                      &                                         &                                        \\ \hline
+	\texttt{\underline{id}}                            & \multicolumn{1}{c|}{\cellcolor[HTML]{6665CD}{\color{white}\texttt{\underline{autor\_id}}}} & \multicolumn{1}{c|}{\texttt{titulo}} & \multicolumn{1}{c|}{\texttt{descricao}} & \multicolumn{1}{c|}{\texttt{conteudo}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|cc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{FAQ}} &                                        &                                        \\ \hline
+	\texttt{\underline{id}}                       & \multicolumn{1}{c|}{\texttt{pergunta}} & \multicolumn{1}{c|}{\texttt{resposta}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|ccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{HORARIOS}} &                                                                                            &                                      &                                   \\ \hline
+	\texttt{\underline{id}}                            & \multicolumn{1}{c|}{\cellcolor[HTML]{6665CD}{\color{white}\texttt{\underline{admin\_id}}}} & \multicolumn{1}{c|}{\texttt{inicio}} & \multicolumn{1}{c|}{\texttt{fim}} \\ \hline
+\end{tabular}
+
+\vspace{3mm}
+
+\begin{tabular}{|c|ccccc}
+	\cline{1-1}
+	\cellcolor[HTML]{F8A102}\textbf{\texttt{ADMIN}} &                                     &                                     &                                           &                                    &                                         \\ \hline
+	\texttt{\underline{id}}                         & \multicolumn{1}{c|}{\texttt{login}} & \multicolumn{1}{c|}{\texttt{senha}} & \multicolumn{1}{c|}{\texttt{chave\_auth}} & \multicolumn{1}{c|}{\texttt{nome}} & \multicolumn{1}{c|}{\texttt{descricao}} \\ \hline
+\end{tabular}
+
+\end{document}
