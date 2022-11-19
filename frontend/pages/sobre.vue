@@ -414,6 +414,7 @@
 <style scoped>
 p{
     max-width: 900px;
+    text-align: justify;
 }
 h3{
     margin: 10px 0 10px 0;
