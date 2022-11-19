@@ -1,35 +1,26 @@
 <template>
-    <div>
-        <SecaoTitulo
-            :icon="icon"
-            :title="title"
-        >
-        </SecaoTitulo>
-        
-        <v-container>
-            <slot>
+  <div>
+    <SecaoTitulo :icon="icon" :title="title"> </SecaoTitulo>
 
-            </slot>
-    
-        </v-container>
-    </div>
+    <v-container>
+      <slot> </slot>
+    </v-container>
+  </div>
 </template>
 <script>
 export default {
-    props:{
-       icon: String,
-       title: String 
-    },
-
+  props: {
+    icon: String,
+    title: String,
+  },
 };
 </script>
 <style>
-p{
-    max-width: 900px;
-    text-align: justify;
+p {
+  max-width: 900px;
+  text-align: justify;
 }
-h3{
-    margin: 10px 0 10px 0;
+h3 {
+  margin: 10px 0 10px 0;
 }
-
 </style>

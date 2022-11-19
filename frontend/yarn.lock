@@ -3452,6 +3452,7 @@ __metadata:
     core-js: ^3.19.3
     jest: ^27.4.4
     nuxt: ^2.15.8
+    prettier: 2.7.1
     vue: ^2.6.14
     vue-jest: ^3.0.4
     vue-server-renderer: ^2.6.14
@@ -10470,7 +10471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^1.18.2 || ^2.0.0":
+"prettier@npm:2.7.1, prettier@npm:^1.18.2 || ^2.0.0":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
