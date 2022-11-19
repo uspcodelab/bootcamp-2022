@@ -68,6 +68,7 @@ CREATE TABLE SLIDES_BOTOES (
   id SERIAL PRIMARY KEY,
   title character varying(255) NOT NULL,
   link character varying(523) NOT NULL,
+  color character varying(255) NOT NULL,
   slide_id INTEGER NOT NULL,
 
 	CONSTRAINT botao_slide_ct FOREIGN KEY (slide_id)
