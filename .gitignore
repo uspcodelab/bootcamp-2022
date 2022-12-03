@@ -1,0 +1,19 @@
+# Environment variables files
+.env
+
+# Nuxt dev/build outputs
+.output
+.nuxt
+.yarn
+
+# Node dependencies
+node_modules
+
+# System files
+*.log
+
+# Build files
+dist
+
+# Binary files
+*.pdf

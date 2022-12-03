@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes: 
+
+      - ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/sql/populate_avisos.sql:/docker-entrypoint-initdb.d/populate_avisos.sql
+      - ./db/sql/populate_horarios.sql:/docker-entrypoint-initdb.d/populate_horarios.sql
+      - ./db/sql/populate_slides.sql:/docker-entrypoint-initdb.d/populate_slides.sql
+      - ./db/sql/populate_usuarios.sql:/docker-entrypoint-initdb.d/populate_usuario.sql
+      - ./db/sql/populate_admins.sql:/docker-entrypoint-initdb.d/populate_admins.sql
+      - ./db/sql/populate_faq.sql:/docker-entrypoint-initdb.d/populate_faq.sql
+      - ./db/sql/populate_noticias.sql:/docker-entrypoint-initdb.d/populate_noticias.sql
+      - ./db/sql/populate_status.sql:/docker-entrypoint-initdb.d/populate_status.sql
+
+  api:
+    container_name: quotes-api
+    build:
+      context: ./
+      target: production
+    image: quotes-api
+    expose:
+      - ${PORT}
+    depends_on:
+      - db
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    links:
+      - db
+    volumes:
+      - ./:/src
+      - /src/node_modules
+volumes:
+  db:
+    driver: local
