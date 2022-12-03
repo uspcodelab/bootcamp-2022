@@ -9,15 +9,8 @@ services:
       - ${DB_PORT}:${DB_PORT}
     volumes: 
 
-      - ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./db/sql/populate_avisos.sql:/docker-entrypoint-initdb.d/populate_avisos.sql
-      - ./db/sql/populate_horarios.sql:/docker-entrypoint-initdb.d/populate_horarios.sql
-      - ./db/sql/populate_slides.sql:/docker-entrypoint-initdb.d/populate_slides.sql
-      - ./db/sql/populate_usuarios.sql:/docker-entrypoint-initdb.d/populate_usuario.sql
-      - ./db/sql/populate_admins.sql:/docker-entrypoint-initdb.d/populate_admins.sql
-      - ./db/sql/populate_faq.sql:/docker-entrypoint-initdb.d/populate_faq.sql
-      - ./db/sql/populate_noticias.sql:/docker-entrypoint-initdb.d/populate_noticias.sql
-      - ./db/sql/populate_status.sql:/docker-entrypoint-initdb.d/populate_status.sql
+    # - db:/var/lib/postgresql/data
+      - ./db/sql/:/docker-entrypoint-initdb.d/
 
   api:
     container_name: quotes-api
