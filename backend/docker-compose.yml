@@ -8,7 +8,7 @@ services:
     ports:
       - ${DB_PORT}:${DB_PORT}
     volumes: 
-      - db:/var/lib/postgresql/data
+    #- db:/var/lib/postgresql/data
       - ./db/sql/:/docker-entrypoint-initdb.d/
   api:
     container_name: quotes-api

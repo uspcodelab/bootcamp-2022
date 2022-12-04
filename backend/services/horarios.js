@@ -5,7 +5,7 @@ const config = require('../config');
 async function getMultiple(page = 1) {
  const offset = helper.getOffset(page, config.listPerPage);
  const rows = await db.query(
-    'SELECT * FROM HORARIOS', 
+    'SELECT * FROM HORARIOS OFFSET $1 LIMIT $2', 
     [offset, config.listPerPage]
   );
   const data = helper.emptyOrRows(rows);
