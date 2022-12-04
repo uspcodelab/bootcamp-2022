@@ -6,7 +6,7 @@
           :now="today"
           :value="today"
           ref="calendar"
-          :events="events"
+          :events="eventos"
           type="week"
           light
           locale="pt"
@@ -25,6 +25,7 @@
 export default {
   data: () => ({
     today: "2019-01-08",
+    eventos: [],
     events: [
       {
         name: "Weekly Meeting",
@@ -41,6 +42,14 @@ export default {
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
+  },
+  methods: {
+    async getHorarios() {
+      await fetch(this.$global.baseUrlApi + "/horarios", { method: "GET" }).then(res => res.text()).then(text => console.log(text));
+    },
+  },
+  created() {
+    this.getHorarios();
   },
 };
 </script>
