@@ -6,7 +6,7 @@
           :now="today"
           :value="today"
           ref="calendar"
-          :events="eventos"
+          :events="events"
           type="week"
           light
           locale="pt"
@@ -24,28 +24,28 @@
 <script>
 export default {
   data: () => ({
-    today: "2019-01-08",
-    eventos: [],
-    events: [
-      {
-        name: "Weekly Meeting",
-        start: "2019-01-07 09:00",
-        end: "2019-01-07 10:00",
-      },
-      {
-        name: "Mash Potatoes",
-        start: "2019-01-09 12:30",
-        end: "2019-01-09 15:30",
-      },
-    ],
-    diasDaSemana: ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"],
+    today: "2019-01-21",
+    events: [],
+    diasDaSemana: ["dom", "seg", "ter", "qua", "qui", "sex", "sab"],
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
   },
   methods: {
     async getHorarios() {
-      await fetch(this.$global.baseUrlApi + "/horarios", { method: "GET" }).then(res => res.text()).then(text => console.log(text));
+      await fetch(this.$global.baseUrlApi + "/horarios", { method: "GET" }).then((res) => res.json()).then((data_api) => {
+          let horarios_api = data_api.data;
+
+          for (let i = 1; i < horarios_api.length; i++) {
+            let diadasemana = horarios_api[i].weekday
+            let evento_novo = {
+              name: horarios_api[i].admin_id,
+              start: horarios_api[i].start_time,
+              end: horarios_api[i].end_time,
+            };
+            this.events.push(evento_novo);
+          }
+        });
     },
   },
   created() {
