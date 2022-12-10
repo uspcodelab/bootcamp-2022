@@ -66,6 +66,11 @@ export default {
           title: "Inspire",
           to: "/inspire",
         },
+        {
+          icon: "mdi-calendar-month",
+          title: "Atendimento",
+          to: "/atendimento",
+        },
       ],
       miniVariant: false,
       right: true,

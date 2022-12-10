@@ -27,6 +27,10 @@ export default {
         link: "/sobre",
       },
       {
+        name: "Atendimento",
+        link: "/atendimento",
+      },
+      {
         name: "Nossa História",
         link: "/nossahistoria",
       },
