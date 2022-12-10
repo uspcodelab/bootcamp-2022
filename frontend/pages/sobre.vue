@@ -1,6 +1,6 @@
 <template>
   <PaginaTexto icon="mdi-information" title="Sobre Nós">
-    <content>
+    <template #content>
       <p class="mt-4">
         &emsp;&emsp; Somos uma rede de computadores rodando a Debian, uma distro
         GNU/Linux, no Instituto de Matemática e Estatística da USP.A história
@@ -63,6 +63,6 @@
         seção, sendo, em última instância, nosso representante. Por parte da
         Seção de Informática, temos a tutela de William Gnann e Sérgio Milare.
       </p>
-    </content>
+    </template>
   </PaginaTexto>
 </template>

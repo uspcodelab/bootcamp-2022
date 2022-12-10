@@ -1,6 +1,6 @@
 <template>
   <PaginaTexto icon="mdi-book-open-blank-variant" title="Nossa História">
-    <content>
+    <template #content>
       <h2 class="my-4">Primeiros Passos</h2>
       <p>
         &emsp;&emsp; A Rede Linux IME-USP do IME começou através de uma
@@ -320,6 +320,6 @@
 
         <li>Derick William de M. Frias</li>
       </ul>
-    </content>
+    </template>
   </PaginaTexto>
 </template>

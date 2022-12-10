@@ -1,9 +1,8 @@
 <template>
   <div>
     <SecaoTitulo :icon="icon" :title="title"> </SecaoTitulo>
-
     <v-container>
-      <slot> </slot>
+      <slot name="content"></slot>
     </v-container>
   </div>
 </template>
