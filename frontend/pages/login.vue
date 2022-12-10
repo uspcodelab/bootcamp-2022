@@ -12,12 +12,12 @@
           <v-col cols="8" class="d-flex flex-column">
             <input
               type="email"
-              class="form-control mt-4 mr-8 pa-4 mailField"
+              class="form-control mt-4 mr-8 pa-4 inputField"
               required
             />
             <input
               type="password"
-              class="form-control mt-4 mr-8 pa-4 passwdField"
+              class="form-control mt-4 mr-8 pa-4 inputField"
               required
             />
           </v-col>
@@ -40,13 +40,7 @@
 <script></script>
 
 <style>
-.passwdField {
-  background-color: #d9d9d9;
-  height: 2.2em;
-  border-radius: 0.5em;
-}
-
-.mailField {
+.inputField {
   background-color: #d9d9d9;
   height: 2.2em;
   border-radius: 0.5em;
