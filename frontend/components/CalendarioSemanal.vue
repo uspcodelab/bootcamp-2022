@@ -1,25 +1,25 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" md="8">
-        <v-calendar
-          :now="today"
-          :value="today"
-          ref="calendar"
-          type="week"
-          light
-	  :events="events"
-          locale="pt"
-          color="blue"
-          :first-interval="7"
-          :interval-minutes="60"
-          :interval-count="14"
-	  interval-height="70px"
-          :weekdays="[1, 2, 3, 4, 5, 6]"
-	>
-	  <template v-slot:event="{ event }">
-	    {{event.name}}
-	  </template>
-	</v-calendar>
+      <v-calendar
+        :now="today"
+        :value="today"
+        ref="calendar"
+        type="week"
+        light
+        :events="events"
+        locale="pt"
+        color="blue"
+        :first-interval="7"
+        :interval-minutes="60"
+        :interval-count="14"
+        interval-height="70px"
+        :weekdays="[1, 2, 3, 4, 5, 6]"
+      >
+        <template v-slot:event="{ event }">
+          {{ event.name }}
+        </template>
+      </v-calendar>
     </v-col>
   </v-row>
 </template>
@@ -33,43 +33,43 @@ export default {
         name: "Millene",
         start: "2019-01-08 08:00",
         end: "2019-01-08 09:00",
-	color: '#30167C',
+        color: "#30167C",
       },
       {
         name: "Marcos Castello",
         start: "2019-01-08 10:00",
         end: "2019-01-08 12:00",
-	color: '#30167C',
+        color: "#30167C",
       },
       {
         name: "Willian Wang",
-	start: "2019-01-09 09:00",
-	end: "2019-01-09 11:00",
-	color: "#FFD363",
+        start: "2019-01-09 09:00",
+        end: "2019-01-09 11:00",
+        color: "#FFD363",
       },
       {
         name: "Marcos Castello",
         start: "2019-01-10 08:00",
         end: "2019-01-10 10:00",
-	color: '#30167C',
+        color: "#30167C",
       },
       {
         name: "Matsu",
-	start: "2019-01-10 10:00",
-	end: "2019-01-10 11:00",
-	color: "#77216F",
+        start: "2019-01-10 10:00",
+        end: "2019-01-10 11:00",
+        color: "#77216F",
       },
       {
-      	name: "Willian Wang",
-	start: "2019-01-11 09:00",
-	end: "2019-01-11 11:00",
-	color: "#FFD363",
+        name: "Willian Wang",
+        start: "2019-01-11 09:00",
+        end: "2019-01-11 11:00",
+        color: "#FFD363",
       },
     ],
   }),
   methods: {
-    getEventColor (event) {
-      return event.color
+    getEventColor(event) {
+      return event.color;
     },
   },
   mounted() {
@@ -98,7 +98,9 @@ export default {
   margin-right: 10px;
 }
 
-.v-calendar .v-calendar-daily__interval:not(:first-of-type) > .v-calendar-daily__interval-text:after {
+.v-calendar
+  .v-calendar-daily__interval:not(:first-of-type)
+  > .v-calendar-daily__interval-text:after {
   content: "h";
 }
 
