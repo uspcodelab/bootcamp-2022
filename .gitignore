@@ -14,3 +14,6 @@ node_modules
 
 # Build files
 dist
+
+# Binary files
+*.pdf

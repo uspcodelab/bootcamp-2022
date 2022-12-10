@@ -23,8 +23,16 @@ export default {
         link: "/inspire",
       },
       {
+        name: "Sobre",
+        link: "/sobre",
+      },
+      {
         name: "Atendimento",
         link: "/atendimento",
+      },
+      {
+        name: "Nossa História",
+        link: "/nossahistoria",
       },
     ],
   }),

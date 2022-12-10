@@ -24,28 +24,28 @@
               <v-container class="texto">
                 <h2 class="sub">{{ slide.smallIntro }}</h2>
                 <h1 class="text-h3 big text-md-h2">{{ slide.mainText }}</h1>
-                <template v-for="button in slide.buttons">
-                  <v-btn
-                    :key="button.text"
-                    v-if="!button.external"
-                    :to="button.link"
-                    :color="button.color"
-                    class="infolink"
-                    outlined
-                  >
-                    {{ button.text }}
-                  </v-btn>
-                  <v-btn
-                    :key="button.text"
-                    v-else
-                    :href="button.link"
-                    :color="button.color"
-                    class="infolink"
-                    outlined
-                  >
-                    {{ button.text }}
-                  </v-btn>
-                </template>
+                <v-btn
+                  v-for="button in slide.buttons"
+                  :key="button.text"
+                  v-if="!button.external"
+                  :to="button.link"
+                  :color="button.color"
+                  class="infolink"
+                  outlined
+                >
+                  {{ button.text }}
+                </v-btn>
+                <v-btn
+                  v-for="button in slide.buttons"
+                  :key="button.text"
+                  v-if="button.external"
+                  :href="button.link"
+                  :color="button.color"
+                  class="infolink"
+                  outlined
+                >
+                  {{ button.text }}
+                </v-btn>
               </v-container>
             </v-carousel-item>
           </v-carousel>
