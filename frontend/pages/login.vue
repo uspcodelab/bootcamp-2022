@@ -1,7 +1,7 @@
 <template>
   <div>
     <SecaoTitulo title="Login" icon="mdi-account-circle" />
-    <div class="d-flex align-center justify-center mt-10">
+    <div class="d-flex justify-center align-stretch mt-10">
       <div class="d-flex flex-column align-end">
         <v-row class="d-flex justify-end">
           <v-col cols="3">
@@ -27,12 +27,9 @@
         </v-row>
       </div>
 
-      <v-col cols="2" class="d-flex align-center">
-        <v-btn color="#30167C" height="7em" width="8em">
-          Cadastre-se<br />
-          aqui
-        </v-btn>
-      </v-col>
+      <v-btn color="#30167C" width="8em" height="auto" class="pa-5 my-2">
+        Cadastre-se aqui
+      </v-btn>
     </div>
   </div>
 </template>
@@ -40,6 +37,8 @@
 <script></script>
 
 <style>
+.v-btn__content { width: 100%; white-space: normal; }
+
 .inputField {
   background-color: #d9d9d9;
   height: 2.2em;
