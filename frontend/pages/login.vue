@@ -37,7 +37,10 @@
 <script></script>
 
 <style>
-.v-btn__content { width: 100%; white-space: normal; }
+.v-btn__content {
+  width: 100%;
+  white-space: normal;
+}
 
 .inputField {
   background-color: #d9d9d9;
