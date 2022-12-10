@@ -1,7 +1,9 @@
 <template>
   <div>
     <SecaoTitulo icon="mdi-calendar-month" title="Horários de Atendimento" />
-    <CalendarioSemanal />
+    <v-container>
+      <CalendarioSemanal />
+    </v-container>
   </div>
 </template>
 

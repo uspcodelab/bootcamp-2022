@@ -61,8 +61,8 @@ export default {
         },
         {
           icon: "mdi-calendar-month",
-          title: "Atendimento2",
-          to: "/atendimento2",
+          title: "Atendimento",
+          to: "/atendimento",
         },
       ],
       miniVariant: false,
