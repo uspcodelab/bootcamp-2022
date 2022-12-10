@@ -22,6 +22,14 @@ export default {
         name: "Inspire",
         link: "/inspire",
       },
+      {
+        name: "Sobre",
+        link: "/sobre",
+      },
+      {
+        name: "Nossa História",
+        link: "/nossahistoria",
+      },
     ],
   }),
 };
