@@ -40,7 +40,7 @@ export default {
           for (let i = 1; i < horarios_api.length; i++) {
             let diadasemana = diasDaSemana[horarios_api[i].weekday]
             let evento_novo = {
-              name: horarios_api[i].admin_id,
+              name: horarios_api[i].name,
               start: diadasemana +" " + horarios_api[i].start_time,
               end: diadasemana +" " + horarios_api[i].end_time,
             };
