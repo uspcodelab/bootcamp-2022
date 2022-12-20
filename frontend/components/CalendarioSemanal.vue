@@ -37,7 +37,7 @@ export default {
           let horarios_api = data_api.data;
           let diasDaSemana= {"seg":"2022-12-12", "ter":"2022-12-13", "qua":"2022-12-14", "qui":"2022-12-15", "sex":"2022-12-16", "sab":"2022-12-17"};
           
-          for (let i = 1; i < horarios_api.length; i++) {
+          for (let i = 0; i < horarios_api.length; i++) {
             let diadasemana = diasDaSemana[horarios_api[i].weekday]
             let evento_novo = {
               name: horarios_api[i].name,
