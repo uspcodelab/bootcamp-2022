@@ -15,7 +15,6 @@
           :interval-minutes="60"
           :interval-count="14"
           :weekdays="[1, 2, 3, 4, 5, 6]"
-          hide-header="True"
         ></v-calendar>
       </v-sheet>
     </v-col>
@@ -27,7 +26,7 @@ export default {
   data: () => ({
     today: "2022-12-12",
     events: [],
-    diasDaSemana: {"seg":"2022-12-12", "ter":"2022-12-13", "qua":"2022-12-14", "qui":"2022-12-15", "sex":"2022-12-16", "sab":"2022-12-17"},
+    
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -36,13 +35,14 @@ export default {
     async getHorarios() {
       await fetch(this.$global.baseUrlApi + "/horarios", { method: "GET" }).then((res) => res.json()).then((data_api) => {
           let horarios_api = data_api.data;
-
+          let diasDaSemana= {"seg":"2022-12-12", "ter":"2022-12-13", "qua":"2022-12-14", "qui":"2022-12-15", "sex":"2022-12-16", "sab":"2022-12-17"};
+          
           for (let i = 1; i < horarios_api.length; i++) {
             let diadasemana = diasDaSemana[horarios_api[i].weekday]
             let evento_novo = {
               name: horarios_api[i].admin_id,
-              start: diadasemana + horarios_api[i].start_time,
-              end: diadasemana + horarios_api[i].end_time,
+              start: diadasemana +" " + horarios_api[i].start_time,
+              end: diadasemana +" " + horarios_api[i].end_time,
             };
             this.events.push(evento_novo);
           }
