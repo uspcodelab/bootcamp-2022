@@ -16,11 +16,7 @@
             :show-arrows="false"
             class="pl-2 text-center text-md-left"
           >
-            <v-carousel-item
-              class="d-block"
-              v-for="slide in slides"
-              :key="slide.mainText"
-            >
+            <v-carousel-item v-for="slide in slides" :key="slide.mainText">
               <v-container class="texto">
                 <h2 class="sub">{{ slide.smallIntro }}</h2>
                 <h1 class="text-h3 big text-md-h2">{{ slide.mainText }}</h1>
