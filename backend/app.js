@@ -1,27 +1,49 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var quotesRouter = require('./routes/quotes');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
-var app = express();
+require('express-async-errors')
 
-app.use(function (req, res, next) {
-    // Allow-origin from frontend
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    next();
-});
+require('dotenv').config()
 
-app.use(logger('dev'));
+const port = 3000 || process.env.PORT
+
+// importing middlewares
+const {
+  allowFrontendMiddleware,
+  errorHandlerMiddleware,
+  notFoundMiddleware
+} = require('./middlewares')
+
+// importing Routers
+const indexRouter = require('./routes/indexRouter');
+const quotesRouter = require('./routes/quotesRouter');
+
+// creating app
+const app = express();
+
+// maybe could use cors, idk
+app.use(allowFrontendMiddleware);
+
+if(process.env.NODE_ENV === 'dev') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser()); // remember to put a key here
 
+// applying routes
 app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
+
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
+})
 
 module.exports = app;

@@ -8,14 +8,14 @@ services:
     ports:
       - ${DB_PORT}:${DB_PORT}
     volumes: 
-      - db:/var/lib/postgresql/data
+      #- db:/var/lib/postgresql/data
       - ./db/sql/:/docker-entrypoint-initdb.d/
   api:
-    container_name: quotes-api
+    container_name: api # cria o container com nome api a partir da Dockerfile
     build:
       context: ./
       target: production
-    image: quotes-api
+    image: api
     expose:
       - ${PORT}
     depends_on:
