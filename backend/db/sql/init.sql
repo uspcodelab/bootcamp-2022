@@ -21,7 +21,7 @@ CREATE TABLE USUARIOS (
   id SERIAL PRIMARY KEY,
   username character varying(255) NOT NULL,
   password character varying(255) NOT NULL,
-  mail character varying(255) NOT NULL,
+  mail character varying(255) NOT NULL UNIQUE,
   shell character varying(255) DEFAULT '/bin/bash' NOT NULL,
   user_group character varying(255) NOT NULL,
   ssh_access boolean DEFAULT TRUE NOT NULL,

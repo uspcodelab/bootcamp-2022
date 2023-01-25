@@ -21,6 +21,7 @@ const {
 const indexRouter = require('./routes/indexRouter');
 const quotesRouter = require('./routes/quotesRouter');
 const statusRouter = require('./routes/statusRouter')
+const userRouter = require('./routes/userRouter')
 
 // creating app
 const app = express();
@@ -40,6 +41,7 @@ app.use(cookieParser()); // remember to put a key here
 app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 app.use('/status', statusRouter)
+app.use('/user', userRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
