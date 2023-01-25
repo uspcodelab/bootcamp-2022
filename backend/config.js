@@ -9,6 +9,9 @@ const config = {
     database: env.DB_NAME || 'cklijfef',
   },
   listPerPage: env.LIST_PER_PAGE || 10,
+  roles: ['user', 'admin'],
+  privilegedRoles: ['admin'],
+  NODE_ENV: env.NODE_ENV
 };
 
 module.exports = config;

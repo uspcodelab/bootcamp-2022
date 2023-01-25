@@ -27,7 +27,6 @@ CREATE TABLE USUARIOS (
   ssh_access boolean DEFAULT TRUE NOT NULL,
   link_type character varying(255) NOT NULL,
   institute character varying(255) NOT NULL,
-  auth_key character varying(255) NOT NULL,
   last_login timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
   description character varying(255) DEFAULT 'Usuario',
   role character varying(255) DEFAULT 'user' NOT NULL

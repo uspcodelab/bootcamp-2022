@@ -5,13 +5,8 @@ const { attachCookieToResponse } = require('../../utils/jwt')
 const createCookiePayloadFromUser = require('../../utils/create-cookie-payload-from-user.js')
 
 const registerUser = async (req, res) => {
-  const user = req.body
-  await authService.register(user) 
-  const payload = {
-    id: user.id,
-    name: user.name,
-    username: user.username,
-  }
+  const user = await authService.register(req.body) 
+  const payload = createCookiePayloadFromUser(user)
   attachCookieToResponse(res, payload)
   res.status(StatusCodes.CREATED).json({ message: 'success' })
 }
@@ -19,11 +14,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   // req.body has email and password
   const user = await authService.login(req.body)
-  const payload = {
-    id: user.id,
-    name: user.name,
-    username: user.username,
-  }
+  const payload = createCookiePayloadFromUser(user)
   attachCookieToResponse(res, payload)
   res.status(StatusCodes.OK).json({ message: 'success' })
 }

@@ -30,7 +30,7 @@ const app = express();
 // maybe could use cors, idk
 app.use(allowFrontendMiddleware);
 
-if(process.env.NODE_ENV === 'dev') {
+if(process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { authenticateUser, authorizePermissions }  = require('../middlewares/authentication')
+
 const {
   getStatusPage,
   createStatus,
@@ -9,11 +11,11 @@ const {
 } = require('../controllers/status')
 
 router.route('/')
-  .get(getStatusPage) // get all the quotes
-  .post(createStatus) // create a new quote
+  .get(getStatusPage)
+  .post(authenticateUser, authorizePermissions(['admin']), createStatus)
 
 router.route('/:id')
-  .patch(updateStatus) // update status of status
-  .delete(deleteStatus)
+  .patch(authenticateUser, authorizePermissions(['admin']), updateStatus) 
+  .delete(authenticateUser, authorizePermissions(['admin']), deleteStatus)
 
 module.exports = router;

@@ -2,13 +2,15 @@
 const express = require('express');
 const router = express.Router();
 
+const { authenticateUser, authorizePermissions }  = require('../middlewares/authentication')
+
 const {
   getQuotesPage,
   createQuote
 } = require('../controllers/quotes')
 
 router.route('/')
-  .get(getQuotesPage) // get all the quotes
-  .post(createQuote) // create a new quote
+  .get(getQuotesPage) 
+  .post(authenticateUser, authorizePermissions(['admin']), createQuote) 
 
 module.exports = router;
