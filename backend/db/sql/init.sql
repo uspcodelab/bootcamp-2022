@@ -78,7 +78,7 @@ CREATE TABLE SLIDES_BOTOES (
 
 CREATE TABLE STATUS (
   id SERIAL PRIMARY KEY,
-  machine character varying(255) NOT NULL,
+  machine character varying(255) NOT NULL UNIQUE,
   status boolean NOT NULL
 );
 

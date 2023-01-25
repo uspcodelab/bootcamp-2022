@@ -1,6 +1,6 @@
 
 const { StatusCodes } = require('http-status-codes')
-const quotesService = require('../services/quotesService');
+const quotesService = require('../../services/quotesService');
 
 const createQuote = async (req, res) => {
   await quotesService.create(req.body)

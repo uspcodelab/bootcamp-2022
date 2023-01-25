@@ -20,6 +20,7 @@ const {
 // importing Routers
 const indexRouter = require('./routes/indexRouter');
 const quotesRouter = require('./routes/quotesRouter');
+const statusRouter = require('./routes/statusRouter')
 
 // creating app
 const app = express();
@@ -38,6 +39,7 @@ app.use(cookieParser()); // remember to put a key here
 // applying routes
 app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
+app.use('/status', statusRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

@@ -5,7 +5,7 @@ const router = express.Router();
 const {
   getQuotesPage,
   createQuote
-} = require('../controllers/quotesControllers')
+} = require('../controllers/quotes')
 
 router.route('/')
   .get(getQuotesPage) // get all the quotes

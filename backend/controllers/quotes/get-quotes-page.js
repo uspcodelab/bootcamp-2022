@@ -1,9 +1,9 @@
 
 const { StatusCodes } = require('http-status-codes')
-const quotesService = require('../services/quotesService');
+const quotesService = require('../../services/quotesService');
 
 const getQuotesPage = async (req, res) => {
-  const { data, meta }= await quotesService.getMultiple(req.query.page)
+  const { data, meta } = await quotesService.getMultiple(req.query.page) // default value === 1
   res.status(StatusCodes.OK).json({
     data,
     meta: {
