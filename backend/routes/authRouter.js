@@ -3,10 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getUserPage
-} = require('../controllers/user')
+  registerUser
+} = require('../controllers/auth')
 
 router.route('/')
-  .get(getUserPage)
+  .post(registerUser)
 
 module.exports = router;

@@ -2,6 +2,18 @@
 const validator = require('validator')
 const CustomError = require('../../errors')
 
+const validateName = (messages, name) => {
+  if(!name){
+    messages.push('Please provide name')
+  }
+  if(typeof name !== 'string'){
+    messages.push('Name must be string')
+  }
+  if(name.length > 255){
+    messages.push('Name must have at most 255 characters')
+  }
+}
+
 const validateUsername = (messages, username) => {
   if(!username){
     messages.push('Please provide username')
@@ -97,6 +109,7 @@ const validateUser = (user) => {
   if(!user) {
     throw new CustomError.BadRequestError('User not provided')
   }
+  validateName(messages, user.name)
   validateUsername(messages, user.username)
   validatePassword(messages, user.password)
   validateMail(messages, user.mail) 

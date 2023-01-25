@@ -22,6 +22,7 @@ const indexRouter = require('./routes/indexRouter');
 const quotesRouter = require('./routes/quotesRouter');
 const statusRouter = require('./routes/statusRouter')
 const userRouter = require('./routes/userRouter')
+const authRouter = require('./routes/authRouter')
 
 // creating app
 const app = express();
@@ -35,13 +36,14 @@ if(process.env.NODE_ENV === 'dev') {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser()); // remember to put a key here
+app.use(cookieParser(process.env.COOKIE_SECRET)); // cookies are sent to req.signedCookies
 
 // applying routes
 app.use('/', indexRouter);
 app.use('/quotes', quotesRouter);
 app.use('/status', statusRouter)
 app.use('/user', userRouter)
+app.use('/auth', authRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

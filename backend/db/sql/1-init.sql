@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS USUARIOS CASCADE;
-DROP TABLE IF EXISTS ADMIN CASCADE;
 DROP TABLE IF EXISTS AVISOS_CATEGORIA CASCADE;
 DROP TABLE IF EXISTS AVISOS CASCADE;
 DROP TABLE IF EXISTS SLIDES CASCADE;
@@ -20,6 +19,7 @@ CREATE TABLE QUOTE (
 CREATE TABLE USUARIOS (
   id SERIAL PRIMARY KEY,
   username character varying(255) NOT NULL,
+  name character varying(255) NOT NULL,
   password character varying(255) NOT NULL,
   mail character varying(255) NOT NULL UNIQUE,
   shell character varying(255) DEFAULT '/bin/bash' NOT NULL,
@@ -28,16 +28,9 @@ CREATE TABLE USUARIOS (
   link_type character varying(255) NOT NULL,
   institute character varying(255) NOT NULL,
   auth_key character varying(255) NOT NULL,
-  last_login timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-CREATE TABLE ADMIN (
-  id SERIAL PRIMARY KEY,
-  login character varying(255) NOT NULL,
-  password character varying(255) NOT NULL,
-  name character varying(255) NOT NULL,
-  description character varying(255) DEFAULT '/bin/bash' NOT NULL,
-  auth_key character varying(255) NOT NULL
+  last_login timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  description character varying(255) DEFAULT 'Usuario',
+  role character varying(255) DEFAULT 'user' NOT NULL
 );
 
 CREATE TABLE AVISOS_CATEGORIA (
@@ -90,7 +83,7 @@ CREATE TABLE NOTICIAS (
   author_id INTEGER NOT NULL,
 
 	CONSTRAINT noticia_author_ct FOREIGN KEY (author_id)
-		REFERENCES ADMIN (id)
+		REFERENCES USUARIOS (id)
 );
 
 CREATE TABLE FAQ (
@@ -106,6 +99,7 @@ CREATE TABLE HORARIOS (
   end_time time NOT NULL,
   admin_id INTEGER NOT NULL,
 
-	CONSTRAINT horario_admin_ct FOREIGN KEY (admin_id)
-		REFERENCES ADMIN (id)
+	CONSTRAINT fk_admin 
+    FOREIGN KEY(admin_id)
+		  REFERENCES USUARIOS(id)
 );
