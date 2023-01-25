@@ -127,6 +127,27 @@ const validateUser = (user) => {
   }
 }
 
+const validatePasswordLogin = (messages, password) => {
+  if(!password){
+    messages.push('Please provide password')
+  }
+  if(typeof password !== 'string'){
+    messages.push('Password must be a string')
+  }
+}
+
+const validateLoginInfo = (loginInfo) => {
+  const messages = []
+  if(!loginInfo) {
+    throw new CustomError.BadRequestError('Please provide login info')
+  }
+  validateMail(messages, loginInfo.mail)
+  validatePasswordLogin(messages, loginInfo.password)
+  if(messages.length > 0){
+    throw new CustomError.BadRequestError(messages.join());
+  }
+}
+
 // precisa verificar que existem:
 // username,
 // password,
@@ -135,6 +156,9 @@ const validateUser = (user) => {
 // link_type
 // institute
 
-module.exports = validateUser
+module.exports = {
+  validateUser,
+  validateLoginInfo
+}
 
 

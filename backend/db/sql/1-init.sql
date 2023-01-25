@@ -18,7 +18,7 @@ CREATE TABLE QUOTE (
 
 CREATE TABLE USUARIOS (
   id SERIAL PRIMARY KEY,
-  username character varying(255) NOT NULL,
+  username character varying(255) NOT NULL UNIQUE,
   name character varying(255) NOT NULL,
   password character varying(255) NOT NULL,
   mail character varying(255) NOT NULL UNIQUE,

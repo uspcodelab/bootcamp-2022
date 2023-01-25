@@ -2,7 +2,7 @@
 const db = require('../db')
 const bcrypt = require('bcrypt')
 const CustomError = require('../../errors')
-const validateUser = require('./validatorsAuth')
+const { validateUser, validateLoginInfo }= require('./validatorsAuth')
 
 const hashPassword = async (plainPassword) => {
   const salt = await bcrypt.genSalt(10)
@@ -18,6 +18,10 @@ const genCreateQuery = (user) => {
   `
 }
 
+const comparePasswords = async (plainPassword, hashedPassword) => {
+  return await bcrypt.compare(plainPassword, hashedPassword) 
+}
+
 const register = async (user) => {
   // username, password, mail, shell, user_group, ssh_access, link_type, institute
   validateUser(user)
@@ -29,6 +33,27 @@ const register = async (user) => {
   }
 }
 
+const login = async (loginInfo) => {
+  validateLoginInfo(loginInfo)
+  const [user] = await db.query(
+    'SELECT id, name, username, password FROM USUARIOS WHERE mail = $1', 
+    [loginInfo.mail]
+  )
+  if(!user) {
+    throw new CustomError.UnauthenticatedError('Wrong credentials')
+  }
+  const isMatch = await comparePasswords(loginInfo.password, user.password)
+  if(!isMatch){
+    throw new CustomError.UnauthenticatedError('Wrong credentials')
+  }
+  return {
+    id: user.id,
+    username: user.username,
+    name: user.name
+  }
+}
+
 module.exports = {
-  register
+  register,
+  login
 }

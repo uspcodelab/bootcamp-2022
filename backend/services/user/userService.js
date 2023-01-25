@@ -1,6 +1,6 @@
 
 const db = require('../db')
-const helper = require('../../helper');
+const helper = require('../../utils/pageHelper');
 const config = require('../../config');
 
 const getMultiple = async (page = 1) => {
