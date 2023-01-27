@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
 const config = require('../config');
 const pool = new Pool(config.db);
+const CustomError = require('../errors')
 
 /**
  * Query the database using the pool
@@ -9,10 +10,14 @@ const pool = new Pool(config.db);
  * 
  * @see https://node-postgres.com/features/pooling#single-query
  */
-async function query(query, params) {
+const query = async (query, params) => {
+  try {
     const {rows, fields} = await pool.query(query, params);
-
     return rows;
+  }
+  catch(err) {
+    throw new CustomError.InternalServerError('Error when requesting to db. Check if db is receiving requests')
+  }
 }
 
 module.exports = {
