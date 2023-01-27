@@ -42,9 +42,10 @@ const login = async (loginInfo) => {
     [loginInfo.mail]
   )
   if(!user) {
-    throw new CustomError.UnauthenticatedError('Wrong credentials')
+    throw new CustomError.UnauthenticatedError('This user does not exist')
   }
-  const isMatch = await comparePasswords(loginInfo.password, user.password)
+  let hashedPassword = await hashPassword(user.password)
+  const isMatch = await comparePasswords(loginInfo.password, hashedPassword)
   if(!isMatch){
     throw new CustomError.UnauthenticatedError('Wrong credentials')
   }
