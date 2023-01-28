@@ -121,7 +121,7 @@ const validateRole = (messages, role) => {
   }
 }
 
-const validateRepetion = async (messages, username, mail) => {
+const validateRepetition = async (messages, username, mail) => {
   const result = await checkExistanceHelper({ username, mail }, tableName)
   let emailExists = false
   let usernameExists = false 
@@ -159,10 +159,10 @@ const validateUser = async (user) => {
     validateAccess(messages, user.ssh_access)
   }
 
-  await validateRepetion(messages, user.username, user.mail)
+  await validateRepetition(messages, user.username, user.mail)
 
   if(messages.length > 0){
-    throw new CustomError.BadRequestError(messages.join());
+    throw new CustomError.BadRequestError(messages);
   }
 }
 
@@ -174,7 +174,7 @@ const validateLoginInfo = (loginInfo) => {
   validateMail(messages, loginInfo.mail)
   validatePassword(messages, loginInfo.password)
   if(messages.length > 0){
-    throw new CustomError.BadRequestError(messages.join());
+    throw new CustomError.BadRequestError(messages);
   }
 }
 

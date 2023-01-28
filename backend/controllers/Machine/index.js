@@ -4,14 +4,13 @@ const machinesService = require('../../services/machines/machinesService');
 
 const create = async (req, res) => {
   await machinesService.createMachine(req.body)
-  res.status(StatusCodes.CREATED).json({
-    message: 'Success'
-  });
+  res.status(StatusCodes.CREATED).json({ messages: [] });
 }
 
 const getPage = async (req, res) => {
   const { data, meta } = await machinesService.getMultipleMachines(req.query.page)
   res.status(StatusCodes.OK).json({
+    messages: [],
     data,
     meta: {
       ...meta,
@@ -27,16 +26,12 @@ const update = async (req, res) => {
     name: req.body.name
   }
   await machinesService.updateMachine(updatedMachine)
-  res.status(StatusCodes.OK).json({
-    message: 'Success'
-  });
+  res.status(StatusCodes.OK).json({ messages: [] });
 }
 
 const remove = async (req, res) => {
   await machinesService.deleteMachine(req.params.id)
-  res.status(StatusCodes.OK).json({
-    message: 'Success'
-  });
+  res.status(StatusCodes.OK).json({ messages: [] });
 }
 
 module.exports = {

@@ -69,7 +69,8 @@
     "name": {
       "undef": "Please provide machine name",
       "str": "Machine name must be string",
-      "len": "Machine name must have at most 255 characters"
+      "len": "Machine name must have at most 255 characters",
+      "ext": "Machine Name already exists"
     },
     "mch": {
       "undef": "Please provide machine"

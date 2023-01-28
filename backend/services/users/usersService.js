@@ -3,6 +3,7 @@ const db = require('../db')
 const helper = require('../../utils/pageHelper');
 const config = require('../../config');
 const CustomError = require('../../errors')
+const { bcryptPassword } = require('../../utils/bcryptHelper')
 
 const errors = require('../../errors/error-messages.json').machines
 
@@ -56,8 +57,14 @@ const getUser = async (userId) => {
   return userInfo
 }
 
+const updatePasswordUser = async ({id, newPassword}) => {
+  const hashed = await bcryptPassword(newPassword)
+  await updateHelper({ password: hashed }, id, tableName)
+}
+
 module.exports = {
   deleteUser,
   getMultipleUsers,
-  getUser
+  getUser,
+  updatePasswordUser,
 }

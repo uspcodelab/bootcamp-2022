@@ -1,6 +1,11 @@
+
 class CustomAPIError extends Error {
-  constructor(message) {
-    super(message)
+  constructor(messages) {
+    super()
+    if(!Array.isArray(messages)){
+      messages = [ messages ]
+    }
+    this.messages = messages 
   }
 }
 

@@ -8,7 +8,7 @@ const register = async (req, res) => {
   const user = await authService.registerAuth(req.body) 
   const payload = createCookiePayloadFromUser(user)
   attachCookieToResponse(res, payload)
-  res.status(StatusCodes.CREATED).json({ message: 'success' })
+  res.status(StatusCodes.CREATED).json({ messages: []})
 }
 
 const login = async (req, res) => {
@@ -16,7 +16,7 @@ const login = async (req, res) => {
   const user = await authService.loginAuth(req.body)
   const payload = createCookiePayloadFromUser(user)
   attachCookieToResponse(res, payload)
-  res.status(StatusCodes.OK).json({ message: 'success' })
+  res.status(StatusCodes.OK).json({ messages: []})
 }
 
 module.exports = {

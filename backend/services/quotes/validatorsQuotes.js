@@ -1,28 +1,28 @@
 
-const errors = require('../../errors/error-messages.json')
+const errors = require('../../errors/error-messages.json').quotes
 const CustomError = require('../../errors')
 
 const validateContent = (messages, content) => {
   if (!content){
-    messages.push(errors.quotes.content.undef);
+    messages.push(errors.content.undef);
   }
   else if(typeof content !== 'string') {
-    messages.push(errors.quotes.content.str);
+    messages.push(errors.content.str);
   }
   else if(content.length > 255){
-    messages.push(errors.quotes.content.len)
+    messages.push(errors.content.len)
   }
 }
 
 const validateAuthor = (messages, author) => {
   if (!author){
-    messages.push(errors.quotes.author.undef);
+    messages.push(errors.author.undef);
   }
   else if(!(typeof author === 'string')) {
-    messages.push(errors.quotes.author.str);
+    messages.push(errors.author.str);
   }
   else if(author.length > 255){
-    messages.push(errors.quotes.len.str)
+    messages.push(errors.len.str)
   }
 }
 
@@ -30,7 +30,7 @@ const validateQuote = (quote) => {
   const messages = [];
 
   if (!quote) {
-    throw new CustomError.BadRequestError(errors.quotes.qt)
+    throw new CustomError.BadRequestError(errors.qt)
   }
 
   validateContent(messages, quote.content)
@@ -45,7 +45,7 @@ const validateUpdateContentQuote = (quote) => {
   const messages = []
   
   if (!quote) {
-    throw new CustomError.BadRequestError(errors.quotes.qt)
+    throw new CustomError.BadRequestError(errors.qt)
   }
 
   validateContent(messages, quote.content)
