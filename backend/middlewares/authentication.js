@@ -6,7 +6,6 @@ const authenticateUser = (req, res, next) => {
   const { accessCookie } = req.signedCookies
   try {
     const payload = verifyCookie(accessCookie)
-    console.log(payload)
     req.user = {
       id: payload.id,
       name: payload.name,
@@ -21,19 +20,35 @@ const authenticateUser = (req, res, next) => {
   }
 }
 
-const authorizePermissions = ([...roles]) => {
+const roleCheck = ([...roles]) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       throw new CustomError.UnauthorizedError(
         'Unauthorized to access this route'
       );
     }
-    next();
-  };
-};
+    next()
+  }
+}
+
+const personalChangesPermissionCheck = ([...roles]) => {
+  return (req, res, next) => {
+    const id = req.params.id
+    if (roles.includes(req.user.role)) {
+      return next()
+    }
+    if(id === req.user.id) {
+      return next()
+    }
+    throw new CustomError.UnauthorizedError(
+      'Unauthorized to access this route'
+    )
+  }
+}
 
 module.exports = {
   authenticateUser,
-  authorizePermissions
+  roleCheck,
+  personalChangesPermissionCheck
 }
 

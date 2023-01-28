@@ -1,0 +1,15 @@
+
+- corrigir o pau que esta dando agora (create new machine, checando se ja existe)
+- Adicionar checagem em users 
+- Adicionar mudanca de senha em users 
+- Arrumar os erros de db
+- refatorar a parte dos erros (parte do require)
+- organizar os erros como se pudesse ser um array 
+- produzir mais um controller
+
+.
+.
+.
+
+- testes no postman
+

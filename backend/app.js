@@ -20,8 +20,9 @@ const {
 // importing Routers
 const indexRouter = require('./routes/indexRouter');
 const quotesRouter = require('./routes/quotesRouter');
-const statusRouter = require('./routes/statusRouter')
-const userRouter = require('./routes/userRouter')
+const warningClassesRouter = require('./routes/warningClassesRouter');
+const machinesRouter = require('./routes/machinesRouter')
+const usersRouter = require('./routes/usersRouter')
 const authRouter = require('./routes/authRouter')
 
 // creating app
@@ -40,9 +41,10 @@ app.use(cookieParser(process.env.COOKIE_SECRET)); // cookies are sent to req.sig
 
 // applying routes
 app.use('/', indexRouter);
-app.use('/quotes', quotesRouter);
-app.use('/status', statusRouter)
-app.use('/user', userRouter)
+app.use('/quote', quotesRouter);
+app.use('/warning-class', warningClassesRouter);
+app.use('/machine', machinesRouter)
+app.use('/user', usersRouter)
 app.use('/auth', authRouter)
 
 app.use(notFoundMiddleware)

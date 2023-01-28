@@ -1,36 +1,39 @@
 
-const validateQuote = (messages, quote) => {
-  if (!quote){
-    messages.push('Please provide machine property');
+const errors = require('../../errors/error-messages.json')
+const CustomError = require('../../errors')
+
+const validateContent = (messages, content) => {
+  if (!content){
+    messages.push(errors.quotes.content.undef);
   }
-  if(!(typeof quote === 'string')) {
-    messages.push('Quote property must be a string');
+  else if(typeof content !== 'string') {
+    messages.push(errors.quotes.content.str);
   }
-  else if(quote.length > 255){
-    messages.push('Quote cannot be longer than 255 characters')
+  else if(content.length > 255){
+    messages.push(errors.quotes.content.len)
   }
 }
 
 const validateAuthor = (messages, author) => {
   if (!author){
-    messages.push('Please provide author property');
+    messages.push(errors.quotes.author.undef);
   }
-  if(!(typeof author === 'string')) {
-    messages.push('Author property must be a string');
+  else if(!(typeof author === 'string')) {
+    messages.push(errors.quotes.author.str);
   }
   else if(author.length > 255){
-    messages.push('Author cannot be longer than 255 characters')
+    messages.push(errors.quotes.len.str)
   }
 }
 
-const validateCreate = (quote) => {
-  let messages = [];
+const validateQuote = (quote) => {
+  const messages = [];
 
   if (!quote) {
-    throw new CustomError.BadRequestError('Quote not provided')
+    throw new CustomError.BadRequestError(errors.quotes.qt)
   }
 
-  validateQuote(messages, quote.quote)
+  validateContent(messages, quote.content)
   validateAuthor(messages, quote.author)
 
   if (messages.length > 0) {
@@ -38,8 +41,22 @@ const validateCreate = (quote) => {
   }
 }
 
+const validateUpdateContentQuote = (quote) => {
+  const messages = []
+  
+  if (!quote) {
+    throw new CustomError.BadRequestError(errors.quotes.qt)
+  }
+
+  validateContent(messages, quote.content)
+
+  if (messages.length > 0) {
+    throw new CustomError.BadRequestError(messages.join());
+  }
+
+}
+
 module.exports = {
   validateQuote,
-  validateAuthor,
-  validateCreate,
+  validateUpdateContentQuote
 }

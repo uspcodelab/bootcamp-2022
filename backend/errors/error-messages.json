@@ -1,0 +1,105 @@
+{
+  "auth": {
+    "credential": {
+      "wrg": "Wrong Credentials"
+    },
+    "name":{
+      "undef": "Please provide name",
+      "str": "Name must be string",
+      "len": "Name must have at most 255 characters"
+    },
+    "username":{
+      "undef": "Please provide username",
+      "str": "Username must be string",
+      "len": "Username must have at most 255 characters",
+      "ext": "Username already exists"
+    },
+    "password": {
+      "undef": "Please provide password",
+      "str": "Password must be string"
+    },
+    "mail": {
+      "undef": "Please provide mail",
+      "str": "Mail must be string",
+      "vld": "Mail not valid",
+      "ext": "Mail already exists"
+    },
+    "userGroup": {
+      "undef": "Please provide user group",
+      "str": "User group must be string",
+      "len": "User group must have at most 255 characters"
+    },
+    "link": {
+      "undef": "Please provide link",
+      "str": "Link must be string",
+      "len": "Link must have at most 255 characters"
+    },
+    "institute": {
+      "undef": "Please provide institute",
+      "str": "Institute must be string",
+      "len": "Institute must have at most 255 characters"
+    },
+    "shell": {
+      "str": "Shell must be string",
+      "len": "Shell must have at most 255 characters"
+    },
+    "ssh": {
+      "str": "SSH access must be string",
+      "len": "SHH access must have at most 255 characters"
+    },
+    "role": {
+      "undef": "Please provide role",
+      "auth": "In production, this route does not register provileged roles",
+      "notExt": "Role does not exist"
+    },
+    "register": {
+      "undef": "Please provide register info"
+    },
+    "login": {
+      "undef": "Please provide login info"
+    }
+  },
+  "machines": {
+    "exists": "This machine already exists",
+    "notFound": "This machine id does not exists",
+    "status": {
+      "undef": "Please provide status",
+      "bool": "Status must be bool"
+    },
+    "name": {
+      "undef": "Please provide machine name",
+      "str": "Machine name must be string",
+      "len": "Machine name must have at most 255 characters"
+    },
+    "mch": {
+      "undef": "Please provide machine"
+    }
+  },
+  "quotes": {
+    "content": {
+      "undef": "Please provide content",
+      "str": "Content must be string",
+      "len": "Content must have at most 255 characters"
+    },
+    "author": {
+      "undef": "Please provide author",
+      "str": "Author must be string",
+      "len": "Author must have at most 255 characters"
+    },
+    "qt": {
+      "undef": "Please provide quote"
+    }
+  },
+  "warningClasses": {
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title must be string",
+      "len": "Title must have at most 255 characters"
+    },
+    "color": {
+      "undef": "Please provide color",
+      "vld": "Please provide a valid color"
+    }
+  }
+}
+

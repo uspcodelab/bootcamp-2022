@@ -16,6 +16,7 @@ const query = async (query, params) => {
     return rows;
   }
   catch(err) {
+    console.log(err)
     throw new CustomError.InternalServerError('Error when requesting to db. Check if db is receiving requests')
   }
 }
