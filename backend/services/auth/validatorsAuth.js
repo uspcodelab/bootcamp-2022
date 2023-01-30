@@ -121,24 +121,24 @@ const validateRole = (messages, role) => {
   }
 }
 
-const validateRepetition = async (messages, username, mail) => {
-  const result = await checkExistanceHelper({ username, mail }, tableName)
-  let emailExists = false
-  let usernameExists = false 
-  if(result.length > 0) {
-    result.forEach(u => {
-      if(u.mail === mail && emailExists === false){
-        messages.push(errors.mail.ext)
-        emailExists = true
-      }
-      if(u.username === username && usernameExists === false)
-        messages.push(errors.username.ext)
-        usernameExists = true
-    })
-  }
-}
+//const validateRepetition = async (messages, username, mail) => {
+//  const result = await checkExistanceHelper({ username, mail }, tableName)
+//  let emailExists = false
+//  let usernameExists = false 
+//  if(result.length > 0) {
+//    result.forEach(u => {
+//      if(u.mail === mail && emailExists === false){
+//        messages.push(errors.mail.ext)
+//        emailExists = true
+//      }
+//      if(u.username === username && usernameExists === false)
+//        messages.push(errors.username.ext)
+//        usernameExists = true
+//    })
+//  }
+//}
 
-const validateUser = async (user) => {
+const validateUser = (user) => {
   const messages = []
   if(!user) {
     throw new CustomError.BadRequestError(errors.register.undef)
@@ -159,7 +159,7 @@ const validateUser = async (user) => {
     validateAccess(messages, user.ssh_access)
   }
 
-  await validateRepetition(messages, user.username, user.mail)
+//  await validateRepetition(messages, user.username, user.mail)
 
   if(messages.length > 0){
     throw new CustomError.BadRequestError(messages);

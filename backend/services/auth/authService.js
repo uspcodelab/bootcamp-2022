@@ -2,18 +2,24 @@
 const db = require('../db')
 const CustomError = require('../../errors')
 const { validateUser, validateLoginInfo } = require('./validatorsAuth')
-const { insertHelper, checkExistanceHelper } = require('../../utils/queryHelper')
+const { insertHelper } = require('../../utils/queryHelper')
 const { bcryptPassword, comparePasswords } = require('../../utils/bcryptHelper')
 const errors = require('../../errors/error-messages.json').auth
+const Handler = require('../../errors/error-handlers')
 
 const tableName = 'USERS'
 
 const registerAuth = async (userBody) => {
   // username, password, mail, shell, user_group, ssh_access, link_type, institute
-  await validateUser(userBody)
+  validateUser(userBody)
   userBody.password = await bcryptPassword(userBody.password)
-  const user = await insertHelper(userBody, tableName)
-  return user
+  try {
+    const user = await insertHelper(userBody, tableName)
+    return user
+  }
+  catch(error){
+    throw Handler.alreadyExistsError(error)
+  }
 }
 
 const loginAuth = async (loginInfo) => {

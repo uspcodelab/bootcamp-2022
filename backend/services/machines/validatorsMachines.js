@@ -1,28 +1,28 @@
 
 const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json')
+const errors = require('../../errors/error-messages.json').machines
 const { checkExistanceHelper } = require('../../utils/queryHelper')
 
 const tableName = 'MACHINES'
 
 const validateStatus = (messages, status) => {
   if (status === undefined) {
-    messages.push(errors.machines.status.undef);
+    messages.push(errors.status.undef);
   }
   else if(!(typeof status === 'boolean')){
-    messages.push(errors.machines.status.bool)
+    messages.push(errors.status.bool)
   }
 }
 
 const validateMachineName = (messages, name) => {
   if (!name){
-    messages.push(errors.machines.name.undef);
+    messages.push(errors.name.undef);
   }
   else if(typeof name !== 'string') {
-    messages.push(errors.machines.name.str);
+    messages.push(errors.name.str);
   }
   else if(name.length > 30){
-    messages.push(errors.machines.name.len)
+    messages.push(errors.name.len)
   }
 }
 
@@ -43,7 +43,7 @@ const validateMachine = async (machine) => {
   const messages = [];
 
   if (!machine) {
-    messages.push(errors.machines.mch.undef);
+    messages.push(errors.mch.undef);
   }
 
   validateStatus(messages, machine.status)
@@ -52,7 +52,7 @@ const validateMachine = async (machine) => {
   await validateRepetition(messages, machine.name)
 
   if (messages.length > 0) {
-    throw new CustomError.BadRequestError(messages.join());
+    throw new CustomError.BadRequestError(messages);
   }
 }
 

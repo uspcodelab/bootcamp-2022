@@ -1,6 +1,6 @@
 
-const errors = require('../../errors/error-messages.json').quotes
 const CustomError = require('../../errors')
+const errors = require('../../errors/error-messages.json').quotes
 
 const validateContent = (messages, content) => {
   if (!content){

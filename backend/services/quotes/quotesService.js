@@ -2,6 +2,7 @@ const db = require('../db');
 const helper = require('../../utils/pageHelper');
 const config = require('../../config');
 const CustomError = require('../../errors')
+const Handler = require('../../errors/error-handlers')
 
 const {
   validateQuote,
@@ -24,38 +25,57 @@ const createQuote = async (quote) => {
     content: quote.content,
     author: quote.author
   }
-  const result = await insertHelper(insertObject, tableName)
-  if(result.length < 1){
-    throw new CustomError.InternalServerError('Error when submitting quote to db')
+  try {
+    const result = await insertHelper(insertObject, tableName)
+  }
+  catch(error){
+    throw new CustomError.InternalServerError('Something went wrong') 
   }
 }
 
 const getMultipleQuotes = async (page = 1) => {
-  const selectArray = ['id', 'content', 'author', 'updated_at', 'created_at']
-  const rows = await selectPageHelper(selectArray, page, tableName)
-  const data = helper.emptyOrRows(rows);
-  const meta = {page};
-  return {
-    data,
-    meta
+  try {
+    const selectArray = ['id', 'content', 'author', 'updated_at', 'created_at']
+    const rows = await selectPageHelper(selectArray, page, tableName)
+    const data = helper.emptyOrRows(rows);
+    const meta = {page};
+    return {
+      data,
+      meta
+    }
+  }
+  catch(error) {
+    throw Handler.pageError(error, page)
   }
 }
 
 const deleteQuote = async (quoteId) => {
-  const result = deleteHelper({ id: quoteId }, tableName)
-  if(result.length === 0) {
-    throw new CustomError.NotFoundError(`There is no quote with id ${quoteId}`)
+  try{
+    const [result] = deleteHelper({ id: quoteId }, tableName)
+    if(!result) {
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, newsId)
   }
 }
 
 const updateContentQuote = async (quoteBody) => {
   validateUpdateContentQuote(quoteBody)
-  const queryObject = {
-    content: quoteBody.content,
+  try{
+    const queryObject = { content: quoteBody.content }
+    const result = await updateHelper(queryObject, quoteBody.id, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
   }
-  const result = await updateHelper(queryObject, quoteBody.id, tableName)
-  if(result.length === 0) {
-    throw new CustomError.NotFoundError(`There is no quote with id ${quoteBody.id}`)
+  catch(error) {
+    throw Handler.idError(error, news.id)
   }
 }
 

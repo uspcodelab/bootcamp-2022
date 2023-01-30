@@ -1,9 +1,7 @@
 
-const db = require('../db')
 const helper = require('../../utils/pageHelper');
 const CustomError = require('../../errors')
 const validateWarningClass = require('./validatorsWarningClasses')
-const { createUpdateQuery }= require('../../utils/queryHelper')
 
 const { 
   updateHelper,
@@ -36,7 +34,7 @@ const deleteWarningClass = async (warningClassId) => {
 }
 
 const getMultipleWarningClasses = async (page = 1) => {
-  const rows = await selectPageHelper(['title', 'color'], page, tableName)
+  const rows = await selectPageHelper(['title', 'color', 'id'], page, tableName)
   const data = helper.emptyOrRows(rows);
   const meta = {page};
   return {

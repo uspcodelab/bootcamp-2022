@@ -3,11 +3,11 @@ const helper = require('../../utils/pageHelper');
 const config = require('../../config');
 const CustomError = require('../../errors')
 const validateMachine = require('./validatorsMachines')
+const Handler = require('../../errors/error-handlers')
 
 const { 
   updateHelper,
   insertHelper,
-  checkExistanceHelper,
   deleteHelper,
   selectPageHelper
 } = require('../../utils/queryHelper')
@@ -19,11 +19,12 @@ const errors = require('../../errors/error-messages.json').machines
 
 const createMachine = async (machine) => {
   validateMachine(machine);
-  const result = await checkExistanceHelper({ name: machine.name }, tableName)
-  if(result.length > 0) {
-    throw new CustomError.BadRequestError(errors.exists)
+  try{
+    await insertHelper({ name: machine.name, status: machine.status }, tableName)
   }
-  await insertHelper({ name: machine.name, status: machine.status }, tableName)
+  catch(error){
+    throw Handler.alreadyExistsError(error)
+  }
 }
 
 const updateMachine = async (machine) => {
@@ -32,28 +33,41 @@ const updateMachine = async (machine) => {
     status: machine.status.toString().toUpperCase(),
     name: machine.name
   }
-  const updatedMachine = await updateHelper(updateObject, machine.id, tableName)
-  // console.log(updatedMachine)
+  try{
+    const updatedMachine = await updateHelper(updateObject, machine.id, tableName)
+  }
+  catch(error){
+    throw Handler.alreadyExistsError(error)
+  }
 }
 
 const deleteMachine = async (deleteId) => {
-  if(!deleteId){
-    throw new CustomError.BadRequestError('Please provide id')
+  try {
+    const [result]= await deleteHelper({ id: deleteId }, tableName)
+    if(!result) {
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
   }
-  const deletedMachine = await deleteHelper({ id: deleteId }, tableName)
-  if(deletedMachine.length === 0){
-    throw new CustomError.BadRequestError(errors.notFound)
+  catch(error){
+    throw Handler.idError(error, deleteId)
   }
 }
 
 const getMultipleMachines = async (page = 1) => {
-  const selectArray = ['id', 'status', 'name']
-  const rows = await selectPageHelper(selectArray, page, tableName)
-  const data = helper.emptyOrRows(rows); // acho que tenho que tirar isso
-  const meta = {page};
-  return {
-    data,
-    meta
+  try{
+    const selectArray = ['id', 'status', 'name']
+    const rows = await selectPageHelper(selectArray, page, tableName)
+    const data = helper.emptyOrRows(rows); // acho que tenho que tirar isso
+    const meta = {page};
+    return {
+      data,
+      meta
+    }
+  }
+  catch(error){
+    throw Handler.pageError(error, page)
   }
 }
 

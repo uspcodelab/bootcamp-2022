@@ -92,6 +92,7 @@
     }
   },
   "warningClasses": {
+    "wc": "Please provide warnign class",
     "title": {
       "undef": "Please provide title",
       "str": "Title must be string",
@@ -101,6 +102,110 @@
       "undef": "Please provide color",
       "vld": "Please provide a valid color"
     }
+  },
+  "warnings": {
+    "wr": "Please provide warning body",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title must be string",
+      "len": "Title must have at most 255 characters"
+    },
+    "icon": {
+      "undef": "Please provide icon"
+    },
+    "content": {
+      "undef": "Please provide content",
+      "str": "Content must be string"
+    },
+    "class_id": {
+      "undef": "Please provide class id",
+      "notExt": "Class id does not exists"
+    }
+  },
+  "slides": {
+    "sl": "Please provide slide",
+    "small_intro": {
+      "undef": "Please provide a small intro",
+      "str": "Small intro must be string",
+      "len": "Small intro must have at most 255 characters"
+    },
+    "main_text": {
+      "undef": "Please provide a main text",
+      "str": "Main text must be string",
+      "len": "Main text must have at most 255 characters"
+    }
+  },
+  "slideButtons": {
+    "sb": "Please provide slide button",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title text must be string",
+      "len": "Title text must have at most 255 characters"
+    },
+    "link": {
+      "undef": "Please provide link",
+      "vld": "Link not valid"
+    },
+    "color": {
+      "undef": "Please provide color"
+    },
+    "slide_id": {
+      "undef": "Please provide slide id",
+      "notExt": "Slide id does not exists"
+    }
+  },
+  "news": {
+    "nw": "Please provide news",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title must be string",
+      "len": "Title must have at most 255 characters"
+    },
+    "subtitle": {
+      "undef": "Please provide subtitle",
+      "str": "Subtitle must be string",
+      "len": "Subtitle must have at most 255 characters"
+    },
+    "content": {
+      "undef": "Please provide content",
+      "str": "Content must be string"
+    },
+    "author_id": {
+      "undef": "Please provide author id",
+      "notExt": "Author id does not exists"
+    }
+  },
+  "faq": {
+    "faq": "Please provide answer and question",
+    "question": {
+      "undef": "Please provide question",
+      "str": "Question must be string",
+      "len": "Question must have at most 255 characters"
+    },
+    "answer": {
+      "undef": "Please provide answer",
+      "str": "Answer must be string",
+      "len": "Answer must have at most 255 characters"
+    },
+    "schedule": {
+      "sc": "Plese provide schedule",
+      "weekday": {
+        "undef": "Please provide week day",
+        "vld": "Week day not valid"
+      },
+      "start_time": {
+        "undef": "Please provide start time",
+        "vld": "Start time not valid"
+      },
+      "end_time": {
+        "undef": "Please provide end time",
+        "vld": "End time not valid"
+      }
+    },
+    "admin_id": {
+      "undef": "Please provide admin id",
+      "notExt": "Admin id does not exists"
+    }
   }
-}
+} 
 

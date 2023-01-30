@@ -56,7 +56,7 @@ CREATE TABLE SLIDES (
   main_text character varying(255) NOT NULL
 );
 
-CREATE TABLE SLIDES_BUTTONS (
+CREATE TABLE SLIDE_BUTTONS (
   id SERIAL PRIMARY KEY,
   title character varying(255) NOT NULL,
   link character varying(523) NOT NULL,
