@@ -11,7 +11,7 @@ const {
   insertHelper,
   deleteHelper,
   selectOneHelper,
-  selectPageHelper
+  selectTwoTablesJoinPageHelper
 } = require('../../utils/queryHelper')
 
 // db
@@ -70,8 +70,10 @@ const getNews = async (newsId) => {
 const getMultipleNews = async (page = 1) => {
   // it wont send the content
   try{
-    const data = await selectPageHelper(['title', 'subtitle', 'author_id', 'id'], page, tableName)
-    const meta = {page};
+    const selectArray = ['title', 'subtitle', 'author_id', 'NEWS.id']
+    const idArray = ['author_id', 'USERS.id']
+    const data = await selectTwoTablesJoinPageHelper(selectArray, idArray, page, [tableName, 'USERS'])
+    const meta = {page, size: data.length};
     return {
       data,
       meta

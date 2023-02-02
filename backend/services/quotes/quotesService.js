@@ -13,7 +13,7 @@ const {
   insertHelper,
   updateHelper,
   deleteHelper,
-  selectPageHelper
+  selectTwoTablesJoinPageHelper
 } = require('../../utils/queryHelper')
 
 // db
@@ -41,13 +41,13 @@ const updateContentQuote = async (updateObject) => {
     }
   }
   catch(error) {
-    throw Handler.idError(error, news.id)
+    throw Handler.idError(error, updateObject.id)
   }
 }
 
 const deleteQuote = async (quoteId) => {
   try{
-    const [result] = deleteHelper({ id: quoteId }, tableName)
+    const [result] = await deleteHelper({ id: quoteId }, tableName)
     if(!result) {
       const err = new Error()
       err.code = '22P02'
@@ -55,15 +55,16 @@ const deleteQuote = async (quoteId) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, newsId)
+    throw Handler.idError(error, quoteId)
   }
 }
 
 const getMultipleQuotes = async (page = 1) => {
   try {
-    const selectArray = ['id', 'content', 'author', 'updated_at', 'created_at']
-    const data = await selectPageHelper(selectArray, page, tableName)
-    const meta = {page};
+    const selectArray = ['QUOTES.id', 'content', 'updated_at', 'created_at', 'username', 'name', 'role']
+    const idArray = ['QUOTES.author_id', 'USERS.id']
+    const data = await selectTwoTablesJoinPageHelper(selectArray, idArray, page, [tableName, 'USERS'])
+    const meta = {size: data.length}
     return {
       data,
       meta

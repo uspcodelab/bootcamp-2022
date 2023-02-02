@@ -1,6 +1,10 @@
 
 // errors
-const { validateUpdatePassword, validateUpdateMail } = require('./validatorsUsers')
+const { 
+  validateUpdatePassword,
+  validateUpdateMail,
+  validateUpdateRole
+} = require('./validatorsUsers')
 
 // helpers
 const { 
@@ -55,7 +59,7 @@ const updateMailUser = async (updateObject) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, news.id)
+    throw Handler.idError(error, updateObject.id)
   }
 }
 
@@ -84,10 +88,26 @@ const getUser = async (userId) => {
   }
 }
 
+const updateRoleUser = async (updateObject) => {
+  validateUpdateRole(updateObject.role)
+  try{
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, updateObject.id)
+  }
+
+}
+
 const getMultipleUsers = async (page = 1) => {
   try{
     const data = await selectPageHelper(OpenPersonalInfo, page, tableName)
-    const meta = {page};
+    const meta = {page, size: data.length};
     return {
       data,
       meta
@@ -103,5 +123,6 @@ module.exports = {
   getMultipleUsers,
   getUser,
   updatePasswordUser,
-  updateMailUser
+  updateMailUser,
+  updateRoleUser
 }

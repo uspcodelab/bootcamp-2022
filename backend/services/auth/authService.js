@@ -8,11 +8,10 @@ const Handler = require('../../errors/error_handlers')
 const { validateUser, validateLoginInfo } = require('./validatorsAuth')
 
 // helpers
-const { insertHelper } = require('../../utils/queryHelper')
+const { insertHelper, selectOneHelper } = require('../../utils/queryHelper')
 const { bcryptPassword, comparePasswords } = require('../../utils/bcryptHelper')
 
 // db
-const db = require('../db')
 const tableName = 'USERS'
 
 const registerAuth = async (userBody) => {
@@ -29,10 +28,8 @@ const registerAuth = async (userBody) => {
 
 const loginAuth = async (loginInfo) => {
   validateLoginInfo(loginInfo)
-  const [user] = await db.query(
-    'SELECT id, name, username, role, password FROM USERS WHERE mail = $1', 
-    [loginInfo.mail]
-  )
+  const selectArray = ['id', 'name', 'username', 'role', 'password']
+  const [user] = await selectOneHelper(selectArray, { mail: loginInfo.mail }, tableName)
   if(!user) {
     throw new CustomError.UnauthenticatedError(errors.credential.wrg)
   }

@@ -26,7 +26,7 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   const removeId = req.params.id
-  await newsService.deleteNews(id)
+  await newsService.deleteNews(removeId)
   res.status(StatusCodes.OK).json({ messages: [] })
 }
 

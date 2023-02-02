@@ -58,18 +58,9 @@ const validatePasswordLogin = (messages, password) => {
   else if(typeof password !== 'string'){
     messages.push(errors.password.str)
   }
-  else {
-    const strength = passwordStrength(password)
-    if(strength.id == 0){
-      messages.push(errors.password.tweak)
-    }
-    else if(strength.id == 1) {
-      messages.push(errors.password.weak)
-    }
-  }
 }
 
-const validateMail = (messages, mail) => {
+const validateMailRegister = (messages, mail) => {
   if(!mail){
     messages.push(errors.mail.undef)
   }
@@ -78,6 +69,15 @@ const validateMail = (messages, mail) => {
   }
   else if(!validator.isEmail(mail)){
     messages.push(errors.mail.vld)
+  }
+}
+
+const validateMailLogin = (messages, mail) => {
+  if(!mail){
+    messages.push(errors.mail.undef)
+  }
+  else if(typeof mail !== 'string'){
+    messages.push(errors.mail.str)
   }
 }
 
@@ -153,7 +153,7 @@ const validateUser = (user) => {
   validateName(messages, user.name)
   validateUsername(messages, user.username)
   validatePasswordRegister(messages, user.password)
-  validateMail(messages, user.mail) 
+  validateMailRegister(messages, user.mail) 
   validateUserGroup(messages, user.user_group)
   validateLink(messages, user.link_type)
   validateInstitute(messages, user.institute)
@@ -178,7 +178,7 @@ const validateLoginInfo = (loginInfo) => {
   if(!loginInfo) {
     throw new CustomError.BadRequestError(errors.login.undef)
   }
-  validateMail(messages, loginInfo.mail)
+  validateMailLogin(messages, loginInfo.mail)
   validatePasswordLogin(messages, loginInfo.password)
   if(messages.length > 0){
     throw new CustomError.BadRequestError(messages);

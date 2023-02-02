@@ -1,9 +1,7 @@
 
 // errors
-const Handler = require('../../errors/error_handlers')
-
-// validator
 const validateMachine = require('./validatorsMachines')
+const Handler = require('../../errors/error_handlers')
 
 // helper
 const { 
@@ -37,7 +35,7 @@ const updateMachine = async (updateObject) => {
   }
   catch(error){
     error = Handler.idError(error, updateObject.id)
-    if(!e.statusCode){
+    if(!error.statusCode){
       error = Handler.alreadyExistsError(error)
     }
     throw error

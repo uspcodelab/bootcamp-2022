@@ -56,11 +56,21 @@ const updateMail = async (req, res) => {
   res.status(StatusCodes.OK).json({ messages: [] })
 }
 
+const updateRole = async (req, res) => {
+  const updateObject = {
+    id: req.body.id,
+    role: req.body.role
+  }
+  await usersService.updateRoleUser(updateObject)
+  res.status(StatusCodes.OK).json({ messages: [] })
+}
+
 module.exports = {
   getPage,
   showMe,
   getUser,
   remove,
   updatePassword,
-  updateMail
+  updateMail,
+  updateRole
 }

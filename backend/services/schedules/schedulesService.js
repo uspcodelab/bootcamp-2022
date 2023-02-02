@@ -10,7 +10,7 @@ const {
   updateHelper,
   insertHelper,
   deleteHelper,
-  selectAllHelper,
+  selectTwoTablesJoinAllHelper,
 } = require('../../utils/queryHelper')
 
 // db
@@ -39,7 +39,7 @@ const updateSchedule = async (updateObject) => {
   catch(error){
     error = Handler.idError(error, updateObject.id)
     if(error.statusCode === undefined){
-      error = Handler.alreadyExistsError(error, updateObject.admin_id, 'USERS')
+      error = Handler.externalIdError(error, updateObject.admin_id, 'USERS')
     }
     throw error
   }
@@ -55,13 +55,14 @@ const deleteSchedule = async (scheduleId) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, newsId)
+    throw Handler.idError(error, scheduleId)
   }
 }
 
 const getAllSchedules = async () => {
-  const selectArray = ['weekday', 'start_time', 'end_time', 'admin_name']
-  const data = await selectAllHelper(selectArray, tableName)
+  const selectArray = ['SCHEDULES.id', 'weekday', 'start_time', 'end_time', 'admin_id', 'name']
+  const idArray = ['SCHEDULES.admin_id', 'USERS.id']
+  const data = await selectTwoTablesJoinAllHelper(selectArray, idArray, [tableName, 'USERS'])
   const meta = {size: data.length};
   return {
     data,

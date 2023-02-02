@@ -37,7 +37,11 @@ const updateSlideButton = async (updateObject) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, slideButton.id)
+    error = Handler.idError(error, updateObject.id)
+    if(!error.statusCode){
+      error = Handler.externalIdError(error, updateObject.slide_id, 'SLIDES')
+    }
+    throw error
   }
 }
 
@@ -57,7 +61,7 @@ const deleteSlideButton = async (slideButtonId) => {
 
 const getAllSlideButtons = async () => {
   try{
-    const data = await selectAllHelper(['title', 'link', 'color', 'slide_id'], tableName)
+    const data = await selectAllHelper(['id', 'title', 'link', 'color', 'slide_id'], tableName)
     const meta = {size: data.length};
     return {
       data,

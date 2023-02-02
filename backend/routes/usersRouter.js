@@ -12,16 +12,19 @@ const {
 const User = require('../controllers/User')
 
 router.route('/')
-  .get(authenticateUser, roleCheck(['admin']), User.getPage)
+  .get(authenticateUser, roleCheck(config.privilegedRoles), User.getPage)
 
 router.route('/showMe')
   .get(authenticateUser, User.showMe)
 
 router.route('/update-password')
-  .post(authenticateUser, User.updatePassword)
+  .patch(authenticateUser, User.updatePassword)
 
 router.route('/update-mail')
-  .post(authenticateUser, User.updateMail)
+  .patch(authenticateUser, User.updateMail)
+
+router.route('/update-role')
+  .patch(authenticateUser, roleCheck(config.privilegedRoles), User.updateRole)
 
 router.route('/:id')
   .get(authenticateUser, personalChangesPermissionCheck(config.privilegedRoles), User.getUser)

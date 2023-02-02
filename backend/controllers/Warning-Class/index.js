@@ -4,8 +4,8 @@ const warningClassesService = require('../../services/warning-classes/warningCla
 
 const create = async (req, res) => {
   const createObject = {
-    title: warningClass.title,
-    color: warningClass.color
+    title: req.body.title,
+    color: req.body.color
   }
   await warningClassesService.createWarningClass(createObject)
   res.status(StatusCodes.CREATED).json({ messages: [] });
@@ -14,8 +14,8 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const updateObject = {
     id: req.params.id,
-    title: warningClass.title,
-    color: warningClass.color
+    title: req.body.title,
+    color: req.body.color
   }
   await warningClassesService.updateWarningClass(updateObject)
   res.status(StatusCodes.OK).json({ messages: [] });

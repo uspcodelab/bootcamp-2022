@@ -90,7 +90,8 @@
     },
     "color": {
       "undef": "Please provide color",
-      "vld": "Please provide a valid hex color"
+      "str": "Color must be string",
+      "vld": "Please provide a valid hex color. Format example: #FFFFFF"
     }
   },
   "warnings": {
@@ -141,7 +142,8 @@
     },
     "color": {
       "undef": "Please provide color",
-      "vld": "Please provide a valid hex color"
+      "str": "Color must be string",
+      "vld": "Please provide a valid hex color. Format example: #FFFFFF"
     },
     "slide_id": {
       "undef": "Please provide slide id"
@@ -196,10 +198,12 @@
     },
     "start_time": {
       "undef": "Please provide start time",
+      "str": "Start time must be string",
       "vld": "Start time not valid"
     },
     "end_time": {
       "undef": "Please provide end time",
+      "str": "End time must be string",
       "vld": "End time not valid"
     },
     "admin_id": {
@@ -216,6 +220,10 @@
       "undef": "Please provide password",
       "str": "Mail must be string",
       "vld": "Mail not valid"
+    },
+    "role": {
+      "undef": "Please provide password",
+      "notExt": "Role does not exist"
     }
   }
 } 

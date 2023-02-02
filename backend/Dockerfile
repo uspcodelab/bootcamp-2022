@@ -8,14 +8,6 @@ ENV NODE_ENV=production
 
 RUN npm install
 
-#RUN npm install node-gyp -g && \
-#    npm install bcrypt -g && \
-#    npm install bcrypt --save
-
-# RUN npm i check-password-strength --save
-
-# apk del make gcc g++ python
-
 COPY --chown=node:node . ./
 
 USER node

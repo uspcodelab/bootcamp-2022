@@ -3,6 +3,7 @@ const CustomError = require('../../errors/custom_errors')
 const errors = require('../../errors/error_messages').users
 const validator = require('validator')
 const { passwordStrength } = require('check-password-strength')
+const config = require('../../config')
 
 const validateUpdatePassword = (password) => {
   if(!password){
@@ -31,7 +32,17 @@ const validateUpdateMail = (mail) => {
   }
 }
 
+const validateUpdateRole = (role) => {
+  if(!role){
+    throw new CustomError.BadRequestError(errors.role.undef)
+  }
+  else if(!config.roles.includes(role)){
+    throw new CustomError.BadRequestError(errors.role.notExt)
+  }
+}
+
 module.exports = {
   validateUpdatePassword,
-  validateUpdateMail
+  validateUpdateMail,
+  validateUpdateRole
 } 

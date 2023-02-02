@@ -8,7 +8,7 @@ const {
   updateHelper,
   insertHelper,
   deleteHelper,
-  selectAllHelper
+  selectTwoTablesJoinAllHelper
 } = require('../../utils/queryHelper')
 
 // db
@@ -49,8 +49,9 @@ const deleteSlide = async (slideId) => {
 }
 
 const getAllSlides = async () => {
-  const selectArray = ['small_intro', 'main_text', 'id']
-  const data = await selectAllHelper(selectArray, tableName)
+  const selectArray = ['small_intro', 'main_text', 'title', 'SLIDES.id', 'link', 'color']
+  const idArray = ['slide_id', 'SLIDES.id']
+  const data = await selectTwoTablesJoinAllHelper(selectArray, idArray, [tableName, 'SLIDE_BUTTONS'])
   const meta = {size: data.length};
   return {
     data,

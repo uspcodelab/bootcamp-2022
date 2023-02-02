@@ -56,18 +56,31 @@ const selectOneHelper = async (queryArray, queryObject, tableName) => {
   )
 }
 
-const selectAllHelper = async (queryArray, tableName) => {
-  return await db.query(`SELECT ${queryArray.join()} FROM ${tableName}`)
+
+const selectAllHelper = async (selectArray, tableName) => {
+  return await db.query(`SELECT ${selectArray.join()} FROM ${tableName}`)
 }
 
-const selectPageHelper = async (queryArray, page, tableName, listPerPage=config.listPerPage) => {
+const selectTwoTablesJoinAllHelper = async (selectArray, idArray, tableNames) => {
+  console.log(selectArray, idArray, tableNames)
+  return await db.query(`SELECT ${selectArray.join()} FROM ${tableNames.join()} WHERE ${idArray[0]} = ${idArray[1]}`)
+}
+
+const selectPageHelper = async (selectArray, page, tableName, listPerPage=config.listPerPage) => {
   const offset = getOffset(page, listPerPage);
   return await db.query(
-    `SELECT ${queryArray.join()} FROM ${tableName} OFFSET $1 LIMIT $2`, 
+    `SELECT ${selectArray.join()} FROM ${tableName} OFFSET $1 LIMIT $2`, 
     [offset, listPerPage]
   )
 }
 
+const selectTwoTablesJoinPageHelper = async (selectArray, idArray, page, tableNames, listPerPage=config.listPerPage) => {
+  const offset = getOffset(page, listPerPage);
+  return await db.query(
+    `SELECT ${selectArray.join()} FROM ${tableNames.join()} WHERE ${idArray[0]} = ${idArray[1]} OFFSET $1 LIMIT $2`, 
+    [offset, listPerPage]
+  )
+}
 
 module.exports = {
   insertHelper,
@@ -76,5 +89,7 @@ module.exports = {
   selectPageHelper,
   selectOneHelper,
   checkExistanceHelper,
-  selectAllHelper
+  selectAllHelper,
+  selectTwoTablesJoinPageHelper,
+  selectTwoTablesJoinAllHelper
 } 

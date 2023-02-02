@@ -37,12 +37,15 @@ const validateColor = (messages, color) => {
   if(!color){
     messages.push(errors.color.undef)
   }
-  if(!isHexColor(color)){
+  else if(typeof color != 'string'){
+    messages.push(errors.color.str)
+  }
+  else if(!isHexColor(color) || !color.startsWith('#')){
     messages.push(errors.color.vld)
   }
 }
 
-const validateSlideId = (slide_id) => {
+const validateSlideId = (messages, slide_id) => {
   if(!slide_id){
     messages.push(errors.slide_id.undef)
   }
@@ -56,7 +59,7 @@ const validateSlideButton = (slideButton) => {
   validateTitle(messages, slideButton.title)
   validateColor(messages, slideButton.color)
   validateLink(messages, slideButton.link)
-  validateSlideId(messages, slideButton.slide_id)
+  validateSlideId(messages,slideButton.slide_id)
   if(messages.length > 0){
     throw new CustomError.BadRequestError(messages);
   }

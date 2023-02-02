@@ -1,6 +1,7 @@
 
-// validator
+// errors 
 const validateWarningClass = require('./validatorsWarningClasses')
+const Handler = require('../../errors/error_handlers')
 
 // helper
 const { 

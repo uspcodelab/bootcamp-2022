@@ -1,13 +1,14 @@
 
 // errors
 const validateWarning = require('./validatorsWarnings')
+const Handler = require('../../errors/error_handlers')
 
 // helpers 
 const { 
   updateHelper,
   insertHelper,
   deleteHelper,
-  selectAllHelper
+  selectTwoTablesJoinAllHelper
 } = require('../../utils/queryHelper')
 
 // db stuff
@@ -34,7 +35,11 @@ const updateWarning = async (updateObject) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, warningBody.id)
+    error = Handler.idError(error, updateObject.id)
+    if(!error.statusCode){
+      error = Handler.externalIdError(error, updateObject.class_id, 'WARNING_CLASSES')
+    }
+    throw error
   }
 }
 
@@ -48,13 +53,14 @@ const deleteWarning = async (warning) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, warningBody.id)
+    throw Handler.idError(error, warning)
   }
 }
 
 const getAllWarnings = async () => {
-  const selectArray = ['title', 'icon', 'content', 'class_id', 'id']
-  const data = await selectAllHelper(selectArray, tableName)
+  const selectArray = ['icon', 'content', 'class_id', 'WARNINGS.id', 'WARNINGS.title', 'color']
+  const idArray = ['WARNINGS.class_id', 'WARNING_CLASSES.id']
+  const data = await selectTwoTablesJoinAllHelper(selectArray, idArray, [tableName, 'WARNING_CLASSES'])
   const meta = {size: data.length};
   return {
     data,

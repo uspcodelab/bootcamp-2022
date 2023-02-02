@@ -20,7 +20,10 @@ const validateStartTime = (messages, start_time) => {
   if(!start_time){
     messages.push(errors.start_time.undef)
   }
-  if(!validate24hTime(start_time)){
+  else if(typeof start_time !== 'string'){
+    messages.push(errors.start_time.str)
+  }
+  else if(!validate24hTime(start_time)){
     messages.push(errors.start_time.vld)
   }
 }
@@ -29,12 +32,15 @@ const validateEndTime = (messages, end_time) => {
   if(!end_time){
     messages.push(errors.end_time.undef)
   }
-  if(!validate24hTime(end_time)){
+  else if(typeof end_time !== 'string'){
+    messages.push(errors.start_time.str)
+  }
+  else if(!validate24hTime(end_time)){
     messages.push(errors.end_time.vld)
   }
 }
 
-const validateAdminName = (messages, admin_id) => {
+const validateAdminId = (messages, admin_id) => {
   if(!admin_id) {
     messages.push(errors.admin_id.undef)
   }
@@ -45,10 +51,10 @@ const validateSchedule = (schedule) => {
   if(!schedule){
     throw new CustomError.BadRequestError(errors.sc)
   }
-  validateWeekday(messages, schedule.title)
-  validateStartTime(messages, schedule.icon)
-  validateEndTime(messages, schedule.content)
-  validateAdminName(messages, schedule.admin_name)
+  validateWeekday(messages, schedule.weekday)
+  validateStartTime(messages, schedule.start_time)
+  validateEndTime(messages, schedule.end_time)
+  validateAdminId(messages, schedule.admin_id)
   if(messages.length > 0) {
     throw new CustomError.BadRequestError(messages);
   }
