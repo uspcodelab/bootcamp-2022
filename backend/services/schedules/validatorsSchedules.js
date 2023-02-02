@@ -1,14 +1,13 @@
 
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').warnings
-const { checkExistanceHelper } = require('../../utils/queryHelper')
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').schedule
 
 const validateWeekday = (messages, weekday ) => {
-  const weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
   if(!weekday) {
     messages.push(errors.weekday.undef)
   }
-  else if(!weekdays.includes(weekday)) {
+  else if(!errors.weekday.days.includes(weekday)) {
     messages.push(errors.weekday.vld)
   }
 }
@@ -35,19 +34,13 @@ const validateEndTime = (messages, end_time) => {
   }
 }
 
-const validateAdminId = async (messages, admin_id) => {
+const validateAdminName = (messages, admin_id) => {
   if(!admin_id) {
     messages.push(errors.admin_id.undef)
   }
-  else  {
-    const result = await checkExistanceHelper({ id: admin_id }, 'USERS')
-    if(result.length === 0){
-      messages.push(errors.admin_id.notExt)
-    }
-  }
 }
 
-const validateSchedule = async (schedule) => {
+const validateSchedule = (schedule) => {
   const messages = []
   if(!schedule){
     throw new CustomError.BadRequestError(errors.sc)
@@ -55,8 +48,7 @@ const validateSchedule = async (schedule) => {
   validateWeekday(messages, schedule.title)
   validateStartTime(messages, schedule.icon)
   validateEndTime(messages, schedule.content)
-  await validateAdminId(messages, schedule.admin_id)
-
+  validateAdminName(messages, schedule.admin_name)
   if(messages.length > 0) {
     throw new CustomError.BadRequestError(messages);
   }

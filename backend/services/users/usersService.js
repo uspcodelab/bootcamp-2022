@@ -1,20 +1,18 @@
 
-const db = require('../db')
-const helper = require('../../utils/pageHelper');
-const config = require('../../config');
-const CustomError = require('../../errors')
-const { bcryptPassword } = require('../../utils/bcryptHelper')
+// errors
+const { validateUpdatePassword, validateUpdateMail } = require('./validatorsUsers')
 
-const errors = require('../../errors/error-messages.json').machines
-
+// helpers
 const { 
   updateHelper,
-  insertHelper,
-  checkExistanceHelper,
   deleteHelper,
   selectOneHelper,
   selectPageHelper
 } = require('../../utils/queryHelper')
+const { bcryptPassword } = require('../../utils/bcryptHelper')
+
+// db
+const tableName = 'USERS'
 
 const OpenPersonalInfo = [
   'id',
@@ -30,36 +28,74 @@ const OpenPersonalInfo = [
   'role'
 ]
 
-const tableName = 'USERS'
+const updatePasswordUser = async (updateBody) => {
+  validateUpdatePassword(updateBody.password)
+  try{
+    updateBody.password = await bcryptPassword(updateBody.password)
+    const [result] = await updateHelper(updateBody, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, news.id)
+  }
+}
 
-const getMultipleUsers = async (page = 1) => {
-  const rows = await selectPageHelper(OpenPersonalInfo, page, tableName)
-  const data = helper.emptyOrRows(rows);
-  const meta = {page};
-  return {
-    data,
-    meta
+const updateMailUser = async (updateObject) => {
+  validateUpdateMail(updateObject.mail)
+  try{
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, news.id)
   }
 }
 
 const deleteUser = async (userId) => {
-  const result = await deleteHelper({ id: userId }, tableName)
-  if(result.length == 0) {
-    throw new CustomError.NotFoundError(`Not found user with id ${userId}`)
+  try{
+    const [result] = await deleteHelper({ id: userId }, tableName)
+    if(!result) {
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, userId)
   }
 }
 
 const getUser = async (userId) => {
-  const [ userInfo ] = await selectOneHelper(OpenPersonalInfo, { id: userId }, tableName)
-  if(!userInfo) {
-    throw new CustomError.NotFoundError(`Not found user with id ${userId}`)
+  try {
+    const [ userInfo ] = await selectOneHelper(OpenPersonalInfo, { id: userId }, tableName)
+    console.log(userInfo)
+    return userInfo
   }
-  return userInfo
+  catch(error) {
+    throw Handler.idError(error, userId)
+  }
 }
 
-const updatePasswordUser = async ({id, newPassword}) => {
-  const hashed = await bcryptPassword(newPassword)
-  await updateHelper({ password: hashed }, id, tableName)
+const getMultipleUsers = async (page = 1) => {
+  try{
+    const data = await selectPageHelper(OpenPersonalInfo, page, tableName)
+    const meta = {page};
+    return {
+      data,
+      meta
+    }
+  }
+  catch(error){
+    throw Handler.pageError(error, page)
+  }
 }
 
 module.exports = {
@@ -67,4 +103,5 @@ module.exports = {
   getMultipleUsers,
   getUser,
   updatePasswordUser,
+  updateMailUser
 }

@@ -1,14 +1,14 @@
-const db = require('../db');
-const helper = require('../../utils/pageHelper');
-const config = require('../../config');
-const CustomError = require('../../errors')
-const Handler = require('../../errors/error-handlers')
 
+// errors
+const Handler = require('../../errors/error_handlers')
+
+// validators
 const {
   validateQuote,
   validateUpdateContentQuote
 } = require('./validatorsQuotes')
 
+// helper
 const { 
   insertHelper,
   updateHelper,
@@ -16,36 +16,32 @@ const {
   selectPageHelper
 } = require('../../utils/queryHelper')
 
+// db
 const tableName = 'QUOTES'
 
-const createQuote = async (quote) => {
-  // checar se existe content igual
-  validateQuote(quote);
-  const insertObject = {
-    content: quote.content,
-    author: quote.author
-  }
-  try {
-    const result = await insertHelper(insertObject, tableName)
+const createQuote = async (createObject) => {
+  validateQuote(createObject);
+  try{
+    await insertHelper(createObject, tableName)
   }
   catch(error){
-    throw new CustomError.InternalServerError('Something went wrong') 
+    throw Handler.externalIdError(error, createObject.author_id, 'USERS')
   }
 }
 
-const getMultipleQuotes = async (page = 1) => {
-  try {
-    const selectArray = ['id', 'content', 'author', 'updated_at', 'created_at']
-    const rows = await selectPageHelper(selectArray, page, tableName)
-    const data = helper.emptyOrRows(rows);
-    const meta = {page};
-    return {
-      data,
-      meta
+const updateContentQuote = async (updateObject) => {
+  validateUpdateContentQuote(updateObject)
+  try{
+    const queryObject = { content: quoteBody.content }
+    const result = await updateHelper(queryObject, quoteBody.id, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
     }
   }
   catch(error) {
-    throw Handler.pageError(error, page)
+    throw Handler.idError(error, news.id)
   }
 }
 
@@ -63,19 +59,18 @@ const deleteQuote = async (quoteId) => {
   }
 }
 
-const updateContentQuote = async (quoteBody) => {
-  validateUpdateContentQuote(quoteBody)
-  try{
-    const queryObject = { content: quoteBody.content }
-    const result = await updateHelper(queryObject, quoteBody.id, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+const getMultipleQuotes = async (page = 1) => {
+  try {
+    const selectArray = ['id', 'content', 'author', 'updated_at', 'created_at']
+    const data = await selectPageHelper(selectArray, page, tableName)
+    const meta = {page};
+    return {
+      data,
+      meta
     }
   }
   catch(error) {
-    throw Handler.idError(error, news.id)
+    throw Handler.pageError(error, page)
   }
 }
 

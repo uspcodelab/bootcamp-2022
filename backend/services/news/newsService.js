@@ -1,33 +1,44 @@
 
-const helper = require('../../utils/pageHelper');
-const CustomError = require('../../errors')
-const { validateNewsCreate, validateNewsUpdate  }= require('./validatorsNews')
-const Handler = require('../../errors/error-handlers')
+// errors 
+const Handler = require('../../errors/error_handlers')
 
+// validators
+const { validateNewsCreate, validateNewsUpdate  }= require('./validatorsNews')
+
+// helpers
 const { 
   updateHelper,
   insertHelper,
-  checkExistanceHelper,
   deleteHelper,
   selectOneHelper,
   selectPageHelper
 } = require('../../utils/queryHelper')
 
+// db
 const tableName = 'NEWS'
 
-const createNews = async (news) => {
-  validateNewsCreate(news)
-  const insertObject = {
-    title: news.title,
-    subtitle: news.subtitle,
-    content: news.content,
-    author_id: news.author_id
-  }
+const createNews = async (createObject) => {
+  validateNewsCreate(createObject)
   try {
-    const result = await insertHelper(insertObject, tableName)
+    await insertHelper(createObject, tableName)
   }
   catch(error){
-    throw Handler.externalIdError(error, news.author_id, 'USERS')
+    throw Handler.externalIdError(error, createObject.author_id, 'USERS')
+  }
+}
+
+const updateNews = async (updateObject) => {
+  validateNewsUpdate(updateObject)
+  try{
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, updateObject.id)
   }
 }
 
@@ -45,22 +56,6 @@ const deleteNews = async (newsId) => {
   }
 }
 
-const getMultipleNews = async (page = 1) => {
-  // it wont send the content
-  try{
-    const rows = await selectPageHelper(['title', 'subtitle', 'author_id', 'id'], page, tableName)
-    const data = helper.emptyOrRows(rows);
-    const meta = {page};
-    return {
-      data,
-      meta
-    }
-  } 
-  catch(error){
-    throw Handler.pageError(error, page)
-  }
-}
-
 const getNews = async (newsId) => {
   const importantInfo = ['title', 'subtitle', 'content', 'author_id', 'id']
   try {
@@ -72,23 +67,18 @@ const getNews = async (newsId) => {
   }
 }
 
-const updateNews = async (news) => {
-  validateNewsUpdate(news)
+const getMultipleNews = async (page = 1) => {
+  // it wont send the content
   try{
-    const updateObject = {
-      title: news.title,
-      subtitle: news.subtitle,
-      content: news.content
+    const data = await selectPageHelper(['title', 'subtitle', 'author_id', 'id'], page, tableName)
+    const meta = {page};
+    return {
+      data,
+      meta
     }
-    const [result] = await updateHelper(updateObject, news.id, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
-    }
-  }
+  } 
   catch(error){
-    throw Handler.idError(error, news.id)
+    throw Handler.pageError(error, page)
   }
 }
 

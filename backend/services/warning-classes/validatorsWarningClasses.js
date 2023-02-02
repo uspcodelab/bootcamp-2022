@@ -1,7 +1,8 @@
 
-// const { validateColor: isColor } = require('validate-color')
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').warningClass
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').warningClass
+const { isHexColor } = require('validator')
 
 const validateTitle = (messages, title) => {
   if(!title){
@@ -10,7 +11,7 @@ const validateTitle = (messages, title) => {
   else if(typeof title !== 'string'){
     messages.push(errors.title.str)
   }
-  else if(title.length > 255){
+  else if(title.length > 16){
     messages.push(errors.title.len)
   }
 }
@@ -19,9 +20,9 @@ const validateColor = (messages, color) => {
   if(!color){
     messages.push(errors.color.undef)
   }
-//  else if(!isColor(warningClass.color)){
-//    messages.push(errors.color.vld)
-//  }
+  else if(!isHexColor(color)){
+    messages.push(errors.color.vld)
+  }
 }
 
 const validateWarningClass = (warningClass) => {

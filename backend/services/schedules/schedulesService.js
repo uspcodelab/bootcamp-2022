@@ -1,69 +1,77 @@
 
+// errors
+const Handler = require('../../errors/error_handlers')
 
-const helper = require('../../utils/pageHelper');
-const CustomError = require('../../errors')
+// validator
 const validateSchedule = require('./validatorsSchedules')
 
+// helpers
 const { 
   updateHelper,
   insertHelper,
-  checkExistanceHelper,
   deleteHelper,
-  selectPageHelper
+  selectAllHelper,
 } = require('../../utils/queryHelper')
 
+// db
 const tableName = 'SCHEDULES'
 
-const createSchedule = async (schedule) => {
-  await validateSchedule(schedule)
-  const insertObject = {
-    weekday: schedule.weekday,
-    start_time: schedule.start_time,
-    end_time: schedule.end_time,
-    admin_id: schedule.admin_id
+const createSchedule = async (createObject) => {
+  validateSchedule(createObject)
+  try{
+    await insertHelper(createObject, tableName)
   }
-  const result = await insertHelper(insertObject, tableName)
-  if(result.length == 0) {
-    throw new CustomError.InternalServerError('Error when submitting schedule to db')
+  catch(error){
+    throw Handler.externalIdError(error, createObject.admin_id, tableName)
+  }
+}
+
+const updateSchedule = async (updateObject) => {
+  validateSchedule(updateObject)
+  try{
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    error = Handler.idError(error, updateObject.id)
+    if(error.statusCode === undefined){
+      error = Handler.alreadyExistsError(error, updateObject.admin_id, 'USERS')
+    }
+    throw error
   }
 }
 
 const deleteSchedule = async (scheduleId) => {
-  const result = await deleteHelper({ id: scheduleId }, tableName)
-  if(result.length == 0) {
-    throw new CustomError.NotFoundError(`Not found schedule with id ${scheduleId}`)
+  try{
+    const [result] = await deleteHelper({ id: scheduleId }, tableName)
+    if(!result) {
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, newsId)
   }
 }
 
-const getMultipleSchedules = async (page = 1) => {
-  const rows = await selectPageHelper(
-    ['weekday', 'start_time', 'end_time', 'admin_id'],
-    page, tableName)
-  const data = helper.emptyOrRows(rows);
-  const meta = {page};
+const getAllSchedules = async () => {
+  const selectArray = ['weekday', 'start_time', 'end_time', 'admin_name']
+  const data = await selectAllHelper(selectArray, tableName)
+  const meta = {size: data.length};
   return {
     data,
     meta
   }
 }
 
-const updateSchedule = async (scheduleBody) => {
-  await validateSchedule(scheduleBody)
-  const updateObject = {
-    weekday: scheduleBody.weekday,
-    start_time: scheduleBody.start_time,
-    end_time: scheduleBody.end_time,
-    admin_id: scheduleBody.admin_id
-  }
-  const result = await updateHelper(updateObject, scheduleBody.id, tableName)
-  if(result.length === 0) {
-    throw new CustomError.NotFoundError(`There is no schedule with id ${scheduleBody.id}`)
-  }
-}
-
 module.exports = {
   createSchedule,
   deleteSchedule,
-  getMultipleSchedules,
+  getAllSchedules,
   updateSchedule
 }

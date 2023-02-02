@@ -1,8 +1,7 @@
 
 // const { validateColor: isColor } = require('validate-color')
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').warnings
-const { checkExistanceHelper } = require('../../utils/queryHelper')
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').warnings
 
 const validateTitle = (messages, title) => {
   if(!title){
@@ -11,7 +10,7 @@ const validateTitle = (messages, title) => {
   else if(typeof title !== 'string'){
     messages.push(errors.title.str)
   }
-  else if(title.length > 255){
+  else if(title.length > 64){
     messages.push(errors.title.len)
   }
 }
@@ -19,6 +18,12 @@ const validateTitle = (messages, title) => {
 const validateIcon = (messages, icon) => {
   if(!icon){
     messages.push(errors.icon.undef)
+  }
+  else if(typeof icon!== 'string'){
+    messages.push(errors.icon.str)
+  }
+  else if(icon.length > 64){
+    messages.push(errors.icon.len)
   }
 }
 
@@ -31,19 +36,13 @@ const validateContent = (messages, content) => {
   }
 }
 
-const validateClassId = async (messages, class_id) => {
+const validateClassId = (messages, class_id) => {
   if(!class_id) {
     messages.push(errors.class_id.undef)
   }
-  else  {
-    const result = await checkExistanceHelper({ id: class_id }, 'WARNING_CLASSES')
-    if(result.length === 0){
-      messages.push(errors.class_id.notExt)
-    }
-  }
 }
 
-const validateWarning = async (warning) => {
+const validateWarning = (warning) => {
   const messages = []
   if(!warning){
     throw new CustomError.BadRequestError(errors.wr)
@@ -51,8 +50,7 @@ const validateWarning = async (warning) => {
   validateTitle(messages, warning.title)
   validateIcon(messages, warning.icon)
   validateContent(messages, warning.content)
-  await validateClassId(messages, warning.class_id)
-
+  validateClassId(messages, warning.class_id)
   if(messages.length > 0){
     throw new CustomError.BadRequestError(messages);
   }

@@ -3,12 +3,32 @@ const { StatusCodes } = require('http-status-codes')
 const warningClassesService = require('../../services/warning-classes/warningClassesService');
 
 const create = async (req, res) => {
-  await warningClassesService.createWarningClass(req.body)
+  const createObject = {
+    title: warningClass.title,
+    color: warningClass.color
+  }
+  await warningClassesService.createWarningClass(createObject)
   res.status(StatusCodes.CREATED).json({ messages: [] });
 }
 
-const getPage = async (req, res) => {
-  const { data, meta } = await warningClassesService.getMultipleWarningClasses(req.query.page) // default value === 1
+const update = async (req, res) => {
+  const updateObject = {
+    id: req.params.id,
+    title: warningClass.title,
+    color: warningClass.color
+  }
+  await warningClassesService.updateWarningClass(updateObject)
+  res.status(StatusCodes.OK).json({ messages: [] });
+}
+
+const remove = async (req, res) => {
+  const removeId = req.params.id
+  await warningClassesService.deleteWarningClass(removeId)
+  res.status(StatusCodes.OK).json({ messages: [] });
+}
+
+const getAll = async (req, res) => {
+  const { data, meta } = await warningClassesService.getAllWarningClasses()
   res.status(StatusCodes.OK).json({
     messages: [],
     data,
@@ -19,21 +39,9 @@ const getPage = async (req, res) => {
   });
 }
 
-const remove = async (req, res) => {
-  const id = req.params.id
-  await warningClassesService.deleteWarningClass(id)
-  res.status(StatusCodes.OK).json({ messages: [] });
-}
-
-const update = async (req, res) => {
-  const id = req.params.id
-  await warningClassesService.updateWarningClass({ id, ...req.body })
-  res.status(StatusCodes.OK).json({ messages: [] });
-}
-
 module.exports = {
   create,
-  getPage,
+  getAll,
   remove,
   update 
 }

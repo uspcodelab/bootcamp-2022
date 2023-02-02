@@ -1,6 +1,7 @@
 
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').quotes
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').quotes
 
 const validateContent = (messages, content) => {
   if (!content){
@@ -14,15 +15,9 @@ const validateContent = (messages, content) => {
   }
 }
 
-const validateAuthor = (messages, author) => {
-  if (!author){
-    messages.push(errors.author.undef);
-  }
-  else if(!(typeof author === 'string')) {
-    messages.push(errors.author.str);
-  }
-  else if(author.length > 255){
-    messages.push(errors.len.str)
+const validateAuthorId = (messages, author_id) => {
+  if (!author_id){
+    messages.push(errors.author_id.undef);
   }
 }
 
@@ -34,10 +29,10 @@ const validateQuote = (quote) => {
   }
 
   validateContent(messages, quote.content)
-  validateAuthor(messages, quote.author)
+  validateAuthorId(messages, quote.author_id)
 
   if (messages.length > 0) {
-    throw new CustomError.BadRequestError(messages.join());
+    throw new CustomError.BadRequestError(messages);
   }
 }
 
@@ -51,7 +46,7 @@ const validateUpdateContentQuote = (quote) => {
   validateContent(messages, quote.content)
 
   if (messages.length > 0) {
-    throw new CustomError.BadRequestError(messages.join());
+    throw new CustomError.BadRequestError(messages);
   }
 
 }

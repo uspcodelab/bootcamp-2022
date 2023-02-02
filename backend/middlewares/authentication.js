@@ -1,6 +1,6 @@
 
 const { verifyCookie, attachCookieToResponse } = require('../utils/jwt')
-const CustomError = require('../errors')
+const CustomError = require('../errors/custom_errors')
 
 const authenticateUser = (req, res, next) => {
   const { accessCookie } = req.signedCookies

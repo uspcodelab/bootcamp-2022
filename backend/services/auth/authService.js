@@ -1,16 +1,21 @@
 
-const db = require('../db')
-const CustomError = require('../../errors')
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').auth
+const Handler = require('../../errors/error_handlers')
+
+// validator
 const { validateUser, validateLoginInfo } = require('./validatorsAuth')
+
+// helpers
 const { insertHelper } = require('../../utils/queryHelper')
 const { bcryptPassword, comparePasswords } = require('../../utils/bcryptHelper')
-const errors = require('../../errors/error-messages.json').auth
-const Handler = require('../../errors/error-handlers')
 
+// db
+const db = require('../db')
 const tableName = 'USERS'
 
 const registerAuth = async (userBody) => {
-  // username, password, mail, shell, user_group, ssh_access, link_type, institute
   validateUser(userBody)
   userBody.password = await bcryptPassword(userBody.password)
   try {

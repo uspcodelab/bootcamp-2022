@@ -1,43 +1,46 @@
-const db = require('../db');
-const helper = require('../../utils/pageHelper');
-const config = require('../../config');
-const CustomError = require('../../errors')
-const validateMachine = require('./validatorsMachines')
-const Handler = require('../../errors/error-handlers')
 
+// errors
+const Handler = require('../../errors/error_handlers')
+
+// validator
+const validateMachine = require('./validatorsMachines')
+
+// helper
 const { 
   updateHelper,
   insertHelper,
   deleteHelper,
-  selectPageHelper
+  selectAllHelper
 } = require('../../utils/queryHelper')
 
 const tableName = 'MACHINES'
 
-const errors = require('../../errors/error-messages.json').machines
-
-
-const createMachine = async (machine) => {
-  validateMachine(machine);
+const createMachine = async (createObject) => {
+  validateMachine(createObject);
   try{
-    await insertHelper({ name: machine.name, status: machine.status }, tableName)
+    await insertHelper(createObject, tableName)
   }
   catch(error){
     throw Handler.alreadyExistsError(error)
   }
 }
 
-const updateMachine = async (machine) => {
-  validateMachine(machine)
-  const updateObject = {
-    status: machine.status.toString().toUpperCase(),
-    name: machine.name
-  }
+const updateMachine = async (updateObject) => {
+  validateMachine(updateObject)
   try{
-    const updatedMachine = await updateHelper(updateObject, machine.id, tableName)
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
   }
   catch(error){
-    throw Handler.alreadyExistsError(error)
+    error = Handler.idError(error, updateObject.id)
+    if(!e.statusCode){
+      error = Handler.alreadyExistsError(error)
+    }
+    throw error
   }
 }
 
@@ -55,25 +58,19 @@ const deleteMachine = async (deleteId) => {
   }
 }
 
-const getMultipleMachines = async (page = 1) => {
-  try{
-    const selectArray = ['id', 'status', 'name']
-    const rows = await selectPageHelper(selectArray, page, tableName)
-    const data = helper.emptyOrRows(rows); // acho que tenho que tirar isso
-    const meta = {page};
-    return {
-      data,
-      meta
-    }
-  }
-  catch(error){
-    throw Handler.pageError(error, page)
+const getAllMachines = async () => {
+  const selectArray = ['id', 'status', 'name']
+  const data = await selectAllHelper(selectArray, 'MACHINES')
+  const meta = {size: data.length}
+  return {
+    data,
+    meta
   }
 }
 
 module.exports = {
-  getMultipleMachines,
   createMachine,
   updateMachine,
-  deleteMachine
+  deleteMachine,
+  getAllMachines
 }

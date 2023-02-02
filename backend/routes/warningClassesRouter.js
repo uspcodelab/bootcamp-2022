@@ -8,7 +8,7 @@ const { authenticateUser, roleCheck }  = require('../middlewares/authentication'
 const WarningClass = require('../controllers/Warning-Class')
 
 router.route('/')
-  .get(WarningClass.getPage) 
+  .get(WarningClass.getAll) 
   .post(authenticateUser, roleCheck(config.privilegedRoles), WarningClass.create) 
 
 router.route('/:id')

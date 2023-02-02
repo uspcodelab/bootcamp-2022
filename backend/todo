@@ -1,15 +1,24 @@
 
-- corrigir o pau que esta dando agora (create new machine, checando se ja existe)
-- Adicionar checagem em users 
-- Adicionar mudanca de senha em users 
-- Arrumar os erros de db
-- refatorar a parte dos erros (parte do require)
-- organizar os erros como se pudesse ser um array 
-- produzir mais um controller
+Retirar warning-classes e colocar a color dentro de warning. A padronizacao
+criar helper para selecionar todos
 
-.
-.
-.
+Remover warning classes e trocar apenas por color
 
-- testes no postman
+
+Selecionar todos/as:
+machines
+avisos
+faq
+schedules
+slides
+
+Selecionar por pagina:
+warnings (para selecionar apenas os 4 primeiros no maximo)
+
+Pensar em remover rota de users. Nao sei se tem razao poder pegar e deletar usuarios. Talvez fosse interessante
+poder mudar email tambem, mas vamos ver.
+
+
+
+
 

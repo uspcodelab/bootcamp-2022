@@ -13,6 +13,6 @@ router.route('/')
 
 router.route('/:id')
   .delete(authenticateUser, roleCheck(config.privilegedRoles), Quote.remove)
-  .patch(authenticateUser, roleCheck(config.privilegedRoles), Quote.updateContent)
+  .patch(authenticateUser, roleCheck(config.privilegedRoles), Quote.update)
 
 module.exports = router;

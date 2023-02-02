@@ -20,6 +20,9 @@ router.route('/showMe')
 router.route('/update-password')
   .post(authenticateUser, User.updatePassword)
 
+router.route('/update-mail')
+  .post(authenticateUser, User.updateMail)
+
 router.route('/:id')
   .get(authenticateUser, personalChangesPermissionCheck(config.privilegedRoles), User.getUser)
   .delete(authenticateUser, personalChangesPermissionCheck(config.privilegedRoles), User.remove)

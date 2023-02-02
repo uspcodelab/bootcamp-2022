@@ -1,7 +1,13 @@
-const { Pool } = require('pg');
+
+// errors
+const CustomError = require('../errors/custom_errors')
+
+// default configs
 const config = require('../config');
+
+// db stuff
+const { Pool } = require('pg');
 const pool = new Pool(config.db);
-const CustomError = require('../errors')
 
 /**
  * Query the database using the pool

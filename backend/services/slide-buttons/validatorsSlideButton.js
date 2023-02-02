@@ -1,7 +1,10 @@
 
-const { checkExistanceHelper } = require('../../utils/queryHelper')
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').slideButtons
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').slideButtons
+
+// validation helper
+const { isHexColor, isURL } = require('validator')
 
 const validateTitle = (messages, title) => {
   if(!title){
@@ -10,7 +13,7 @@ const validateTitle = (messages, title) => {
   else if(typeof title !== 'string'){
     messages.push(errors.title.str)
   }
-  else if(title.length > 255){
+  else if(title.length > 32){
     messages.push(errors.title.len)
   }
 }
@@ -22,14 +25,20 @@ const validateLink = (messages, link) => {
   else if(typeof link !== 'string'){
     messages.push(errors.link.str)
   }
-//  else if(!validator.isURL(link)){
-//    messages.push(errors.link.vld)
-//  }
+  else if(link.length > 2048){
+    messages.push(errors.link.len)
+  }
+  else if(!isURL(link, { requireHost: false })){
+    messages.push(errors.link.vld)
+  }
 }
 
 const validateColor = (messages, color) => {
   if(!color){
     messages.push(errors.color.undef)
+  }
+  if(!isHexColor(color)){
+    messages.push(errors.color.vld)
   }
 }
 

@@ -1,6 +1,7 @@
 
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').news
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').news
 
 const validateTitle = (messages, title) => {
   if(!title){
@@ -9,7 +10,7 @@ const validateTitle = (messages, title) => {
   else if(typeof title !== 'string'){
     messages.push(errors.title.str)
   }
-  else if(title.length > 255){
+  else if(title.length > 128){
     messages.push(errors.title.len)
   }
 }
@@ -21,7 +22,7 @@ const validateSubtitle = (messages, subtitle) => {
   else if(typeof subtitle !== 'string'){
     messages.push(errors.subtitle.str)
   }
-  else if(subtitle.length > 255){
+  else if(subtitle.length > 128){
     messages.push(errors.subtitle.len)
   }
 }
@@ -39,12 +40,6 @@ const validateAuthorId = (messages, author_id) => {
   if(!author_id) {
     messages.push(errors.author_id.undef)
   }
-//  else  {
-//    const result = await checkExistanceHelper({ id: author_id }, 'USERS')
-//    if(result.length === 0){
-//      messages.push(errors.author_id.notExt)
-//    }
-//  }
 }
 
 const validateNewsCreate = (news) => {

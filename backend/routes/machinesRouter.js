@@ -6,7 +6,7 @@ const { authenticateUser, roleCheck }  = require('../middlewares/authentication'
 const Machine = require('../controllers/Machine')
 
 router.route('/')
-  .get(Machine.getPage)
+  .get(Machine.getAll)
   .post(authenticateUser, roleCheck(['admin']), Machine.create)
 
 router.route('/:id')

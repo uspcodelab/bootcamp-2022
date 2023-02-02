@@ -1,13 +1,15 @@
 
 const db = require('../services/db')
-const CustomError = require('../errors')
 const { getOffset } = require('./pageHelper')
 const config = require('../config')
 
-const updateHelper = async (queryObject, id, tableName) => {
+const updateHelper = async (queryObject, tableName) => {
+  const id = queryObject.id
+  delete queryObject.id
   const keys = Object.keys(queryObject)
   const values = Object.values(queryObject)
   const args = values.map((_, i) => keys[i] + ' = $' + (i + 1)).join()
+  queryObject.id = id
   return await db.query(
     `UPDATE ${tableName} SET ${args} WHERE id = ${'$' + (values.length + 1)} RETURNING *`,
     [...values, id]
@@ -44,14 +46,6 @@ const deleteHelper = async (queryObject, tableName) => {
   )
 }
 
-const selectPageHelper = async (queryArray, page, tableName, listPerPage=config.listPerPage) => {
-  const offset = getOffset(page, listPerPage);
-  return await db.query(
-    `SELECT ${queryArray.join()} FROM ${tableName} OFFSET $1 LIMIT $2`, 
-    [offset, listPerPage]
-  )
-}
-
 const selectOneHelper = async (queryArray, queryObject, tableName) => {
   const keys = Object.keys(queryObject)
   const values = Object.values(queryObject)
@@ -62,11 +56,25 @@ const selectOneHelper = async (queryArray, queryObject, tableName) => {
   )
 }
 
+const selectAllHelper = async (queryArray, tableName) => {
+  return await db.query(`SELECT ${queryArray.join()} FROM ${tableName}`)
+}
+
+const selectPageHelper = async (queryArray, page, tableName, listPerPage=config.listPerPage) => {
+  const offset = getOffset(page, listPerPage);
+  return await db.query(
+    `SELECT ${queryArray.join()} FROM ${tableName} OFFSET $1 LIMIT $2`, 
+    [offset, listPerPage]
+  )
+}
+
+
 module.exports = {
   insertHelper,
   updateHelper,
   deleteHelper,
   selectPageHelper,
   selectOneHelper,
-  checkExistanceHelper
+  checkExistanceHelper,
+  selectAllHelper
 } 

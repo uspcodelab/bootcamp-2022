@@ -1,2 +1,2 @@
-INSERT INTO QUOTES (content, author)
-VALUES ('Sou muito fodao', 'Joao paulo')
+INSERT INTO QUOTES (content, author_id)
+VALUES ('Sou muito fodao', 1)

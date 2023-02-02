@@ -29,6 +29,7 @@ const slidesRouter = require('./routes/slidesRouter')
 const slideButtonsRouter = require('./routes/slideButtonsRouter')
 const newsRouter = require('./routes/newsRouter')
 const scheduleRouter = require('./routes/schedulesRouter')
+const faqRouter = require('./routes/faqRouter')
 
 // creating app
 const app = express();
@@ -56,6 +57,7 @@ app.use('/slide', slidesRouter)
 app.use('/slide-button', slideButtonsRouter)
 app.use('/news', newsRouter)
 app.use('/schedule', scheduleRouter)
+app.use('/faq', faqRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

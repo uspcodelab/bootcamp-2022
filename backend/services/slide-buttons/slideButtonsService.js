@@ -1,33 +1,43 @@
 
-const helper = require('../../utils/pageHelper');
-const CustomError = require('../../errors')
-const validateSlideButton = require('./validatorsSlideButton')
-const Handler = require('../../errors/error-handlers')
+// errors
+const Handler = require('../../errors/error_handlers')
 
+// validator
+const validateSlideButton = require('./validatorsSlideButton')
+
+// helpers
 const { 
   updateHelper,
   insertHelper,
-  checkExistanceHelper,
   deleteHelper,
-  selectOneHelper,
-  selectPageHelper
+  selectAllHelper 
 } = require('../../utils/queryHelper')
 
+// db 
 const tableName = 'SLIDE_BUTTONS'
 
-const createSlideButton = async (slideButton) => {
-  validateSlideButton(slideButton)
-  const insertObject = {
-    title: slideButton.title,
-    link: slideButton.link,
-    color: slideButton.color,
-    slide_id: slideButton.slide_id
-  }
+const createSlideButton = async (createObject) => {
+  validateSlideButton(createObject)
   try{
-    const result = await insertHelper(insertObject, tableName)
+    await insertHelper(createObject, tableName)
   }
   catch(error){
-    throw Handler.externalIdError(error, slide_id, 'SLIDES')
+    throw Handler.externalIdError(error, createObject.slide_id, 'SLIDES')
+  }
+}
+
+const updateSlideButton = async (updateObject) => {
+  validateSlideButton(updateObject)
+  try{
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, slideButton.id)
   }
 }
 
@@ -45,11 +55,10 @@ const deleteSlideButton = async (slideButtonId) => {
   }
 }
 
-const getMultipleSlideButtons = async (page = 1) => {
+const getAllSlideButtons = async () => {
   try{
-    const rows = await selectPageHelper(['title', 'link', 'color', 'slide_id'], page, tableName)
-    const data = helper.emptyOrRows(rows);
-    const meta = {page};
+    const data = await selectAllHelper(['title', 'link', 'color', 'slide_id'], tableName)
+    const meta = {size: data.length};
     return {
       data,
       meta
@@ -60,23 +69,9 @@ const getMultipleSlideButtons = async (page = 1) => {
   }
 }
 
-const updateSlideButton = async (slideButton) => {
-  validateSlideButton(slideButton)
-  const updateObject = {
-    title: slideButton.title,
-    link: slideButton.link,
-    color: slideButton.color,
-    slide_id: slideButton.slide_id
-  }
-  const result = await updateHelper(updateObject, slideButton.id, tableName)
-  if(result.length === 0) {
-    throw new CustomError.NotFoundError(`There is no slide button with id ${slideButton.id}`)
-  }
-}
-
 module.exports = {
   createSlideButton,
   deleteSlideButton,
-  getMultipleSlideButtons,
+  getAllSlideButtons,
   updateSlideButton
 }

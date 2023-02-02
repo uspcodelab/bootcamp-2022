@@ -1,11 +1,13 @@
 
-const validator = require('validator')
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').auth
-const config = require('../../config')
-const { checkExistanceHelper } = require('../../utils/queryHelper')
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').auth
 
-const tableName = 'USERS'
+// helpers to validate stuff
+const validator = require('validator')
+const { passwordStrength } = require('check-password-strength')
+
+const config = require('../../config')
 
 const validateName = (messages, name) => {
   if(!name){
@@ -14,7 +16,7 @@ const validateName = (messages, name) => {
   else if(typeof name !== 'string'){
     messages.push(errors.name.str)
   }
-  else if(name.length > 255){
+  else if(name.length > 128){
     messages.push(errors.name.len)
   }
 }
@@ -26,20 +28,45 @@ const validateUsername = (messages, username) => {
   else if(typeof username !== 'string'){
     messages.push(errors.username.str)
   }
-  else if(username.length > 255){
+  else if(username.length > 128){
     messages.push(errors.username.len)
   }
 }
 
-const validatePassword = (messages, password) => {
+const validatePasswordRegister = (messages, password) => {
   if(!password){
     messages.push(errors.password.undef)
   }
   else if(typeof password !== 'string'){
     messages.push(errors.password.str)
   }
-  // the strength of the password should be tested in the frontend
-  // (and maybe here also)
+  else {
+    const strength = passwordStrength(password)
+    if(strength.id == 0){
+      messages.push(errors.password.tweak)
+    }
+    else if(strength.id == 1) {
+      messages.push(errors.password.weak)
+    }
+  }
+}
+
+const validatePasswordLogin = (messages, password) => {
+  if(!password){
+    messages.push(errors.password.undef)
+  }
+  else if(typeof password !== 'string'){
+    messages.push(errors.password.str)
+  }
+  else {
+    const strength = passwordStrength(password)
+    if(strength.id == 0){
+      messages.push(errors.password.tweak)
+    }
+    else if(strength.id == 1) {
+      messages.push(errors.password.weak)
+    }
+  }
 }
 
 const validateMail = (messages, mail) => {
@@ -61,7 +88,7 @@ const validateUserGroup = (messages, group) => {
   else if(typeof group !== 'string'){
     messages.push(errors.userGroup.str)
   }
-  else if(group.length > 255){
+  else if(group.length > 32){
     messages.push(errors.userGroup.len)
   }
 }
@@ -73,7 +100,7 @@ const validateLink= (messages, link) => {
   else if(typeof link !== 'string'){
     messages.push(errors.link.str)
   }
-  else if(link.length > 255){
+  else if(link.length > 64){
     messages.push(errors.link.len)
   }
 }
@@ -85,7 +112,7 @@ const validateInstitute = (messages, institute) => {
   else if(typeof institute !== 'string'){
     messages.push(errors.institute.str)
   }
-  else if(institute.length > 255){
+  else if(institute.length > 64){
     messages.push(errors.institute.len)
   }
 }
@@ -94,18 +121,15 @@ const validateShell = (messages, shell) => {
   if(typeof shell !== 'string'){
     messages.push(errors.shell.str)
   }
-  else if(shell.length > 255){
+  else if(shell.length > 32){
     messages.push(errors.shell.len)
   }
 }
 
 
-const validateAccess = (messages, access) => {
-  if(typeof access !== 'string'){
-    messages.push(errors.ssh.str)
-  }
-  else if(access.length > 255){
-    messages.push(errors.ssh.len)
+const validateSSHAccess = (messages, access) => {
+  if(typeof access !== 'boolean'){
+    messages.push(errors.ssh.bool)
   }
 }
 
@@ -121,23 +145,6 @@ const validateRole = (messages, role) => {
   }
 }
 
-//const validateRepetition = async (messages, username, mail) => {
-//  const result = await checkExistanceHelper({ username, mail }, tableName)
-//  let emailExists = false
-//  let usernameExists = false 
-//  if(result.length > 0) {
-//    result.forEach(u => {
-//      if(u.mail === mail && emailExists === false){
-//        messages.push(errors.mail.ext)
-//        emailExists = true
-//      }
-//      if(u.username === username && usernameExists === false)
-//        messages.push(errors.username.ext)
-//        usernameExists = true
-//    })
-//  }
-//}
-
 const validateUser = (user) => {
   const messages = []
   if(!user) {
@@ -145,7 +152,7 @@ const validateUser = (user) => {
   }
   validateName(messages, user.name)
   validateUsername(messages, user.username)
-  validatePassword(messages, user.password)
+  validatePasswordRegister(messages, user.password)
   validateMail(messages, user.mail) 
   validateUserGroup(messages, user.user_group)
   validateLink(messages, user.link_type)
@@ -156,7 +163,7 @@ const validateUser = (user) => {
     validateShell(messages, user.shell)
   }
   if(user.ssh_access !== undefined){
-    validateAccess(messages, user.ssh_access)
+    validateSSHAccess(messages, user.ssh_access)
   }
 
 //  await validateRepetition(messages, user.username, user.mail)
@@ -172,19 +179,11 @@ const validateLoginInfo = (loginInfo) => {
     throw new CustomError.BadRequestError(errors.login.undef)
   }
   validateMail(messages, loginInfo.mail)
-  validatePassword(messages, loginInfo.password)
+  validatePasswordLogin(messages, loginInfo.password)
   if(messages.length > 0){
     throw new CustomError.BadRequestError(messages);
   }
 }
-
-// precisa verificar que existem:
-// username,
-// password,
-// mail,
-// user_group
-// link_type
-// institute
 
 module.exports = {
   validateUser,

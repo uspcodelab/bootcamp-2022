@@ -1,25 +1,37 @@
 
-const helper = require('../../utils/pageHelper');
-const CustomError = require('../../errors')
+// errors
 const validateSlide = require('./validatorsSlide')
-const Handler = require('../../errors/error-handlers')
+const Handler = require('../../errors/error_handlers')
 
+// helpers
 const { 
   updateHelper,
   insertHelper,
   deleteHelper,
-  selectPageHelper
+  selectAllHelper
 } = require('../../utils/queryHelper')
 
+// db
 const tableName = 'SLIDES'
 
-const createSlide = async (slide) => {
-  validateSlide(slide)
-  const insertObject = {
-    small_intro: slide.small_intro,
-    main_text: slide.main_text
+const createSlide = async (createObject) => {
+  validateSlide(createObject)
+  await insertHelper(createObject, tableName)
+}
+
+const updateSlide = async (updateObject) => {
+  validateSlide(updateObject)
+  try {
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
   }
-  await insertHelper(insertObject, tableName)
+  catch(error){
+    throw Handler.idError(error, updateObject.id)
+  }
 }
 
 const deleteSlide = async (slideId) => {
@@ -36,43 +48,19 @@ const deleteSlide = async (slideId) => {
   }
 }
 
-const getMultipleSlides = async (page = 1) => {
-  try{
-    const rows = await selectPageHelper(['small_intro', 'main_text', 'id'], page, tableName)
-    const data = helper.emptyOrRows(rows);
-    const meta = {page};
-    return {
-      data,
-      meta
-    }
-  }
-  catch(error) {
-    throw Handler.pageError(error, page)
-  }
-}
-
-const updateSlide = async (slide) => {
-  validateSlide(slide)
-  try {
-    const updateObject = {
-      small_intro: slide.small_intro,
-      main_text: slide.main_text
-    }
-    const [result] = await updateHelper(updateObject, slide.id, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
-    }
-  }
-  catch(error){
-    throw Handler.idError(error, slide.id)
+const getAllSlides = async () => {
+  const selectArray = ['small_intro', 'main_text', 'id']
+  const data = await selectAllHelper(selectArray, tableName)
+  const meta = {size: data.length};
+  return {
+    data,
+    meta
   }
 }
 
 module.exports = {
   createSlide,
   deleteSlide,
-  getMultipleSlides,
+  getAllSlides,
   updateSlide
 }

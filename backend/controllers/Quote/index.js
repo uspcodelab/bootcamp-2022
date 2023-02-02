@@ -3,8 +3,21 @@ const { StatusCodes } = require('http-status-codes')
 const quotesService = require('../../services/quotes/quotesService');
 
 const create = async (req, res) => {
-  await quotesService.createQuote(req.body)
+  const createObject = {
+    author_id: req.user.id,
+    content: req.body.content
+  }
+  await quotesService.createQuote(createObject)
   res.status(StatusCodes.CREATED).json({ messages: [] });
+}
+
+const update = async (req, res) => {
+  const updateObject = {
+    id: req.params.id,
+    content: req.body.content
+  }
+  await quotesService.updateContentQuote(updateObject)
+  res.status(StatusCodes.OK).json({ messages: [] });
 }
 
 const getPage = async (req, res) => {
@@ -25,16 +38,9 @@ const remove = async (req, res) => {
   res.status(StatusCodes.OK).json({ messages: [] });
 }
 
-const updateContent = async (req, res) => {
-  const id = req.params.id
-  const { content } = req.body
-  await quotesService.updateContentQuote({ id, content })
-  res.status(StatusCodes.OK).json({ messages: [] });
-}
-
 module.exports = {
   create,
   getPage,
   remove,
-  updateContent,
+  update,
 }

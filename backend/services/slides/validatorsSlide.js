@@ -1,7 +1,7 @@
 
-// const { validateColor: isColor } = require('validate-color')
-const CustomError = require('../../errors')
-const errors = require('../../errors/error-messages.json').slides
+// errors
+const CustomError = require('../../errors/custom_errors')
+const errors = require('../../errors/error_messages').slides
 
 const validateSmallIntro = (messages, small_intro) => {
   if(!small_intro){
@@ -10,7 +10,7 @@ const validateSmallIntro = (messages, small_intro) => {
   else if(typeof small_intro !== 'string'){
     messages.push(errors.small_intro.str)
   }
-  else if(small_intro.length > 255){
+  else if(small_intro.length > 64){
     messages.push(errors.small_intro.len)
   }
 }
@@ -22,7 +22,7 @@ const validateMainText = (messages, main_text) => {
   else if(typeof main_text !== 'string'){
     messages.push(errors.main_text.str)
   }
-  else if(main_text.length > 255){
+  else if(main_text.length > 128){
     messages.push(errors.main_text.len)
   }
 }

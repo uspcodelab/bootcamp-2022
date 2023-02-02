@@ -8,7 +8,7 @@ const { authenticateUser, roleCheck }  = require('../middlewares/authentication'
 const Slide = require('../controllers/Slide')
 
 router.route('/')
-  .get(Slide.getPage) 
+  .get(Slide.getAll) 
   .post(authenticateUser, roleCheck(config.privilegedRoles), Slide.create) 
 
 router.route('/:id')

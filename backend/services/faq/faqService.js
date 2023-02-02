@@ -1,38 +1,30 @@
-const db = require('../db');
-const helper = require('../../utils/pageHelper');
-const config = require('../../config');
-const CustomError = require('../../errors')
+
+// errors
+const Handler = require('../../errors/error_handlers')
+
+// validator
 const validateFaq = require('./validatorsFaq')
 
+// helper
 const { 
   updateHelper,
   insertHelper,
   deleteHelper,
-  selectPageHelper
+  selectAllHelper
 } = require('../../utils/queryHelper')
 
+// db
 const tableName = 'FAQ'
 
-const errors = require('../../errors/error-messages.json').faqs
-
-const createFaq = async (faq) => {
-  validateFaq(faq);
-  const insertObject = {
-    question: faq.question,
-    answer: faq.answer
-  }
-  await insertHelper(insertObject, tableName)
-  throw new CustomError.InternalServerError('Something went wrong')
+const createFaq = async (createObject) => {
+  validateFaq(createObject);
+  await insertHelper(createObject, tableName)
 }
 
-const updateFaq = async (faq) => {
-  validateFaq(faq)
+const updateFaq = async (updateObject) => {
+  validateFaq(updateObject)
   try {
-    const updateObject = {
-      question: faq.question,
-      answer: faq.answer
-    }
-    const [result] = await updateHelper(updateObject, faq.id, tableName)
+    const [result] = await updateHelper(updateObject, tableName)
     if(!result){
       const err = new Error()
       err.code = '22P02'
@@ -40,9 +32,8 @@ const updateFaq = async (faq) => {
     }
   }
   catch(error){
-    throw Handler.idError(error, faq.id)
+    throw Handler.idError(error, updateObject.id)
   }
-  // console.log(updatedFaq)
 }
 
 const deleteFaq = async (deleteId) => {
@@ -59,12 +50,11 @@ const deleteFaq = async (deleteId) => {
   }
 }
 
-const getMultipleFaqs = async (page = 1) => {
-  const selectArray = ['id', 'status', 'name']
+const getAllFaqs = async () => {
   try{
-    const rows = await selectPageHelper(selectArray, page, tableName)
-    const data = helper.emptyOrRows(rows); // acho que tenho que tirar isso
-    const meta = {page};
+   const selectArray = ['id', 'question', 'answer']
+    const data = await selectAllHelper(selectArray, tableName)
+    const meta = {size: data.length};
     return {
       data,
       meta
@@ -76,7 +66,7 @@ const getMultipleFaqs = async (page = 1) => {
 }
 
 module.exports = {
-  getMultipleFaqs,
+  getAllFaqs,
   createFaq,
   updateFaq,
   deleteFaq

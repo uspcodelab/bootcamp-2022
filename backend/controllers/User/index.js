@@ -39,8 +39,20 @@ const remove = async (req, res) => {
 }
 
 const updatePassword = async (req, res) => {
-  const id = req.user.id
-  await usersService.updatePasswordUser({ id, newPassword: req.body.password })
+  const updateObject = {
+    id: req.user.id,
+    password: req.body.password
+  }
+  await usersService.updatePasswordUser(updateObject)
+  res.status(StatusCodes.OK).json({ messages: [] })
+}
+
+const updateMail = async (req, res) => {
+  const updateObject = {
+    id: req.user.id,
+    password: req.body.mail
+  }
+  await usersService.updatePasswordUser(updateObject)
   res.status(StatusCodes.OK).json({ messages: [] })
 }
 
@@ -49,5 +61,6 @@ module.exports = {
   showMe,
   getUser,
   remove,
-  updatePassword
+  updatePassword,
+  updateMail
 }

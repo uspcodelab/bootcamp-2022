@@ -1,63 +1,69 @@
 
-const helper = require('../../utils/pageHelper');
-const CustomError = require('../../errors')
+// validator
 const validateWarningClass = require('./validatorsWarningClasses')
 
+// helper
 const { 
   updateHelper,
   insertHelper,
-  checkExistanceHelper,
   deleteHelper,
-  selectOneHelper,
-  selectPageHelper
+  selectAllHelper
 } = require('../../utils/queryHelper')
 
+// db
 const tableName = 'WARNING_CLASSES'
 
-const createWarningClass = async (warningClass) => {
-  validateWarningClass(warningClass)
-  const insertObject = {
-    title: warningClass.title,
-    color: warningClass.color
+const createWarningClass = async (createObject) => {
+  validateWarningClass(createObject)
+  await insertHelper(createObject, tableName)
+}
+
+const updateWarningClass = async (updateObject) => {
+  validateWarningClass(updateObject)
+  try{
+    const [result] = await updateHelper(updateObject, tableName)
+    if(!result){
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
   }
-  const result = await insertHelper(insertObject, tableName)
-  if(result.length == 0) {
-    throw new CustomError.InternalServerError('Error when submitting warningClass to db')
+  catch(error){
+    throw Handler.idError(error, updateObject.id)
   }
 }
 
 const deleteWarningClass = async (warningClassId) => {
-  const result = await deleteHelper({ id: warningClassId }, tableName)
-  if(result.length == 0) {
-    throw new CustomError.NotFoundError(`Not found warningClass with id ${warningClassId}`)
+  try{
+    const result = await deleteHelper({ id: warningClassId }, tableName)
+    if(!result) {
+      const err = new Error()
+      err.code = '22P02'
+      throw err
+    }
+  }
+  catch(error){
+    throw Handler.idError(error, warningClassId)
   }
 }
 
-const getMultipleWarningClasses = async (page = 1) => {
-  const rows = await selectPageHelper(['title', 'color', 'id'], page, tableName)
-  const data = helper.emptyOrRows(rows);
-  const meta = {page};
-  return {
-    data,
-    meta
+const getAllWarningClasses = async () => {
+  try{
+    const data = await selectAllHelper(['title', 'color', 'id'], tableName)
+    const meta = {size: data.length}
+    return {
+      data,
+      meta
+    }
   }
-}
-
-const updateWarningClass = async (warningClassBody) => {
-  validateWarningClass(warningClassBody)
-  const updateObject = {
-    color: warningClassBody.color,
-    title: warningClassBody.title
-  }
-  const result = await updateHelper(updateObject, warningClassBody.id, tableName)
-  if(result.length === 0) {
-    throw new CustomError.NotFoundError(`There is no warningClass with id ${warningClassBody.id}`)
+  catch(error){
+    throw Handler.pageError(error, page)
   }
 }
 
 module.exports = {
   createWarningClass,
   deleteWarningClass,
-  getMultipleWarningClasses,
+  getAllWarningClasses,
   updateWarningClass 
 }

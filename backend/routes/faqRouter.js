@@ -7,7 +7,7 @@ const { authenticateUser, roleCheck }  = require('../middlewares/authentication'
 const Faq = require('../controllers/Faq')
 
 router.route('/')
-  .get(Faq.getPage)
+  .get(Faq.getAll)
   .post(authenticateUser, roleCheck(['admin']), Faq.create)
 
 router.route('/:id')
