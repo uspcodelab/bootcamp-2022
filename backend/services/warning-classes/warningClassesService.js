@@ -1,70 +1,75 @@
 
-// errors 
-const validateWarningClass = require('./validatorsWarningClasses')
-const Handler = require('../../errors/error_handlers')
+module.exports = (req) => {
 
-// helper
-const { 
-  updateHelper,
-  insertHelper,
-  deleteHelper,
-  selectAllHelper
-} = require('../../utils/queryHelper')
+  // validators
+  const validateWarningClass = require('./validatorsWarningClasses')(req)
 
-// db
-const tableName = 'WARNING_CLASSES'
+  // errors 
+  const Handler = require('../../errors/error_handlers')(req)
 
-const createWarningClass = async (createObject) => {
-  validateWarningClass(createObject)
-  await insertHelper(createObject, tableName)
-}
+  // helpers
+  const {
+    updateHelper,
+    insertHelper,
+    deleteHelper,
+    selectAllHelper
+  } = require('../../utils/queryHelper')
 
-const updateWarningClass = async (updateObject) => {
-  validateWarningClass(updateObject)
-  try{
-    const [result] = await updateHelper(updateObject, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  // db
+  const tableName = 'WARNING_CLASSES'
+
+  const createWarningClass = async (createObject) => {
+    validateWarningClass(createObject)
+    await insertHelper(createObject, tableName)
+  }
+
+  const updateWarningClass = async (updateObject) => {
+    validateWarningClass(updateObject)
+    try{
+      const [result] = await updateHelper(updateObject, tableName)
+      if(!result){
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, updateObject.id)
     }
   }
-  catch(error){
-    throw Handler.idError(error, updateObject.id)
-  }
-}
 
-const deleteWarningClass = async (warningClassId) => {
-  try{
-    const result = await deleteHelper({ id: warningClassId }, tableName)
-    if(!result) {
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const deleteWarningClass = async (warningClassId) => {
+    try{
+      const [result] = await deleteHelper({ id: warningClassId }, tableName)
+      if(!result) {
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, warningClassId)
     }
   }
-  catch(error){
-    throw Handler.idError(error, warningClassId)
-  }
-}
 
-const getAllWarningClasses = async () => {
-  try{
-    const data = await selectAllHelper(['title', 'color', 'id'], tableName)
-    const meta = {size: data.length}
-    return {
-      data,
-      meta
+  const getAllWarningClasses = async () => {
+    try{
+      const data = await selectAllHelper(['title', 'color', 'id'], tableName)
+      const meta = {size: data.length}
+      return {
+        data,
+        meta
+      }
+    }
+    catch(error){
+      throw Handler.pageError(error, page)
     }
   }
-  catch(error){
-    throw Handler.pageError(error, page)
-  }
-}
 
-module.exports = {
-  createWarningClass,
-  deleteWarningClass,
-  getAllWarningClasses,
-  updateWarningClass 
+  return {
+    createWarningClass,
+    deleteWarningClass,
+    getAllWarningClasses,
+    updateWarningClass 
+  }
 }

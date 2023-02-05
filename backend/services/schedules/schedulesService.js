@@ -1,78 +1,81 @@
 
-// errors
-const Handler = require('../../errors/error_handlers')
+module.exports = (req) => {
 
-// validator
-const validateSchedule = require('./validatorsSchedules')
+  // validator
+  const validateSchedule = require('./validatorsSchedules')(req)
 
-// helpers
-const { 
-  updateHelper,
-  insertHelper,
-  deleteHelper,
-  selectTwoTablesJoinAllHelper,
-} = require('../../utils/queryHelper')
+  // errors
+  const Handler = require('../../errors/error_handlers')(req)
 
-// db
-const tableName = 'SCHEDULES'
+  // helpers
+  const { 
+    updateHelper,
+    insertHelper,
+    deleteHelper,
+    selectTwoTablesJoinAllHelper,
+  } = require('../../utils/queryHelper')
 
-const createSchedule = async (createObject) => {
-  validateSchedule(createObject)
-  try{
-    await insertHelper(createObject, tableName)
-  }
-  catch(error){
-    throw Handler.externalIdError(error, createObject.admin_id, tableName)
-  }
-}
+  // db
+  const tableName = 'SCHEDULES'
 
-const updateSchedule = async (updateObject) => {
-  validateSchedule(updateObject)
-  try{
-    const [result] = await updateHelper(updateObject, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const createSchedule = async (createObject) => {
+    validateSchedule(createObject)
+    try{
+      await insertHelper(createObject, tableName)
+    }
+    catch(error){
+      throw Handler.externalIdError(error, createObject.admin_id, tableName)
     }
   }
-  catch(error){
-    error = Handler.idError(error, updateObject.id)
-    if(error.statusCode === undefined){
-      error = Handler.externalIdError(error, updateObject.admin_id, 'USERS')
-    }
-    throw error
-  }
-}
 
-const deleteSchedule = async (scheduleId) => {
-  try{
-    const [result] = await deleteHelper({ id: scheduleId }, tableName)
-    if(!result) {
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const updateSchedule = async (updateObject) => {
+    validateSchedule(updateObject)
+    try{
+      const [result] = await updateHelper(updateObject, tableName)
+      if(!result){
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      error = Handler.idError(error, updateObject.id)
+      if(error.statusCode === undefined){
+        error = Handler.externalIdError(error, updateObject.admin_id, 'USERS')
+      }
+      throw error
     }
   }
-  catch(error){
-    throw Handler.idError(error, scheduleId)
-  }
-}
 
-const getAllSchedules = async () => {
-  const selectArray = ['SCHEDULES.id', 'weekday', 'start_time', 'end_time', 'admin_id', 'name']
-  const idArray = ['SCHEDULES.admin_id', 'USERS.id']
-  const data = await selectTwoTablesJoinAllHelper(selectArray, idArray, [tableName, 'USERS'])
-  const meta = {size: data.length};
+  const deleteSchedule = async (scheduleId) => {
+    try{
+      const [result] = await deleteHelper({ id: scheduleId }, tableName)
+      if(!result) {
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, scheduleId)
+    }
+  }
+
+  const getAllSchedules = async () => {
+    const selectArray = ['SCHEDULES.id', 'weekday', 'start_time', 'end_time', 'admin_id', 'name']
+    const idArray = ['SCHEDULES.admin_id', 'USERS.id']
+    const data = await selectTwoTablesJoinAllHelper(selectArray, idArray, [tableName, 'USERS'])
+    const meta = {size: data.length};
+    return {
+      data,
+      meta
+    }
+  }
+
   return {
-    data,
-    meta
+    createSchedule,
+    deleteSchedule,
+    getAllSchedules,
+    updateSchedule
   }
-}
-
-module.exports = {
-  createSchedule,
-  deleteSchedule,
-  getAllSchedules,
-  updateSchedule
 }

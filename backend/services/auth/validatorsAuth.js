@@ -1,12 +1,11 @@
 
-
 module.exports = (req) => {
 
   // errors
   const errors = require('../../errors/error_messages')(req).auth
   const CustomError = require('../../errors/custom_errors')
 
-  // helpers to validate stuff
+  // helpers
   const validator = require('validator')
   const { passwordStrength } = require('check-password-strength')
 

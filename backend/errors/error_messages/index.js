@@ -1,12 +1,13 @@
 
 module.exports = (req) => {
-  if(!req){
-    return require('./en-us')
-  }
-  if(req.headers["accept-language"] == 'bla') {
-    return require('./pt-br')
+  let language = req.headers["Accept-Language"]
+  let errors
+  if(language === 'pt-BR') {
+    errors = require('./pt-BR')
   }
   else {
-    return require('./en-us')
+    errors = require('./en-US')
+    language = 'en-US'
   }
+  return errors
 }

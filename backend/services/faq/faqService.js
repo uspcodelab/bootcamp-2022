@@ -1,73 +1,75 @@
 
-// errors
-const Handler = require('../../errors/error_handlers')
+module.exports = (req) => {
 
-// validator
-const validateFaq = require('./validatorsFaq')
+  // validator
+  const validateFaq = require('./validatorsFaq')(req)
 
-// helper
-const { 
-  updateHelper,
-  insertHelper,
-  deleteHelper,
-  selectAllHelper
-} = require('../../utils/queryHelper')
+  // errors
+  const Handler = require('../../errors/error_handlers')(req)
 
-// db
-const tableName = 'FAQ'
+  // helpers
+  const { 
+    updateHelper,
+    insertHelper,
+    deleteHelper,
+    selectAllHelper
+  } = require('../../utils/queryHelper')
 
-const createFaq = async (createObject) => {
-  validateFaq(createObject);
-  await insertHelper(createObject, tableName)
-}
+  // db
+  const tableName = 'FAQ'
 
-const updateFaq = async (updateObject) => {
-  validateFaq(updateObject)
-  try {
-    const [result] = await updateHelper(updateObject, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const createFaq = async (createObject) => {
+    validateFaq(createObject);
+    await insertHelper(createObject, tableName)
+  }
+
+  const updateFaq = async (updateObject) => {
+    validateFaq(updateObject)
+    try {
+      const [result] = await updateHelper(updateObject, tableName)
+      if(!result){
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, updateObject.id)
     }
   }
-  catch(error){
-    throw Handler.idError(error, updateObject.id)
-  }
-}
 
-const deleteFaq = async (deleteId) => {
-  try{
-    const [result] = await deleteHelper({ id: deleteId }, tableName)
-    if(!result) {
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const deleteFaq = async (deleteId) => {
+    try{
+      const [result] = await deleteHelper({ id: deleteId }, tableName)
+      if(!result) {
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, deleteId)
     }
   }
-  catch(error){
-    throw Handler.idError(error, deleteId)
-  }
-}
 
-const getAllFaqs = async () => {
-  try{
-   const selectArray = ['id', 'question', 'answer']
-    const data = await selectAllHelper(selectArray, tableName)
-    const meta = {size: data.length};
-    return {
-      data,
-      meta
+  const getAllFaqs = async () => {
+    try{
+     const selectArray = ['id', 'question', 'answer']
+      const data = await selectAllHelper(selectArray, tableName)
+      const meta = {size: data.length};
+      return {
+        data,
+        meta
+      }
+    }
+    catch(error){
+      throw Handler.pageError(error, page)
     }
   }
-  catch(error){
-    throw Handler.pageError(error, page)
+  return {
+    getAllFaqs,
+    createFaq,
+    updateFaq,
+    deleteFaq
   }
-}
-
-module.exports = {
-  getAllFaqs,
-  createFaq,
-  updateFaq,
-  deleteFaq
 }

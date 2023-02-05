@@ -1,13 +1,13 @@
 
 module.exports = (req) => {
 
-  // validator 
+  // validators
   const { validateUser, validateLoginInfo } = require('./validatorsAuth')(req)
 
   // errors
-  const Handler = require('../../errors/error_handlers')
-  const CustomError = require('../../errors/custom_errors')
   const errors = require('../../errors/error_messages')(req)
+  const Handler = require('../../errors/error_handlers')(req)
+  const CustomError = require('../../errors/custom_errors')
 
   // helpers
   const { insertHelper, selectOneHelper } = require('../../utils/queryHelper')
@@ -17,11 +17,9 @@ module.exports = (req) => {
   const tableName = 'USERS'
 
   const registerAuth = async (userBody) => {
-    console.log('ola 1')
     validateUser(userBody)
     userBody.password = await bcryptPassword(userBody.password)
     try {
-      console.log('ola')
       const user = await insertHelper(userBody, tableName)
       return user
     }

@@ -1,128 +1,133 @@
 
-// errors
-const { 
-  validateUpdatePassword,
-  validateUpdateMail,
-  validateUpdateRole
-} = require('./validatorsUsers')
+module.exports = (req) => {
+  
+  // validators
+  const { 
+    validateUpdatePassword,
+    validateUpdateMail,
+    validateUpdateRole
+  } = require('./validatorsUsers')(req)
 
-// helpers
-const { 
-  updateHelper,
-  deleteHelper,
-  selectOneHelper,
-  selectPageHelper
-} = require('../../utils/queryHelper')
-const { bcryptPassword } = require('../../utils/bcryptHelper')
+  // errors
+  const Handler = require('../../errors/error_handlers')(req)
 
-// db
-const tableName = 'USERS'
+  // helpers
+  const { 
+    updateHelper,
+    deleteHelper,
+    selectOneHelper,
+    selectPageHelper
+  } = require('../../utils/queryHelper')
+  const { bcryptPassword } = require('../../utils/bcryptHelper')
 
-const OpenPersonalInfo = [
-  'id',
-  'name',
-  'username',
-  'mail',
-  'shell',
-  'user_group',
-  'ssh_access',
-  'link_type',
-  'institute',
-  'last_login',
-  'role'
-]
+  // db
+  const tableName = 'USERS'
 
-const updatePasswordUser = async (updateBody) => {
-  validateUpdatePassword(updateBody.password)
-  try{
-    updateBody.password = await bcryptPassword(updateBody.password)
-    const [result] = await updateHelper(updateBody, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const OpenPersonalInfo = [
+    'id',
+    'name',
+    'username',
+    'mail',
+    'shell',
+    'user_group',
+    'ssh_access',
+    'link_type',
+    'institute',
+    'last_login',
+    'role'
+  ]
+
+  const updatePasswordUser = async (updateBody) => {
+    validateUpdatePassword(updateBody.password)
+    try{
+      updateBody.password = await bcryptPassword(updateBody.password)
+      const [result] = await updateHelper(updateBody, tableName)
+      if(!result){
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, news.id)
     }
   }
-  catch(error){
-    throw Handler.idError(error, news.id)
-  }
-}
 
-const updateMailUser = async (updateObject) => {
-  validateUpdateMail(updateObject.mail)
-  try{
-    const [result] = await updateHelper(updateObject, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const updateMailUser = async (updateObject) => {
+    validateUpdateMail(updateObject.mail)
+    try{
+      const [result] = await updateHelper(updateObject, tableName)
+      if(!result){
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, updateObject.id)
     }
   }
-  catch(error){
-    throw Handler.idError(error, updateObject.id)
-  }
-}
 
-const deleteUser = async (userId) => {
-  try{
-    const [result] = await deleteHelper({ id: userId }, tableName)
-    if(!result) {
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const deleteUser = async (userId) => {
+    try{
+      const [result] = await deleteHelper({ id: userId }, tableName)
+      if(!result) {
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, userId)
     }
   }
-  catch(error){
-    throw Handler.idError(error, userId)
-  }
-}
 
-const getUser = async (userId) => {
-  try {
-    const [ userInfo ] = await selectOneHelper(OpenPersonalInfo, { id: userId }, tableName)
-    console.log(userInfo)
-    return userInfo
-  }
-  catch(error) {
-    throw Handler.idError(error, userId)
-  }
-}
-
-const updateRoleUser = async (updateObject) => {
-  validateUpdateRole(updateObject.role)
-  try{
-    const [result] = await updateHelper(updateObject, tableName)
-    if(!result){
-      const err = new Error()
-      err.code = '22P02'
-      throw err
+  const getUser = async (userId) => {
+    try {
+      const [ userInfo ] = await selectOneHelper(OpenPersonalInfo, { id: userId }, tableName)
+      return userInfo
+    }
+    catch(error) {
+      throw Handler.idError(error, userId)
     }
   }
-  catch(error){
-    throw Handler.idError(error, updateObject.id)
+
+  const updateRoleUser = async (updateObject) => {
+    validateUpdateRole(updateObject.role)
+    try{
+      const [result] = await updateHelper(updateObject, tableName)
+      if(!result){
+        const err = new Error()
+        err.code = '22P02'
+        throw err
+      }
+    }
+    catch(error){
+      throw Handler.idError(error, updateObject.id)
+    }
+
   }
 
-}
-
-const getMultipleUsers = async (page = 1) => {
-  try{
-    const data = await selectPageHelper(OpenPersonalInfo, page, tableName)
-    const meta = {page, size: data.length};
-    return {
-      data,
-      meta
+  const getMultipleUsers = async (page = 1) => {
+    try{
+      const data = await selectPageHelper(OpenPersonalInfo, page, tableName)
+      const meta = {page, size: data.length};
+      return {
+        data,
+        meta
+      }
+    }
+    catch(error){
+      throw Handler.pageError(error, page)
     }
   }
-  catch(error){
-    throw Handler.pageError(error, page)
-  }
-}
 
-module.exports = {
-  deleteUser,
-  getMultipleUsers,
-  getUser,
-  updatePasswordUser,
-  updateMailUser,
-  updateRoleUser
+  return {
+    deleteUser,
+    getMultipleUsers,
+    getUser,
+    updatePasswordUser,
+    updateMailUser,
+    updateRoleUser
+  }
 }

@@ -1,47 +1,66 @@
 
-const { StatusCodes } = require('http-status-codes')
-const warningClassesService = require('../../services/warning-classes/warningClassesService');
+const controllers = (req, res) => {
 
-const create = async (req, res) => {
-  const createObject = {
-    title: req.body.title,
-    color: req.body.color
+  const { StatusCodes } = require('http-status-codes')
+
+  const warningClassesService = require('../../services/warning-classes/warningClassesService')(req)
+
+  const create = async () => {
+    const createObject = {
+      title: req.body.title,
+      color: req.body.color
+    }
+    await warningClassesService.createWarningClass(createObject)
+    res.status(StatusCodes.CREATED).json({ messages: [] });
   }
-  await warningClassesService.createWarningClass(createObject)
-  res.status(StatusCodes.CREATED).json({ messages: [] });
-}
 
-const update = async (req, res) => {
-  const updateObject = {
-    id: req.params.id,
-    title: req.body.title,
-    color: req.body.color
+  const update = async () => {
+    const updateObject = {
+      id: req.params.id,
+      title: req.body.title,
+      color: req.body.color
+    }
+    await warningClassesService.updateWarningClass(updateObject)
+    res.status(StatusCodes.OK).json({ messages: [] });
   }
-  await warningClassesService.updateWarningClass(updateObject)
-  res.status(StatusCodes.OK).json({ messages: [] });
-}
 
-const remove = async (req, res) => {
-  const removeId = req.params.id
-  await warningClassesService.deleteWarningClass(removeId)
-  res.status(StatusCodes.OK).json({ messages: [] });
-}
+  const remove = async () => {
+    const removeId = req.params.id
+    await warningClassesService.deleteWarningClass(removeId)
+    res.status(StatusCodes.OK).json({ messages: [] });
+  }
 
-const getAll = async (req, res) => {
-  const { data, meta } = await warningClassesService.getAllWarningClasses()
-  res.status(StatusCodes.OK).json({
-    messages: [],
-    data,
-    meta: {
-      ...meta,
-      size: data.length
-    },
-  });
+  const getAll = async () => {
+    const { data, meta } = await warningClassesService.getAllWarningClasses()
+    res.status(StatusCodes.OK).json({
+      messages: [],
+      data,
+      meta: {
+        ...meta,
+        size: data.length
+      },
+    });
+  }
+
+  return {
+    create,
+    getAll,
+    remove,
+    update 
+  }
 }
 
 module.exports = {
-  create,
-  getAll,
-  remove,
-  update 
+  async create (req, res) {
+    await controllers(req, res).create()
+  },
+  async getAll (req, res) {
+    await controllers(req, res).getAll()
+  },
+  async remove (req, res) {
+    await controllers(req, res).remove()
+  },
+  async update (req, res) {
+    await controllers(req, res).update()
+  }
 }

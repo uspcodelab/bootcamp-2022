@@ -20,9 +20,11 @@ const query = async (query, params) => {
   try {
     const {rows, fields} = await pool.query(query, params);
     return rows;
-  }
+ }
   catch(error) {
-    console.log(error)
+    if(config.NODE_ENV === 'development'){
+      console.log(error)
+    }
     if(error.code === 'EAI_AGAIN'){
       throw new CustomError.InternalServerError('Error when requesting to db. Please, check if db is working properly')
     }

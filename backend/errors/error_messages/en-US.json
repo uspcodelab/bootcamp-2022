@@ -1,4 +1,12 @@
 {
+  "somethingWrong": "Something went wrong. Please try again later",
+  "errorHandlers": {
+    "idError": "Not found id ",
+    "externalId1": "Not found id ",
+    "externalId2": " in table ",
+    "pageError": "Invalid page ",
+    "alreadyExists": " already exists"
+  },
   "auth": {
     "credential": {
       "wrg": "Wrong Credentials"

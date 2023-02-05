@@ -1,5 +1,5 @@
 
-const controllers = (req) => {
+const controllers = (req, res) => {
 
   const { StatusCodes } = require('http-status-codes')
   const { attachCookieToResponse } = require('../../utils/jwt')
@@ -7,7 +7,7 @@ const controllers = (req) => {
 
   const authService = require('../../services/auth/authService')(req)
 
-  const register = async (req, res) => {
+  const register = async () => {
     const registerObject = {
       username: req.body.username,
       name: req.body.name,
@@ -32,7 +32,7 @@ const controllers = (req) => {
     res.status(StatusCodes.CREATED).json({ messages: []})
   }
 
-  const login = async (req, res) => {
+  const login = async () => {
     const loginObject = {
       mail: req.body.mail,
       password: req.body.password
@@ -50,10 +50,10 @@ const controllers = (req) => {
 }
 
 module.exports = {
-  register (req, res) {
-    return controllers(req).register(req, res)
+  async register (req, res) {
+    await controllers(req, res).register()
   },
-  login (req, res) {
-    return controllers(req).login(req, res)
+  async login (req, res) {
+    await controllers(req, res).login()
   }
 }
