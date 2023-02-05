@@ -1,7 +1,7 @@
 
 // errors
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').news
+const errors = require('../../errors/error_messages')().news
 
 const validateTitle = (messages, title) => {
   if(!title){

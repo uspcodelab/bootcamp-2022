@@ -1,7 +1,7 @@
 
 // errors
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').faq
+const errors = require('../../errors/error_messages')().faq
 
 const validateQuestion = (messages, question) => {
   if (!question){

@@ -1,46 +1,51 @@
 
-// errors
-const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').auth
-const Handler = require('../../errors/error_handlers')
+module.exports = (req) => {
 
-// validator
-const { validateUser, validateLoginInfo } = require('./validatorsAuth')
+  // validator 
+  const { validateUser, validateLoginInfo } = require('./validatorsAuth')(req)
 
-// helpers
-const { insertHelper, selectOneHelper } = require('../../utils/queryHelper')
-const { bcryptPassword, comparePasswords } = require('../../utils/bcryptHelper')
+  // errors
+  const Handler = require('../../errors/error_handlers')
+  const CustomError = require('../../errors/custom_errors')
+  const errors = require('../../errors/error_messages')(req)
 
-// db
-const tableName = 'USERS'
+  // helpers
+  const { insertHelper, selectOneHelper } = require('../../utils/queryHelper')
+  const { bcryptPassword, comparePasswords } = require('../../utils/bcryptHelper')
 
-const registerAuth = async (userBody) => {
-  validateUser(userBody)
-  userBody.password = await bcryptPassword(userBody.password)
-  try {
-    const user = await insertHelper(userBody, tableName)
+  // db
+  const tableName = 'USERS'
+
+  const registerAuth = async (userBody) => {
+    console.log('ola 1')
+    validateUser(userBody)
+    userBody.password = await bcryptPassword(userBody.password)
+    try {
+      console.log('ola')
+      const user = await insertHelper(userBody, tableName)
+      return user
+    }
+    catch(error){
+      throw Handler.alreadyExistsError(error)
+    }
+  }
+
+  const loginAuth = async (loginInfo) => {
+    validateLoginInfo(loginInfo)
+    const selectArray = ['id', 'name', 'username', 'role', 'password']
+    const [user] = await selectOneHelper(selectArray, { mail: loginInfo.mail }, tableName)
+    if(!user) {
+      throw new CustomError.UnauthenticatedError(errors.credential.wrg)
+    }
+    const isMatch = await comparePasswords(loginInfo.password, user.password)
+    if(!isMatch){
+      throw new CustomError.UnauthenticatedError(errors.credential.wrg)
+    }
     return user
   }
-  catch(error){
-    throw Handler.alreadyExistsError(error)
-  }
-}
 
-const loginAuth = async (loginInfo) => {
-  validateLoginInfo(loginInfo)
-  const selectArray = ['id', 'name', 'username', 'role', 'password']
-  const [user] = await selectOneHelper(selectArray, { mail: loginInfo.mail }, tableName)
-  if(!user) {
-    throw new CustomError.UnauthenticatedError(errors.credential.wrg)
+  return {
+    registerAuth,
+    loginAuth
   }
-  const isMatch = await comparePasswords(loginInfo.password, user.password)
-  if(!isMatch){
-    throw new CustomError.UnauthenticatedError(errors.credential.wrg)
-  }
-  return user
-}
-
-module.exports = {
-  registerAuth,
-  loginAuth
 }

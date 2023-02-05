@@ -1,7 +1,7 @@
 
 // errors
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').schedule
+const errors = require('../../errors/error_messages')().schedule
 
 const validateWeekday = (messages, weekday ) => {
   if(!weekday) {

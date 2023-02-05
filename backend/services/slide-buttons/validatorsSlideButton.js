@@ -1,7 +1,7 @@
 
 // errors
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').slideButtons
+const errors = require('../../errors/error_messages')().slideButtons
 
 // validation helper
 const { isHexColor, isURL } = require('validator')

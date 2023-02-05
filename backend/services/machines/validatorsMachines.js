@@ -1,7 +1,7 @@
 
 // errors
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').machines
+const errors = require('../../errors/error_messages')().machines
 
 const validateStatus = (messages, status) => {
   if (status === undefined) {

@@ -1,7 +1,7 @@
 
 // errors
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').warningClasses
+const errors = require('../../errors/error_messages')().warningClasses
 const { isHexColor } = require('validator')
 
 const validateTitle = (messages, title) => {

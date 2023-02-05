@@ -1,6 +1,6 @@
 
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').users
+const errors = require('../../errors/error_messages')().users
 const validator = require('validator')
 const { passwordStrength } = require('check-password-strength')
 const config = require('../../config')

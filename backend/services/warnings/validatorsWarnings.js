@@ -1,7 +1,7 @@
 
 // const { validateColor: isColor } = require('validate-color')
 const CustomError = require('../../errors/custom_errors')
-const errors = require('../../errors/error_messages').warnings
+const errors = require('../../errors/error_messages')().warnings
 
 const validateTitle = (messages, title) => {
   if(!title){
