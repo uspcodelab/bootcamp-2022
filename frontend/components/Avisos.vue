@@ -6,25 +6,25 @@
     </div>
     <v-row class="my-1 flex-column flex-md-row">
       <v-col
-        v-for="aviso in avisos.slice(0, 4)"
-        :key="aviso.titulo"
+        v-for="warning in Warnings.slice(0, 4)"
+        :key="warning.title"
         cols="12"
         md="6"
       >
-        <v-card :min-height="minimumHeight" :color="aviso.cor">
+        <v-card :min-height="minimumHeight" :color="warning.color">
           <v-card-title
             class="text-subtitle-1 text-sm-subtitle-2 text-md-h6 text-ubuntu"
           >
-            {{ aviso.titulo }}
+            {{ warning.title}}
             <v-spacer></v-spacer>
             <v-icon v-if="isBigEnough">
-              {{ aviso.icone }}
+              {{ warning.icon }}
             </v-icon>
           </v-card-title>
           <v-card-text
             class="text-caption text-sm-body-2 text-md-body-1 text-ubuntu"
           >
-            {{ aviso.conteudo }}
+            {{ warning.content}}
           </v-card-text>
         </v-card>
       </v-col>
@@ -35,7 +35,7 @@
 <script>
 export default {
   data: () => ({
-    avisos: [],
+    Warnings: [],
   }),
   computed: {
     minimumHeight() {
@@ -53,22 +53,22 @@ export default {
     },
   },
   methods: {
-    async getAvisos() {
+    async getWarning() {
       let res = await this.$axios.get(this.$global.baseUrlApi + "/warning")
-      let avisos_api = res.data.data;
-      for (let i = 0; i < avisos_api.length; i++) {
-        let aviso_novo = {
-          titulo: avisos_api[i].title,
-          icone: avisos_api[i].icon,
-          conteudo: avisos_api[i].content,
-          cor: avisos_api[i].color,
+      let warning_api = res.data.data;
+      for (let i = 0; i < warning_api.length; i++) {
+        let new_warning = {
+          title: warning_api[i].title,
+          icon: warning_api[i].icon,
+          content: warning_api[i].content,
+          color: warning_api[i].color,
         }
-        this.avisos.push(aviso_novo);
+          this.Warnings.push(new_warning);
       }
     }
   },
   created() {
-    this.getAvisos();
+    this.getWarning();
   },
 };
 </script>
