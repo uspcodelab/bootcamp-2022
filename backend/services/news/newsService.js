@@ -12,7 +12,7 @@ module.exports = (req) => {
     updateHelper,
     insertHelper,
     deleteHelper,
-    selectOneHelper,
+    selectTwoTablesJoinOneHelper,
     selectTwoTablesJoinPageHelper
   } = require('../../utils/queryHelper')
 
@@ -59,9 +59,10 @@ module.exports = (req) => {
   }
 
   const getNews = async (newsId) => {
-    const importantInfo = ['title', 'subtitle', 'content', 'author_id', 'id']
     try {
-      const [ newsInfo ] = await selectOneHelper(importantInfo, { id: newsId }, tableName)
+      const selectArray = ['title', 'subtitle', 'content', 'created_at', 'updated_at', 'USERS.name', 'NEWS.id']
+      const idArray = ['author_id', 'USERS.id']
+      const [ newsInfo ] = await selectTwoTablesJoinOneHelper(selectArray, idArray, newsId, [tableName, 'USERS'])
       return newsInfo 
     }
     catch(error) {
@@ -72,7 +73,7 @@ module.exports = (req) => {
   const getMultipleNews = async (page = 1) => {
     // it wont send the content
     try{
-      const selectArray = ['title', 'subtitle', 'author_id', 'NEWS.id']
+      const selectArray = ['title', 'subtitle', 'created_at', 'updated_at', 'USERS.name', 'NEWS.id']
       const idArray = ['author_id', 'USERS.id']
       const data = await selectTwoTablesJoinPageHelper(selectArray, idArray, page, [tableName, 'USERS'])
       const meta = {page, size: data.length};

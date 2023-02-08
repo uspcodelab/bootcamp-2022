@@ -83,6 +83,8 @@ CREATE TABLE NEWS (
   subtitle character varying(128) NOT NULL,
   content text NOT NULL,
   author_id INTEGER NOT NULL,
+  created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
 
 	CONSTRAINT news_author_fk FOREIGN KEY (author_id)
 		REFERENCES USERS (id) ON DELETE CASCADE

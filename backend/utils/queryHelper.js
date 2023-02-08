@@ -62,7 +62,6 @@ const selectAllHelper = async (selectArray, tableName) => {
 }
 
 const selectTwoTablesJoinAllHelper = async (selectArray, idArray, tableNames) => {
-  console.log(selectArray, idArray, tableNames)
   return await db.query(`SELECT ${selectArray.join()} FROM ${tableNames.join()} WHERE ${idArray[0]} = ${idArray[1]}`)
 }
 
@@ -82,6 +81,10 @@ const selectTwoTablesJoinPageHelper = async (selectArray, idArray, page, tableNa
   )
 }
 
+const selectTwoTablesJoinOneHelper = async (selectArray, idArray, id, tableNames) => {
+  return await db.query(`SELECT ${selectArray.join()} FROM ${tableNames.join()} WHERE ${idArray[0]} = ${id} AND ${idArray[1]} = ${id}`)
+}
+
 module.exports = {
   insertHelper,
   updateHelper,
@@ -91,5 +94,6 @@ module.exports = {
   checkExistanceHelper,
   selectAllHelper,
   selectTwoTablesJoinPageHelper,
-  selectTwoTablesJoinAllHelper
-} 
+  selectTwoTablesJoinAllHelper,
+  selectTwoTablesJoinOneHelper
+}
