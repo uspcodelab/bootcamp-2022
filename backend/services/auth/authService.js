@@ -5,7 +5,7 @@ module.exports = (req) => {
   const { validateUser, validateLoginInfo } = require('./validatorsAuth')(req)
 
   // errors
-  const errors = require('../../errors/error_messages')(req)
+  const errors = require('../../errors/error_messages')(req).auth
   const Handler = require('../../errors/error_handlers')(req)
   const CustomError = require('../../errors/custom_errors')
 

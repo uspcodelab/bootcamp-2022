@@ -2,7 +2,7 @@
 module.exports = (req) => {
 
   // errors
-  const errors = require('../../errors/error_messages')(req).schedulea
+  const errors = require('../../errors/error_messages')(req).schedule
   const CustomError = require('../../errors/custom_errors')
 
   const validateWeekday = (messages, weekday ) => {
