@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     async getAvisos() {
-      let res = await this.$axios.get(this.$global.baseUrlApi + "/warning")
+      let res = await this.$axios.get(this.$global.baseUrlApi + "/warning");
       let avisos_api = res.data.data;
       for (let i = 0; i < avisos_api.length; i++) {
         let aviso_novo = {
@@ -62,10 +62,10 @@ export default {
           icone: avisos_api[i].icon,
           conteudo: avisos_api[i].content,
           cor: avisos_api[i].color,
-        }
+        };
         this.avisos.push(aviso_novo);
       }
-    }
+    },
   },
   created() {
     this.getAvisos();
