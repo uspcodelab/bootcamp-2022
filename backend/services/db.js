@@ -1,5 +1,12 @@
-const { Pool } = require('pg');
+
+// errors
+const CustomError = require('../errors/custom_errors')
+
+// default configs
 const config = require('../config');
+
+// db stuff
+const { Pool } = require('pg');
 const pool = new Pool(config.db);
 
 /**
@@ -9,10 +16,22 @@ const pool = new Pool(config.db);
  * 
  * @see https://node-postgres.com/features/pooling#single-query
  */
-async function query(query, params) {
+const query = async (query, params) => {
+  try {
     const {rows, fields} = await pool.query(query, params);
-
     return rows;
+ }
+  catch(error) {
+    if(config.NODE_ENV === 'development'){
+      console.log(error)
+    }
+    if(error.code === 'EAI_AGAIN'){
+      throw new CustomError.InternalServerError('Error when requesting to db. Please, check if db is working properly')
+    }
+    else{
+      throw error
+    }
+  }
 }
 
 module.exports = {

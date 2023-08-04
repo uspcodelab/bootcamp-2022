@@ -35,39 +35,7 @@
 <script>
 export default {
   data: () => ({
-    avisos: [
-      {
-        titulo: "Impressora",
-        conteudo: "Impressora não está funcionando no momento.",
-        cor: "orange",
-        icone: "mdi-alien",
-      },
-      {
-        titulo: "Feriado",
-        conteudo:
-          "Rede ficará indisponível durante o feriado para a realização de manutenção.",
-        cor: "blue",
-        icone: "mdi-robot-excited",
-      },
-      {
-        titulo: "Teste",
-        conteudo: "Testando aqui",
-        cor: "red",
-        icone: "mdi-linkedin",
-      },
-      {
-        titulo: "",
-        conteudo: "",
-        cor: "green",
-        icone: "",
-      },
-      {
-        titulo: "",
-        conteudo: "",
-        cor: "yellow",
-        icone: "mdi-nintendo-wii",
-      },
-    ],
+    avisos: [],
   }),
   computed: {
     minimumHeight() {
@@ -83,6 +51,24 @@ export default {
     isBigEnough() {
       return this.$vuetify.breakpoint.name != "xs";
     },
+  },
+  methods: {
+    async getAvisos() {
+      let res = await this.$axios.get(this.$global.baseUrlApi + "/warning");
+      let avisos_api = res.data.data;
+      for (let i = 0; i < avisos_api.length; i++) {
+        let aviso_novo = {
+          titulo: avisos_api[i].title,
+          icone: avisos_api[i].icon,
+          conteudo: avisos_api[i].content,
+          cor: avisos_api[i].color,
+        };
+        this.avisos.push(aviso_novo);
+      }
+    },
+  },
+  created() {
+    this.getAvisos();
   },
 };
 </script>

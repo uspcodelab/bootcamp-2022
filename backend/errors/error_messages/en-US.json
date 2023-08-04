@@ -1,0 +1,238 @@
+{
+  "somethingWrong": "Something went wrong. Please try again later",
+  "errorHandlers": {
+    "idError": "Not found id ",
+    "externalId1": "Not found id ",
+    "externalId2": " in table ",
+    "pageError": "Invalid page ",
+    "alreadyExists": " already exists"
+  },
+  "auth": {
+    "credential": {
+      "wrg": "Wrong Credentials"
+    },
+    "name":{
+      "undef": "Please provide name",
+      "str": "Name must be string",
+      "len": "Name must have at most 128 characters"
+    },
+    "username":{
+      "undef": "Please provide username",
+      "str": "Username must be string",
+      "len": "Username must have at most 128 characters"
+    },
+    "password": {
+      "undef": "Please provide password",
+      "str": "Password must be string",
+      "tweak": "Too weak password",
+      "weak": "Weak password"
+    },
+    "mail": {
+      "undef": "Please provide mail",
+      "str": "Mail must be string",
+      "vld": "Mail not valid"
+    },
+    "userGroup": {
+      "undef": "Please provide user group",
+      "str": "User group must be string",
+      "len": "User group must have at most 32 characters"
+    },
+    "link": {
+      "undef": "Please provide link",
+      "str": "Link must be string",
+      "len": "Link must have at most 64 characters"
+    },
+    "institute": {
+      "undef": "Please provide institute",
+      "str": "Institute must be string",
+      "len": "Institute must have at most 64 characters"
+    },
+    "shell": {
+      "str": "Shell must be string",
+      "len": "Shell must have at most 32 characters"
+    },
+    "ssh": {
+      "bool": "SSH access must be boolean"
+    },
+    "role": {
+      "undef": "Please provide role",
+      "auth": "In production, this route does not register provileged roles",
+      "notExt": "Role does not exist"
+    },
+    "register": {
+      "undef": "Please provide register info"
+    },
+    "login": {
+      "undef": "Please provide login info"
+    }
+  },
+  "machines": {
+    "mch": "Please provide machine",
+    "status": {
+      "undef": "Please provide status",
+      "bool": "Status must be bool"
+    },
+    "name": {
+      "undef": "Please provide machine name",
+      "str": "Machine name must be string",
+      "len": "Machine name must have at most 16 characters"
+    }
+  },
+  "quotes": {
+    "qt": "Please provide quote",
+    "content": {
+      "undef": "Please provide content",
+      "str": "Content must be string",
+      "len": "Content must have at most 255 characters"
+    },
+    "author_id": {
+      "undef": "Please provide author"
+    }
+  },
+  "warningClasses": {
+    "wc": "Please provide warnign class",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title must be string",
+      "len": "Title must have at most 16 characters"
+    },
+    "color": {
+      "undef": "Please provide color",
+      "str": "Color must be string",
+      "vld": "Please provide a valid hex color. Format example: #FFFFFF"
+    }
+  },
+  "warnings": {
+    "wr": "Please provide warning body",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title must be string",
+      "len": "Title must have at most 64 characters"
+    },
+    "icon": {
+      "undef": "Please provide icon",
+      "str": "Icon must be string",
+      "len": "Icon must have at most 64 characters"
+    },
+    "content": {
+      "undef": "Please provide content",
+      "str": "Content must be string"
+    },
+    "class_id": {
+      "undef": "Please provide class id"
+    }
+  },
+  "slides": {
+    "sl": "Please provide slide",
+    "small_intro": {
+      "undef": "Please provide a small intro",
+      "str": "Small intro must be string",
+      "len": "Small intro must have at most 64 characters"
+    },
+    "main_text": {
+      "undef": "Please provide a main text",
+      "str": "Main text must be string",
+      "len": "Main text must have at most 128 characters"
+    }
+  },
+  "slideButtons": {
+    "sb": "Please provide slide button",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title text must be string",
+      "len": "Title text must have at most 32 characters"
+    },
+    "link": {
+      "undef": "Please provide link",
+      "str": "Link must be string",
+      "vld": "Please prove a valid link",
+      "len": "Title text must have at most 2048 characters"
+    },
+    "color": {
+      "undef": "Please provide color",
+      "str": "Color must be string",
+      "vld": "Please provide a valid hex color. Format example: #FFFFFF"
+    },
+    "slide_id": {
+      "undef": "Please provide slide id"
+    }
+  },
+  "news": {
+    "nw": "Please provide news",
+    "title": {
+      "undef": "Please provide title",
+      "str": "Title must be string",
+      "len": "Title must have at most 128 characters"
+    },
+    "subtitle": {
+      "undef": "Please provide subtitle",
+      "str": "Subtitle must be string",
+      "len": "Subtitle must have at most 128 characters"
+    },
+    "content": {
+      "undef": "Please provide content",
+      "str": "Content must be string"
+    },
+    "author_id": {
+      "undef": "Please provide author id"
+    }
+  },
+  "faq": {
+    "faq": "Please provide answer and question",
+    "question": {
+      "undef": "Please provide question",
+      "str": "Question must be string",
+      "len": "Question must have at most 256 characters"
+    },
+    "answer": {
+      "undef": "Please provide answer",
+      "str": "Answer must be string"
+    }
+  },
+  "schedule": {
+    "sc": "Please provide schedule",
+    "weekday": {
+      "undef": "Please provide week day",
+      "vld": "Week day not valid",
+      "days": [
+        "sun",
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat"
+      ]
+    },
+    "start_time": {
+      "undef": "Please provide start time",
+      "str": "Start time must be string",
+      "vld": "Start time not valid"
+    },
+    "end_time": {
+      "undef": "Please provide end time",
+      "str": "End time must be string",
+      "vld": "End time not valid"
+    },
+    "admin_id": {
+      "undef": "Please provide admin id"
+    }
+  },
+  "users": {
+    "password": {
+      "undef": "Please provide password",
+      "tweak": "Too weak password",
+      "weak": "Weak password"
+    },
+    "mail":{
+      "undef": "Please provide password",
+      "str": "Mail must be string",
+      "vld": "Mail not valid"
+    },
+    "role": {
+      "undef": "Please provide password",
+      "notExt": "Role does not exist"
+    }
+  }
+} 
+
